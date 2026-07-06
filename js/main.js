@@ -196,7 +196,8 @@
         location.href = mailtoUrl;
       }
 
-      if (!window.fetch || !cfg.email) { fallbackMailto(); return; }
+      var formTo = cfg.formEmail || cfg.email;
+      if (!window.fetch || !formTo) { fallbackMailto(); return; }
 
       var btn = form.querySelector('button[type="submit"]');
       var restore = function () { if (btn) { btn.disabled = false; btn.textContent = "提交留言"; } };
@@ -206,7 +207,7 @@
       var ctrl = ("AbortController" in window) ? new AbortController() : null;
       var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 8000) : null;
 
-      fetch("https://formsubmit.co/ajax/" + cfg.email, {
+      fetch("https://formsubmit.co/ajax/" + formTo, {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
         signal: ctrl ? ctrl.signal : undefined,

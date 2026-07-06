@@ -99,6 +99,8 @@
           <p class="sec-sub">留下您的需求，我们将在收到留言后尽快与您联系</p>
         </div>
         <form id="contactForm" class="form-grid">
+          <!-- 蜜罐字段：机器人填了就丢弃，正常访客看不到 -->
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
           <div class="field">
             <label for="f-name">姓名 <em>*</em></label>
             <input id="f-name" name="name" type="text" required autocomplete="name" placeholder="您的称呼">
@@ -125,7 +127,8 @@
           </div>
           <div class="full">
             <button class="btn btn-primary" type="submit">提交留言</button>
-            <p class="form-note">提交后将通过您的邮件客户端发送至我们的邮箱；亦可直接致电洽谈。</p>
+            <p class="form-status" id="formStatus" role="status" hidden></p>
+            <p class="form-note">点击提交即发送至我们的邮箱；亦可直接致电洽谈。</p>
           </div>
         </form>
       </div>
@@ -134,10 +137,17 @@
           <p class="eyebrow">Location</p>
           <h2>公司位置</h2>
         </div>
-        <div class="map-stub">
-          <div>
-            <strong>地图位置</strong>
-            正式上线时此处嵌入高德 / 百度地图，<br>标注公司所在位置与到访路线。
+        <div class="map-card">
+          <div class="map-card-visual" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="map-card-body">
+            <strong>中关村智造大街 D 座</strong>
+            <p data-config="address">北京市海淀区成府路45号中关村智造大街D座3层305</p>
+            <div class="map-card-actions">
+              <a class="btn btn-outline btn-sm" target="_blank" rel="noopener" href="https://uri.amap.com/search?keyword=%E4%B8%AD%E5%85%B3%E6%9D%91%E6%99%BA%E9%80%A0%E5%A4%A7%E8%A1%97&city=%E5%8C%97%E4%BA%AC&callnative=1">高德地图导航</a>
+              <a class="btn btn-outline btn-sm" target="_blank" rel="noopener" href="https://map.baidu.com/search/%E4%B8%AD%E5%85%B3%E6%9D%91%E6%99%BA%E9%80%A0%E5%A4%A7%E8%A1%97">百度地图导航</a>
+            </div>
           </div>
         </div>
         <div class="card" style="margin-top:22px; padding:26px 28px;">

@@ -156,14 +156,29 @@
     if (key === "email") el.setAttribute("href", "mailto:" + cfg[key]);
   });
 
-  /* ---------- 留言表单：生成 mailto（后续可替换为后端接口） ---------- */
+  /* ---------- 留言表单 ----------
+     首选：FormSubmit 免费服务直接送达邮箱（无需后端）；
+     失败或浏览器不支持 fetch 时：回退为唤起访客邮件客户端（mailto）。
+     注意：FormSubmit 首次收到提交时会向收件邮箱发送激活确认邮件，点击确认后生效。 */
   var form = doc.getElementById("contactForm");
+  var statusEl = doc.getElementById("formStatus");
+
+  function showStatus(type, msg) {
+    if (!statusEl) return;
+    statusEl.hidden = false;
+    statusEl.className = "form-status " + type;
+    statusEl.textContent = msg;
+  }
+
   if (form) {
     form.addEventListener("submit", function (ev) {
       ev.preventDefault();
+      // 蜜罐命中：机器人填写了隐藏字段，静默丢弃
+      if (form.elements._honey && form.elements._honey.value) return;
+
       var get = function (n) { return (form.elements[n] && form.elements[n].value.trim()) || ""; };
       var subject = "【官网留言】" + get("name") + " - " + (get("subject") || "业务咨询");
-      var body = [
+      var bodyText = [
         "姓名：" + get("name"),
         "单位：" + get("org"),
         "电话：" + get("tel"),
@@ -172,10 +187,53 @@
         "留言内容：",
         get("message")
       ].join("\n");
-      /* 上线时如需服务端收集留言，可将此处替换为 fetch() 提交到后端接口 */
-      location.href = "mailto:" + (cfg.email || "") +
+      var mailtoUrl = "mailto:" + (cfg.email || "") +
         "?subject=" + encodeURIComponent(subject) +
-        "&body=" + encodeURIComponent(body);
+        "&body=" + encodeURIComponent(bodyText);
+
+      function fallbackMailto() {
+        showStatus("warn", "在线发送未成功，已尝试打开您的邮件客户端发送；亦可直接致电 " + (cfg.phone || "") + "。");
+        location.href = mailtoUrl;
+      }
+
+      if (!window.fetch || !cfg.email) { fallbackMailto(); return; }
+
+      var btn = form.querySelector('button[type="submit"]');
+      var restore = function () { if (btn) { btn.disabled = false; btn.textContent = "提交留言"; } };
+      if (btn) { btn.disabled = true; btn.textContent = "发送中…"; }
+      if (statusEl) statusEl.hidden = true;
+
+      var ctrl = ("AbortController" in window) ? new AbortController() : null;
+      var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 8000) : null;
+
+      fetch("https://formsubmit.co/ajax/" + cfg.email, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        signal: ctrl ? ctrl.signal : undefined,
+        body: JSON.stringify({
+          _subject: subject,
+          _template: "table",
+          _captcha: "false",
+          "姓名": get("name"),
+          "单位": get("org"),
+          "电话": get("tel"),
+          "邮箱": get("mail"),
+          "咨询主题": get("subject"),
+          "留言内容": get("message")
+        })
+      }).then(function (r) {
+        if (timer) clearTimeout(timer);
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      }).then(function () {
+        restore();
+        form.reset();
+        showStatus("ok", "留言已发送，我们会在收到后尽快与您联系。");
+      }).catch(function () {
+        if (timer) clearTimeout(timer);
+        restore();
+        fallbackMailto();
+      });
     });
   }
 })();

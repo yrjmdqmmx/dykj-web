@@ -39,8 +39,8 @@ python3 -m http.server 8000
 3. **域名相关**：
    - `sitemap.xml` 与 `robots.txt` 当前指向 GitHub Pages 临时地址，启用正式域名后请全局替换；
    - 各页 `<head>` 中可补充 `og:image` 绝对地址（已留注释）。
-4. **地图**：`contact.html` 的地图占位区替换为高德 / 百度地图嵌入代码。
-5. **留言表单**：当前通过 mailto 发送；如需服务端收集，替换 `js/main.js` 中表单提交逻辑为后端接口。
+4. ~~地图~~（已完成）：公司位置卡片提供高德/百度免密钥导航链接；如需页面内嵌交互地图，需注册高德开放平台（lbs.amap.com）申请 Web 端 key。
+5. **留言表单**（需激活一次）：通过 FormSubmit 免费服务直发 19313965@qq.com，发送失败自动回退 mailto。**首次收到提交时 FormSubmit 会向该邮箱发激活确认邮件，须点击确认后才正式送达**；如需更换收件邮箱，改 `js/site-config.js` 的 `email` 字段。
 6. **两张客户 Logo 待换**：`assets/img/client-avic.jpg`（中国航空工业）与 `client-cnnc.jpg`（中国核工业）源素材右缘在公司简介 PDF 中即被裁切，建议上线前替换为官方完整 Logo。
 7. **404 首页链接**：`404.html` 中「返回首页」当前指向 GitHub Pages 子路径 `/dykj-web/`；迁移到正式域名根部署时请改回 `href="/"`。
 

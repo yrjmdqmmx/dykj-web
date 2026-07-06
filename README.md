@@ -34,7 +34,7 @@ python3 -m http.server 8000
 
 ## ⚠️ 上线前待办清单
 
-1. **替换联系方式**：编辑 `js/site-config.js`，填入真实电话、邮箱、地址、工作时间 —— 全站页脚与联系页自动同步。
+1. ~~替换联系方式~~（已完成）：联系方式维护于 `js/site-config.js`，如有变更改此一处即可全站生效。
 2. **备案号**：`js/site-config.js` 中的 `icp` 字段替换为真实备案号（工信部要求境内主机部署需 ICP 备案）。
 3. **域名相关**：
    - `sitemap.xml` 与 `robots.txt` 当前指向 GitHub Pages 临时地址，启用正式域名后请全局替换；

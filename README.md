@@ -28,17 +28,21 @@ python3 -m http.server 8000
 任何静态托管均可：虚拟主机、Nginx、阿里云 OSS / 腾讯云 COS 静态网站、GitHub Pages 等。
 将仓库全部文件上传到站点根目录（或子目录）即可，无需构建。
 
+**当前已配置 GitHub Pages 自动部署**：推送到 `claude/dingyi-tech-website-lkp7bu` 分支即触发
+`.github/workflows/pages.yml` 工作流，发布到 <https://zdywrnm.github.io/dykj-web/>
+（要求仓库 Settings → Pages → Source 为 "GitHub Actions"）。
+
 ## ⚠️ 上线前待办清单
 
 1. **替换联系方式**：编辑 `js/site-config.js`，填入真实电话、邮箱、地址、工作时间 —— 全站页脚与联系页自动同步。
 2. **备案号**：`js/site-config.js` 中的 `icp` 字段替换为真实备案号（工信部要求境内主机部署需 ICP 备案）。
 3. **域名相关**：
-   - `sitemap.xml` 与 `robots.txt` 中的 `www.example.com` 替换为实际域名；
+   - `sitemap.xml` 与 `robots.txt` 当前指向 GitHub Pages 临时地址，启用正式域名后请全局替换；
    - 各页 `<head>` 中可补充 `og:image` 绝对地址（已留注释）。
 4. **地图**：`contact.html` 的地图占位区替换为高德 / 百度地图嵌入代码。
 5. **留言表单**：当前通过 mailto 发送；如需服务端收集，替换 `js/main.js` 中表单提交逻辑为后端接口。
 6. **两张客户 Logo 待换**：`assets/img/client-avic.jpg`（中国航空工业）与 `client-cnnc.jpg`（中国核工业）源素材右缘在公司简介 PDF 中即被裁切，建议上线前替换为官方完整 Logo。
-7. **子路径部署**：若站点部署在子路径（如 GitHub Pages 项目站点 `/dykj-web/`），请将 `404.html` 中「返回首页」的 `href="/"` 改为 `href="/子路径/"`。
+7. **404 首页链接**：`404.html` 中「返回首页」当前指向 GitHub Pages 子路径 `/dykj-web/`；迁移到正式域名根部署时请改回 `href="/"`。
 
 ## 目录说明
 

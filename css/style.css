@@ -596,9 +596,7 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.35; letter-spacing: .02em; }
 }
 .map-card-body { padding: 24px 26px 26px; }
 .map-card-body strong { font-size: 17px; color: var(--ink); }
-.map-card-body p { margin: 8px 0 18px; font-size: 14.5px; color: var(--gray-600); line-height: 1.7; }
-.map-card-actions { display: flex; flex-wrap: wrap; gap: 12px; }
-.btn-sm { padding: 10px 20px; font-size: 14px; }
+.map-card-body p { margin: 8px 0 0; font-size: 14.5px; color: var(--gray-600); line-height: 1.7; }
 
 /* 表单提交状态提示 */
 .form-status {

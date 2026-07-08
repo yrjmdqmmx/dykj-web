@@ -11,7 +11,7 @@
 - **页面**：index / about / business / brands / cases / contact + 自包含 404
 - **站点配置集中在 `js/site-config.js`**：电话 133-8113-6863、邮箱 19313965@qq.com、地址（海淀区成府路45号中关村智造大街D座3层305）、`formEmail`（留言表单收件）、`icp`（备案号，当前为空字符串）
 - **在线留言**：前端 fetch POST 到 `https://formsubmit.co/ajax/<formEmail>`，失败自动回退 mailto。链路已用 Gmail 验证可用；当前 formEmail=19313965@qq.com，**QQ 邮箱尚未做 FormSubmit 激活**（首次收到提交时会收到激活邮件，可能在垃圾箱，点击确认后生效）
-- **公司位置**：默认是免密钥的高德/百度检索链接（关键词「中关村智造大街」）；已内置嵌入式高德实时地图支持（`js/map.js`，渐进增强）——填入 `site-config.js` 的 `map.amapKey` + `map.center` 即启用，未配置时零地图请求、页面与纯链接版完全一致。安全密钥走服务器 Nginx 代理（模板 `docs/nginx-amap-proxy.conf.example`）
+- **公司位置**：嵌入式高德实时地图已上线（`js/map.js`，渐进增强，Key/GCJ-02 坐标在 `site-config.js` 的 `map` 字段）；Key 为空或加载失败时自动回退 SVG 占位卡片（零地图请求）。原高德/百度检索导航链接已按用户要求移除（2026-07）。安全密钥走服务器 Nginx 代理（模板 `docs/nginx-amap-proxy.conf.example`）
 
 ## 二、新阶段目标
 

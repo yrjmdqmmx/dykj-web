@@ -39,7 +39,7 @@ python3 -m http.server 8000
 3. **域名相关**：
    - `sitemap.xml` 与 `robots.txt` 当前指向 GitHub Pages 临时地址，启用正式域名后请全局替换；
    - 各页 `<head>` 中可补充 `og:image` 绝对地址（已留注释）。
-4. **嵌入式地图**（代码已就绪，等密钥激活）：联系页已支持页面内嵌高德实时地图（`js/map.js`，渐进增强）。注册高德开放平台（lbs.amap.com）申请「Web端(JS API)」Key 后，填入 `js/site-config.js` 的 `map.amapKey` 与 `map.center`（GCJ-02 坐标）即启用；安全密钥走服务器 Nginx 代理（模板见 `docs/nginx-amap-proxy.conf.example`，详见交接文档）。未配置 Key 时保持高德/百度免密钥导航链接现状。
+4. **嵌入式地图**（已上线）：联系页内嵌高德实时地图（`js/map.js`，渐进增强），Key/坐标配置在 `js/site-config.js` 的 `map` 字段；安全密钥走服务器 Nginx 代理（模板见 `docs/nginx-amap-proxy.conf.example`，详见交接文档）。Key 为空或加载失败时自动回退 SVG 占位卡片（导航外链已按用户要求于 2026-07 移除）。
 5. **留言表单**：通过 FormSubmit 免费服务直发 `js/site-config.js` 中 `formEmail` 指定的邮箱（当前 19313965@qq.com），发送失败自动回退 mailto。链路已用 Gmail 验证可用；**QQ 邮箱首次收到提交时需点击 FormSubmit 激活确认邮件（注意查垃圾箱）**。
 6. **两张客户 Logo 待换**：`assets/img/client-avic.jpg`（中国航空工业）与 `client-cnnc.jpg`（中国核工业）源素材右缘在公司简介 PDF 中即被裁切，建议上线前替换为官方完整 Logo。
 7. **404 首页链接**：`404.html` 中「返回首页」当前指向 GitHub Pages 子路径 `/dykj-web/`；迁移到正式域名根部署时请改回 `href="/"`。

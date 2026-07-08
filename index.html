@@ -75,6 +75,56 @@
     </div>
   </section>
 
+  <!-- ======================= 低温泵 3D 拆解（滚动驱动，JS 升级；默认静态版式即兜底） ======================= -->
+  <section class="pump-scrolly" id="pumpScrolly"
+           data-frames="80" data-src="assets/pump-seq/" data-v="20260708b">
+    <div class="pump-static">
+      <div class="container">
+        <div class="sec-head reveal">
+          <p class="eyebrow">Vacuum Pump</p>
+          <h2>解构一台真空泵</h2>
+          <p class="sec-sub">从整机到零件——一台真空泵机组的精密装配，也是我们维修保养工作的日常</p>
+        </div>
+        <div class="pump-static-grid">
+          <img class="reveal" src="assets/pump-seq/pump-exploded.webp?v=20260708b"
+               alt="真空泵机组结构拆解示意：进排气法兰、泵头壳体、系杆螺栓、驱动电机、接线盒与底座"
+               loading="lazy" width="1440" height="1080">
+          <ul class="pump-parts reveal" data-delay="1">
+            <li><strong>进气 / 排气法兰</strong>顶部双法兰接口，与工艺管路对接</li>
+            <li><strong>泵头总成</strong>蜗壳与端盖组成的承压壳体，气体在此完成吸入与排出</li>
+            <li><strong>系杆与紧固件</strong>贯穿泵头的系杆螺栓，维修拆装的第一步</li>
+            <li><strong>驱动电机</strong>与泵头直联，散热筋壳体，顶置接线盒</li>
+            <li><strong>公共底座</strong>电机与泵头共用的刚性支承，保证轴系对中</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="pump-stage" aria-hidden="true">
+      <canvas class="pump-canvas"></canvas>
+      <div class="pump-caption" data-start="0" data-end="0.26">
+        <p class="pump-k">01 · Assembly</p>
+        <h3>一台真空泵机组</h3>
+        <p>电机直联泵头、共用底座的一体化机组。滚动页面，看它如何被拆解成一个个零件——这也是我们维修工程师每天的工作。</p>
+      </div>
+      <div class="pump-caption" data-start="0.26" data-end="0.55">
+        <p class="pump-k">02 · Interfaces</p>
+        <h3>顶部接口</h3>
+        <p>进排气法兰与接线盒集中于机组顶部：气路对接工艺管路，电路进接线盒——安装与检修在同一侧即可完成。</p>
+      </div>
+      <div class="pump-caption" data-start="0.55" data-end="0.84">
+        <p class="pump-k">03 · Pump Head</p>
+        <h3>泵头拆解</h3>
+        <p>端盖与系杆螺栓依次分离，露出承压的泵头壳体——气体的吸入、压缩与排出都在这套壳体内完成，也是检修的核心部位。</p>
+      </div>
+      <div class="pump-caption" data-start="0.84" data-end="1">
+        <p class="pump-k">04 · Drive &amp; Base</p>
+        <h3>驱动与底座</h3>
+        <p>散热筋壳体的驱动电机与刚性公共底座：精准对中、稳固支承，是真空泵长期稳定运行的基础。</p>
+      </div>
+      <div class="pump-hint">滚动查看拆解</div>
+    </div>
+  </section>
+
   <!-- ======================= 公司简介 ======================= -->
   <section class="section">
     <div class="container intro-grid">
@@ -332,5 +382,6 @@
 
   <script src="js/site-config.js?v=20260708"></script>
   <script src="js/main.js?v=20260708"></script>
+  <script src="js/pump-scrolly.js?v=20260708"></script>
 </body>
 </html>

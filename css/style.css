@@ -669,6 +669,51 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.35; letter-spacing: .02em; }
 .err-wrap h1 { font-size: clamp(80px, 16vw, 150px); line-height: 1; color: var(--teal-400); }
 .err-wrap p { margin: 18px 0 30px; color: rgba(234, 244, 243, .75); }
 
+/* ---------- 首页 · 低温泵拆解 scrollytelling ---------- */
+
+/* 默认呈现静态版式（noscript / 无动效偏好 / 帧加载失败的最终形态）；
+   js/pump-scrolly.js 满足条件时加 .pump-on 升级为滚动擦除舞台。
+   --pump-bg 与帧序列烘焙背景一致（AgX 试渲后取样回填） */
+.pump-scrolly { --pump-bg: #000c0a; position: relative; background: var(--pump-bg); color: #eaf4f3; }
+
+.pump-static { padding: 96px 0; }
+.pump-static .sec-head h2 { color: #fff; }
+.pump-static .sec-sub { color: rgba(234, 244, 243, .75); }
+.pump-static-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; margin-top: 34px; }
+.pump-static-grid img { width: 100%; height: auto; border-radius: var(--radius); box-shadow: var(--shadow-lg); }
+.pump-parts { list-style: none; }
+.pump-parts li { padding: 13px 0; border-bottom: 1px solid rgba(234, 244, 243, .14);
+  font-size: 15px; color: rgba(234, 244, 243, .78); line-height: 1.6; }
+.pump-parts li strong { display: block; color: #fff; font-size: 16.5px; margin-bottom: 2px; }
+
+/* JS 升级后：撑高滚动区 + pin 舞台；静态版式只做视觉隐藏（读屏仍可达） */
+.pump-scrolly.pump-on { height: 320vh; }
+.pump-scrolly.pump-on .pump-static {
+  position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+.pump-stage { display: none; }
+.pump-scrolly.pump-on .pump-stage {
+  display: block; position: sticky; top: 0;
+  height: 100vh; height: 100svh; overflow: hidden;
+}
+.pump-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+/* 字幕：opacity 由 JS 逐帧驱动，不加 transition（避免滞后于擦除） */
+.pump-caption {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  left: max(48px, calc((100vw - var(--container)) / 2));
+  max-width: 380px; opacity: 0; visibility: hidden;
+}
+.pump-k { font-size: 13px; font-weight: 700; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--teal-400); margin-bottom: 12px; }
+.pump-k::before { content: ""; display: inline-block; width: 28px; height: 2px;
+  background: var(--copper); margin-right: 10px; vertical-align: middle; }
+.pump-caption h3 { font-size: clamp(24px, 2.6vw, 34px); color: #fff; margin-bottom: 14px; }
+.pump-caption p { color: rgba(234, 244, 243, .82); font-size: 16px; line-height: 1.75; }
+.pump-hint { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%);
+  font-size: 12.5px; letter-spacing: .18em; color: rgba(234, 244, 243, .5); }
+
 /* ---------- 无动效偏好 ---------- */
 
 @media (prefers-reduced-motion: reduce) {
@@ -676,6 +721,12 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.35; letter-spacing: .02em; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .marquee-track { animation: none; flex-wrap: wrap; width: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+
+  /* 拆解章节强制回静态版式（JS 门控为主，此为双保险） */
+  .pump-scrolly.pump-on { height: auto !important; }
+  .pump-scrolly .pump-stage { display: none !important; }
+  .pump-scrolly.pump-on .pump-static { position: static !important; width: auto !important;
+    height: auto !important; clip: auto !important; padding: 96px 0 !important; white-space: normal !important; }
 }
 
 /* ---------- 响应式 ---------- */
@@ -689,6 +740,7 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.35; letter-spacing: .02em; }
 
 @media (max-width: 900px) {
   .section { padding: 72px 0; }
+  .pump-static-grid { grid-template-columns: 1fr; gap: 36px; }
 
   .nav-toggle { display: flex; }
   .main-nav {
@@ -733,4 +785,9 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.35; letter-spacing: .02em; }
   .logo-text small { letter-spacing: .2em; }
 
   .map-card-visual.map-on { height: 260px; }
+
+  .pump-scrolly.pump-on { height: 240vh; }
+  .pump-caption { left: 18px; right: 18px; top: auto; bottom: 64px; transform: none; max-width: none; }
+  .pump-caption h3 { font-size: 22px; }
+  .pump-static { padding: 60px 0; }
 }

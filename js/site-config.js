@@ -35,8 +35,8 @@ window.SITE_CONFIG = {
    *  用坐标拾取器 https://lbs.amap.com/tools/picker 搜「中关村智造大街」点选 D 座，
    *  把「经度,纬度」填成 [经度, 纬度] 数组。center 为 null 时同样不启用地图。 */
   map: {
-    amapKey: "",                        // Web端(JS API) Key；为空 = 完全禁用嵌入地图
-    center: null,                       // GCJ-02 [经度, 纬度]，如 [116.34xxxx, 39.99xxxx]
+    amapKey: "790e4a4287394ede5a960bc43f3f5c55", // Web端(JS API) Key；为空 = 完全禁用嵌入地图
+    center: [116.335266, 39.994199],    // GCJ-02 坐标（高德拾取器取值：中关村智造大街 D 座）
     zoom: 16,                           // 16 ≈ 街区级
     markerTitle: "中关村智造大街 D 座", // 地图标注文字
     /** 安全密钥（二选一）：留空 = 走本站 Nginx 代理 /_AMapService（生产推荐，

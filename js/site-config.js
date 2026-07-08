@@ -27,6 +27,24 @@ window.SITE_CONFIG = {
   /** 工作时间 */
   worktime: "周一至周五 9:00 – 18:00",
 
+  /** ===== 联系页嵌入式地图（高德 JS API 2.0，仅 contact.html 使用）=====
+   *  amapKey 为空 = 不加载任何地图脚本，联系页保持「占位视觉 + 高德/百度导航链接」。
+   *  申请：lbs.amap.com 注册实名 → 控制台「应用管理」创建应用 → 添加 Key，
+   *  服务平台选「Web端(JS API)」，得到 Key 与配套的「安全密钥」。
+   *  center 必须是 GCJ-02 坐标（高德坐标系，不是 GPS/WGS-84 也不是百度 BD-09）：
+   *  用坐标拾取器 https://lbs.amap.com/tools/picker 搜「中关村智造大街」点选 D 座，
+   *  把「经度,纬度」填成 [经度, 纬度] 数组。center 为 null 时同样不启用地图。 */
+  map: {
+    amapKey: "",                        // Web端(JS API) Key；为空 = 完全禁用嵌入地图
+    center: null,                       // GCJ-02 [经度, 纬度]，如 [116.34xxxx, 39.99xxxx]
+    zoom: 16,                           // 16 ≈ 街区级
+    markerTitle: "中关村智造大街 D 座", // 地图标注文字
+    /** 安全密钥（二选一）：留空 = 走本站 Nginx 代理 /_AMapService（生产推荐，
+     *  密钥只存在服务器 nginx 配置，见 docs/DEPLOY-HANDOVER.md）；
+     *  填明文 = 官方仅建议本地调试，本仓库公开，明文提交等于泄露密钥。 */
+    securityJsCode: ""
+  },
+
   /** ICP 备案号（GitHub Pages 境外托管无需备案；正式域名备案完成后填入，如 "京ICP备XXXXXXXX号"） */
   icp: ""
 };

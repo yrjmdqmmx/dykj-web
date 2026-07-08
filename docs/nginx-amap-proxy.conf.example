@@ -1,0 +1,33 @@
+# =============================================================================
+# 高德 JS API 2.0 安全密钥代理模板（配合 js/map.js 的 serviceHost 模式）
+#
+# 用途：让「安全密钥」只存在于服务器 Nginx 配置，不进公开仓库、不下发浏览器。
+# 使用：把下面三个 location 复制进 /etc/nginx/sites-available/dykj-web 的
+#       server {} 块内（建议放在 acme-challenge location 之后），
+#       将 <AMAP_JSCODE> 替换为高德控制台该 Key 对应的「安全密钥」，
+#       然后 nginx -t && systemctl reload nginx。
+#
+# 注意：
+# - ^~ 前缀保证不被正则 location（如隐藏文件拦截）截胡；
+# - proxy_ssl_server_name on 必须保留（上游是 CDN，HTTPS 握手需要 SNI）；
+# - proxy_pass 的域名在 nginx 加载配置时解析 DNS 并缓存——若将来出现
+#   「地图突然全挂、reload nginx 就恢复」，优先怀疑高德 CDN 换了 IP。
+# - 本文件只是模板（docs/ 不会被部署），占位符不含任何秘密。
+# =============================================================================
+
+    # ===== 高德 JS API 2.0 安全密钥代理 =====
+    location ^~ /_AMapService/v4/map/styles {
+        set $args "$args&jscode=<AMAP_JSCODE>";
+        proxy_pass https://webapi.amap.com/v4/map/styles;
+        proxy_ssl_server_name on;
+    }
+    location ^~ /_AMapService/v3/vectormap {
+        set $args "$args&jscode=<AMAP_JSCODE>";
+        proxy_pass https://fmap01.amap.com/v3/vectormap;
+        proxy_ssl_server_name on;
+    }
+    location ^~ /_AMapService/ {
+        set $args "$args&jscode=<AMAP_JSCODE>";
+        proxy_pass https://restapi.amap.com/;
+        proxy_ssl_server_name on;
+    }

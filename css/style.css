@@ -561,7 +561,8 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.35; letter-spacing: .02em; }
 }
 .field textarea { min-height: 140px; resize: vertical; }
 
-/* 公司位置卡片（免密钥：链接跳转高德/百度检索） */
+/* 公司位置卡片：默认为占位视觉 + 高德/百度导航链接；
+   配置 SITE_CONFIG.map.amapKey 后由 js/map.js 叠加嵌入式高德地图（渐进增强） */
 .map-card {
   border-radius: var(--radius); overflow: hidden;
   border: 1px solid var(--line); background: #fff; box-shadow: var(--shadow-sm);
@@ -581,6 +582,17 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.35; letter-spacing: .02em; }
 .map-card-visual svg {
   position: relative; width: 54px; height: 54px;
   filter: drop-shadow(0 6px 14px rgba(6, 32, 31, .45));
+}
+/* 嵌入式地图容器：未激活时不可见不可点，占位视觉不受影响 */
+.map-live { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+.map-card-visual.map-on { height: 320px; }
+.map-card-visual.map-ready .map-live {
+  opacity: 1; pointer-events: auto; transition: opacity .4s ease;
+}
+/* 高德 marker 标注融入站点设计（勿隐藏高德 logo/copyright，服务条款要求保留） */
+.amap-marker-label {
+  padding: 4px 10px; border: 1px solid var(--line); border-radius: var(--radius-sm);
+  color: var(--teal-700); font-size: 13px; box-shadow: var(--shadow-sm);
 }
 .map-card-body { padding: 24px 26px 26px; }
 .map-card-body strong { font-size: 17px; color: var(--ink); }
@@ -721,4 +733,6 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.35; letter-spacing: .02em; }
   .intro-media .im-float { border-width: 3px; }
   .logo-text strong { font-size: 17px; }
   .logo-text small { letter-spacing: .2em; }
+
+  .map-card-visual.map-on { height: 260px; }
 }

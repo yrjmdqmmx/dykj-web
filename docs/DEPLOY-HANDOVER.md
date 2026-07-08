@@ -11,7 +11,7 @@
 - **页面**：index / about / business / brands / cases / contact + 自包含 404
 - **站点配置集中在 `js/site-config.js`**：电话 133-8113-6863、邮箱 19313965@qq.com、地址（海淀区成府路45号中关村智造大街D座3层305）、`formEmail`（留言表单收件）、`icp`（备案号，当前为空字符串）
 - **在线留言**：前端 fetch POST 到 `https://formsubmit.co/ajax/<formEmail>`，失败自动回退 mailto。链路已用 Gmail 验证可用；当前 formEmail=19313965@qq.com，**QQ 邮箱尚未做 FormSubmit 激活**（首次收到提交时会收到激活邮件，可能在垃圾箱，点击确认后生效）
-- **公司位置**：免密钥的高德/百度检索链接（关键词「中关村智造大街」），无地图 SDK 依赖
+- **公司位置**：默认是免密钥的高德/百度检索链接（关键词「中关村智造大街」）；已内置嵌入式高德实时地图支持（`js/map.js`，渐进增强）——填入 `site-config.js` 的 `map.amapKey` + `map.center` 即启用，未配置时零地图请求、页面与纯链接版完全一致。安全密钥走服务器 Nginx 代理（模板 `docs/nginx-amap-proxy.conf.example`）
 
 ## 二、新阶段目标
 
@@ -62,6 +62,7 @@ EOF
 | 事项 | 说明 |
 |---|---|
 | QQ 邮箱 FormSubmit 激活 | 网站上提交一条留言 → 19313965@qq.com 收激活邮件（查垃圾箱）→ 点击确认；建议把 formsubmit.co 加入 QQ 邮箱白名单 |
+| 高德地图密钥激活 | lbs.amap.com 注册实名 → 应用管理创建应用 → 添加 Key（平台选「Web端(JS API)」）→ Key + 拾取器坐标填 `site-config.js` 的 `map` 配置；「安全密钥」只进服务器 Nginx（模板 `docs/nginx-amap-proxy.conf.example`），绝不提交进仓库。备案切正式域名后在高德控制台给 Key 绑域名白名单 |
 | 两张央企 Logo 裁切 | `assets/img/client-avic.jpg` 与 `client-cnnc.jpg` 源素材（公司简介 PDF）右缘即被裁切，拿到官方完整 Logo 后替换 |
 | 公司官方 Logo | 页头/页脚现为纯文字标识（用户要求移除了自制图标）；favicon 仍是「鼎」字自制图标，拿到官方 Logo 后可整体替换 |
 | 英文版 | 未做，结构已预留，需要时可加 |
@@ -70,6 +71,6 @@ EOF
 
 - 内容事实以公司简介 PDF 为准，**不虚构事实**；避免「最」「第一」等广告法极限词（此前审查已清理过一轮）
 - 联系方式/备案号只改 `js/site-config.js`，页面里的同值静态文本是无 JS 兜底，改配置时同步更新
-- 保持零外部依赖（无 CDN/Google Fonts），兼容国内网络
+- 保持零外部依赖（无 CDN/Google Fonts），兼容国内网络。**显式例外**：联系页嵌入式高德地图 SDK（国内 CDN、仅 contact 页、懒加载、任何失败都完整降级回占位卡片，基线体验仍是零依赖）
 - 页面有 `noscript` 与 `prefers-reduced-motion` 兜底，改动动效相关代码时注意保持
 - 每次改动后验证：本地 `python3 -m http.server` + 浏览器检查 console 无报错、图片无缺失

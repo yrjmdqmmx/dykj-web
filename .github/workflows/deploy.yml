@@ -1,0 +1,49 @@
+# 部署静态官网到阿里云 ECS（Nginx 托管，/var/www/dykj-web）
+# 依赖 Secrets：SSH_PRIVATE_KEY（deploy 用户私钥）、SERVER_HOST（服务器 IP）
+# 服务器侧 deploy 用户被 rrsync 限制为只能同步 /var/www/dykj-web，
+# 因此 rsync 目标写 "/"（rrsync 会映射到该目录），此密钥无法执行其他命令
+name: Deploy to Aliyun ECS
+
+on:
+  push:
+    branches: [claude/dingyi-tech-website-lkp7bu]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-ecs
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          # 固定服务器主机公钥，防中间人（公钥非机密，可提交）
+          echo '116.62.146.226 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJG8dywQeFByQ7ZD1wLqGhc4O/2NNRCRC+bZ8LDXU0o7' >> ~/.ssh/known_hosts
+
+      - name: Rsync to server
+        run: |
+          rsync -rlptzv --delete \
+            --exclude '.git*' --exclude '.github' --exclude 'docs' \
+            --exclude 'README.md' --exclude '.nojekyll' \
+            -e "ssh -i ~/.ssh/deploy_key -o IdentitiesOnly=yes" \
+            ./ "deploy@${{ secrets.SERVER_HOST }}:/"
+
+      - name: Verify deployment
+        run: |
+          code=$(curl -s -o /dev/null -w '%{http_code}' "http://${{ secrets.SERVER_HOST }}/")
+          echo "homepage HTTP $code"
+          test "$code" = "200"
+          # 线上首页应与本次提交逐字节一致
+          curl -s "http://${{ secrets.SERVER_HOST }}/index.html" | cmp - index.html
+          echo "content verified"

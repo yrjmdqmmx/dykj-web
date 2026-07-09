@@ -1,33 +1,51 @@
 # =============================================================================
-# 高德 JS API 2.0 安全密钥代理模板（配合 js/map.js 的 serviceHost 模式）
+# 高德 JS API 2.0 安全密钥代理模板(配合 js/map.js 的 serviceHost 模式)
 #
-# 用途：让「安全密钥」只存在于服务器 Nginx 配置，不进公开仓库、不下发浏览器。
-# 使用：把下面三个 location 复制进 /etc/nginx/sites-available/dykj-web 的
-#       server {} 块内（建议放在 acme-challenge location 之后），
-#       将 <AMAP_JSCODE> 替换为高德控制台该 Key 对应的「安全密钥」，
+# 用途:让「安全密钥」只存在于服务器 Nginx 配置,不进公开仓库、不下发浏览器。
+# 使用:把下面三个 location 复制进 /etc/nginx/sites-available/dykj-web 的
+#       server {} 块内(建议放在 acme-challenge location 之后),
+#       将 <AMAP_JSCODE> 替换为高德控制台该 Key 对应的「安全密钥」,
 #       然后 nginx -t && systemctl reload nginx。
 #
-# 注意：
-# - ^~ 前缀保证不被正则 location（如隐藏文件拦截）截胡；
-# - proxy_ssl_server_name on 必须保留（上游是 CDN，HTTPS 握手需要 SNI）；
-# - proxy_pass 的域名在 nginx 加载配置时解析 DNS 并缓存——若将来出现
-#   「地图突然全挂、reload nginx 就恢复」，优先怀疑高德 CDN 换了 IP。
-# - 本文件只是模板（docs/ 不会被部署），占位符不含任何秘密。
+# ⚠️ 重要教训(2026-07-09 停机事故):不要把域名直接写进 proxy_pass!
+#    静态写法(proxy_pass https://webapi.amap.com/...)会让 nginx 在【启动时】
+#    解析 DNS——系统自动更新重启服务时若 DNS 短暂不可用,nginx 会整个起不来,
+#    网站全挂。必须用下面的「变量 + resolver」写法,域名在【请求时】解析。
+#    100.100.2.136/138 是阿里云 ECS 内网 DNS,223.5.5.5 是公网兜底。
+#
+# 另建议配 systemd 自愈(启动失败每 30s 自动重试):
+#   /etc/systemd/system/nginx.service.d/self-heal.conf
+#     [Unit]
+#     StartLimitIntervalSec=0
+#     [Service]
+#     Restart=on-failure
+#     RestartSec=30
+#
+# 本文件只是模板(docs/ 不会被部署),占位符不含任何秘密。
 # =============================================================================
 
-    # ===== 高德 JS API 2.0 安全密钥代理 =====
+    # ===== 高德 JS API 2.0 安全密钥代理(域名请求时解析,启动不依赖 DNS)=====
     location ^~ /_AMapService/v4/map/styles {
+        resolver 100.100.2.136 100.100.2.138 223.5.5.5 valid=300s;
         set $args "$args&jscode=<AMAP_JSCODE>";
-        proxy_pass https://webapi.amap.com/v4/map/styles;
+        set $amap_up "webapi.amap.com";
+        rewrite ^/_AMapService(/.*)$ $1 break;
+        proxy_pass https://$amap_up;
         proxy_ssl_server_name on;
     }
     location ^~ /_AMapService/v3/vectormap {
+        resolver 100.100.2.136 100.100.2.138 223.5.5.5 valid=300s;
         set $args "$args&jscode=<AMAP_JSCODE>";
-        proxy_pass https://fmap01.amap.com/v3/vectormap;
+        set $amap_up "fmap01.amap.com";
+        rewrite ^/_AMapService(/.*)$ $1 break;
+        proxy_pass https://$amap_up;
         proxy_ssl_server_name on;
     }
     location ^~ /_AMapService/ {
+        resolver 100.100.2.136 100.100.2.138 223.5.5.5 valid=300s;
         set $args "$args&jscode=<AMAP_JSCODE>";
-        proxy_pass https://restapi.amap.com/;
+        set $amap_up "restapi.amap.com";
+        rewrite ^/_AMapService(/.*)$ $1 break;
+        proxy_pass https://$amap_up;
         proxy_ssl_server_name on;
     }

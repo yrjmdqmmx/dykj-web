@@ -63,7 +63,7 @@ EOF
 |---|---|
 | QQ 邮箱 FormSubmit 激活 | 网站上提交一条留言 → 19313965@qq.com 收激活邮件（查垃圾箱）→ 点击确认；建议把 formsubmit.co 加入 QQ 邮箱白名单 |
 | 高德地图密钥激活 | lbs.amap.com 注册实名 → 应用管理创建应用 → 添加 Key（平台选「Web端(JS API)」）→ Key + 拾取器坐标填 `site-config.js` 的 `map` 配置；「安全密钥」只进服务器 Nginx（模板 `docs/nginx-amap-proxy.conf.example`），绝不提交进仓库。备案切正式域名后在高德控制台给 Key 绑域名白名单 |
-| 首页低温泵拆解动画 | 帧序列 `assets/pump-seq/`（80 帧 WebP，预算 ≤2.5MB），Blender 工程在部署机 `~/aliyun-deploy/pump-src/cryopump.blend`（仓库外）。重渲/换帧后**必须**同步 bump `index.html` 里 `#pumpScrolly` 的 `data-v` 与静态图 `?v=` 参数击穿缓存；帧数变了改 `data-frames`。降级链：无 JS / reduce-motion / Save-Data / 帧加载失败 → 自动回静态爆炸图+零件清单版式 |
+| 首页五幕真空系统动画 | 旧 `assets/pump-seq/` 会由 `assets/scrolly/v2/` 桌面/移动预渲染序列替代；统一 Blender 工程为仓库内 LFS 文件 `source/blender/dingyi-vacuum-system.blend`，可由同目录脚本复现。网页以 `manifest.json` 为唯一帧契约；降级链为无 JS / Reduced Motion / Save-Data / Canvas 不可用 / 首帧失败 → 静态关键画面和完整 HTML 五幕文案。内部结构均为工程示意，不对应具体品牌或型号。 |
 | 两张央企 Logo 裁切 | `assets/img/client-avic.jpg` 与 `client-cnnc.jpg` 源素材（公司简介 PDF）右缘即被裁切，拿到官方完整 Logo 后替换 |
 | 公司官方 Logo | 页头/页脚现为纯文字标识（用户要求移除了自制图标）；favicon 仍是「鼎」字自制图标，拿到官方 Logo 后可整体替换 |
 | 英文版 | 未做，结构已预留，需要时可加 |

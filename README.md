@@ -53,10 +53,9 @@ js/main.js           导航 / 滚动动画 / 数字滚动 / 走马灯 / 表单
 js/map.js            联系页嵌入式高德地图（渐进增强）
 js/pump-scrolly.js   首页低温泵拆解 scrollytelling（帧序列滚动擦除）
 assets/img/          图片素材（源自公司简介 PDF，语义化命名）
-assets/pump-seq/     低温泵拆解帧序列（Blender 渲染 f000-f079.webp + 静态兜底图；
-                     下一阶段计划将源文件存放于 source/blender/dingyi-vacuum-system.blend，
-                     生成后按交接文档执行重渲）
+assets/pump-seq/     旧首页低温泵序列（新五幕运行时接入前继续作为线上兜底）
+source/blender/      五幕真空系统 .blend、可复现构建/预览脚本与质量关口静帧
 assets/favicon.svg   站点图标
 ```
 
-计划中的 Blender 工程及 HDR/EXR/TIFF 源素材将由 Git LFS 管理；部署用 WebP 帧仍使用普通 Git，便于静态托管直接读取。
+Blender 工程及 HDR/EXR/TIFF 源素材由 Git LFS 管理；部署用 WebP 帧与质量关口预览仍使用普通 Git，便于静态托管与代码审查直接读取。场景内部结构为工程示意，不对应具体品牌或型号。

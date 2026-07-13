@@ -1,4 +1,7 @@
 .DS_Store
+*.blend[0-9]*
+__pycache__/
+*.py[cod]
 Thumbs.db
 *.log
 node_modules/

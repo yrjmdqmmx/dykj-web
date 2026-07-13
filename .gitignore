@@ -3,3 +3,6 @@ Thumbs.db
 *.log
 node_modules/
 .gstack/
+_site/
+playwright-report/
+test-results/

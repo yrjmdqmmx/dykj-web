@@ -1,6 +1,6 @@
 # 北京鼎熠科技有限公司 官网
 
-纯静态企业官网（HTML / CSS / 原生 JS，零构建、零外部依赖），内容与图片素材源自公司简介资料。
+纯静态企业官网（HTML / CSS / 原生 JS，无应用编译、零外部依赖），内容与图片素材源自公司简介资料。
 
 ## 页面结构
 
@@ -26,7 +26,7 @@ python3 -m http.server 8000
 ## 部署
 
 任何静态托管均可：虚拟主机、Nginx、阿里云 OSS / 腾讯云 COS 静态网站、GitHub Pages 等。
-将仓库全部文件上传到站点根目录（或子目录）即可，无需构建。
+部署前运行 `scripts/build-site.sh _site`，只上传生成的 `_site/`；源码、文档、测试和构建脚本不会进入线上站点。
 
 **当前已配置 GitHub Pages 自动部署**：推送到 `claude/dingyi-tech-website-lkp7bu` 分支即触发
 `.github/workflows/pages.yml` 工作流，发布到 <https://zdywrnm.github.io/dykj-web/>
@@ -54,6 +54,9 @@ js/map.js            联系页嵌入式高德地图（渐进增强）
 js/pump-scrolly.js   首页低温泵拆解 scrollytelling（帧序列滚动擦除）
 assets/img/          图片素材（源自公司简介 PDF，语义化命名）
 assets/pump-seq/     低温泵拆解帧序列（Blender 渲染 f000-f079.webp + 静态兜底图；
-                     工程文件在部署机 ~/aliyun-deploy/pump-src/cryopump.blend，重渲流程见交接文档）
+                     下一阶段计划将源文件存放于 source/blender/dingyi-vacuum-system.blend，
+                     生成后按交接文档执行重渲）
 assets/favicon.svg   站点图标
 ```
+
+计划中的 Blender 工程及 HDR/EXR/TIFF 源素材将由 Git LFS 管理；部署用 WebP 帧仍使用普通 Git，便于静态托管直接读取。

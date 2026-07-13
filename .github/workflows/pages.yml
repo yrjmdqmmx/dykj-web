@@ -25,12 +25,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Test deploy artifact
+        run: bash tests/build-site.test.sh
+      - name: Build deploy artifact
+        run: scripts/build-site.sh _site
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4

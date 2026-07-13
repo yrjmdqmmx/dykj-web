@@ -23,6 +23,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Test deploy artifact
+        run: bash tests/build-site.test.sh
+
+      - name: Build deploy artifact
+        run: scripts/build-site.sh _site
+
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
@@ -34,10 +40,8 @@ jobs:
       - name: Rsync to server
         run: |
           rsync -rlptzv --delete \
-            --exclude '.git*' --exclude '.github' --exclude 'docs' \
-            --exclude 'README.md' --exclude '.nojekyll' \
             -e "ssh -i ~/.ssh/deploy_key -o IdentitiesOnly=yes" \
-            ./ "deploy@${{ secrets.SERVER_HOST }}:/"
+            _site/ "deploy@${{ secrets.SERVER_HOST }}:/"
 
       - name: Verify deployment
         run: |

@@ -5,13 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>页面未找到 - 北京鼎熠科技有限公司</title>
   <meta name="robots" content="noindex">
-  <!--
-    404 页会在任意深度的缺失 URL 处被服务器渲染，
-    因此本页完全自包含：样式内联、图标用 data URI、不引用任何相对路径资源。
-    「返回首页」当前指向 GitHub Pages 项目站点根 /dykj-web/；
-    将来迁移到正式域名根部署时，请改回 href="/"。
-  -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f5e5c'/%3E%3Ctext x='32' y='45' font-family='serif' font-size='38' font-weight='700' fill='%23fff' text-anchor='middle'%3E鼎%3C/text%3E%3C/svg%3E">
+  <script id="sitePathBootstrap">
+    (function (window) {
+      "use strict";
+      var projectRoot = "/dykj-web/";
+      var hostname = window.location.hostname || "";
+      var siteRoot = /(^|\.)github\.io$/i.test(hostname) ? projectRoot : "/";
+
+      window.__DINGYI_SITE_ROOT__ = siteRoot;
+      window.__DINGYI_SITE_URL__ = function (sitePath) {
+        return siteRoot + String(sitePath || "").replace(/^\/+/, "");
+      };
+    }(window));
+  </script>
+  <!-- 绝对地址是无 JS 兜底；下方同步引导会在正常浏览器中改成本次部署根路径。 -->
+  <link id="siteStyles" rel="stylesheet" href="https://zdywrnm.github.io/dykj-web/css/style.css?v=20260714" data-site-path="css/style.css?v=20260714">
+  <script>
+    document.getElementById("siteStyles").href = window.__DINGYI_SITE_URL__(
+      document.getElementById("siteStyles").getAttribute("data-site-path")
+    );
+  </script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -22,27 +36,119 @@
     .err-wrap {
       min-height: 100vh; display: grid; place-items: center; text-align: center;
       padding: 40px 24px; color: #fff;
-      background: linear-gradient(160deg, #06201f, #0d3b39);
+      background: radial-gradient(circle at 75% 20%, rgba(200,117,50,.16), transparent 28%),
+                  linear-gradient(160deg, #070a0b, #151c1f);
     }
-    .err-wrap h1 { font-size: clamp(80px, 16vw, 150px); line-height: 1; color: #3db8b0; }
+    .err-wrap h1 { font-size: clamp(80px, 16vw, 150px); line-height: 1; color: #c87532; }
     .err-wrap p { margin: 18px 0 30px; color: rgba(234, 244, 243, .75); }
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
-      padding: 14px 30px; border-radius: 999px; text-decoration: none;
+      padding: 14px 30px; border-radius: 2px; text-decoration: none;
       font-size: 15.5px; font-weight: 600; letter-spacing: .04em;
-      background: #147d7a; color: #fff; box-shadow: 0 8px 22px rgba(20, 125, 122, .35);
+      background: #18a99a; color: #04100f; box-shadow: none;
       transition: transform .2s ease, background .2s ease;
     }
-    .btn:hover { transform: translateY(-2px); background: #1b9e97; }
+    .btn:hover { transform: translateY(-2px); background: #38c3b5; }
   </style>
 </head>
 <body>
-  <div class="err-wrap">
+  <a class="skip-link" href="#main-content">跳至主要内容</a>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a class="logo" href="https://zdywrnm.github.io/dykj-web/index.html" data-site-path="index.html" aria-label="北京鼎熠科技 首页">
+        <span class="logo-text">
+          <strong>北京鼎熠科技</strong>
+          <small>DINGYI TECHNOLOGY</small>
+        </span>
+      </a>
+      <nav class="main-nav" id="mainNav" aria-label="主导航">
+        <a href="https://zdywrnm.github.io/dykj-web/index.html" data-site-path="index.html">首页</a>
+        <a href="https://zdywrnm.github.io/dykj-web/about.html" data-site-path="about.html">关于我们</a>
+        <a href="https://zdywrnm.github.io/dykj-web/business.html" data-site-path="business.html">主营业务</a>
+        <a href="https://zdywrnm.github.io/dykj-web/brands.html" data-site-path="brands.html">产品与品牌</a>
+        <a href="https://zdywrnm.github.io/dykj-web/cases.html" data-site-path="cases.html">客户与案例</a>
+        <a href="https://zdywrnm.github.io/dykj-web/contact.html" data-site-path="contact.html" class="nav-cta">联系我们</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="mainNav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="err-wrap" id="main-content" tabindex="-1">
     <div>
       <h1>404</h1>
       <p>抱歉，您访问的页面不存在或已被移动。<br>真空里什么都没有 —— 这个页面也是。</p>
-      <a class="btn" href="/dykj-web/">返回首页</a>
+      <a class="btn" href="https://zdywrnm.github.io/dykj-web/" data-site-path="">返回首页</a>
     </div>
-  </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="https://zdywrnm.github.io/dykj-web/index.html" data-site-path="index.html" aria-label="北京鼎熠科技 首页">
+          <span class="logo-text"><strong>北京鼎熠科技</strong><small>DINGYI TECHNOLOGY</small></span>
+        </a>
+        <p>专业从事真空设备经营和真空领域全方位整合服务，实现客户从产品设计、生产加工、装配调试到维修保养的整体解决方案。</p>
+      </div>
+      <div class="footer-col">
+        <h2>快速导航</h2>
+        <ul>
+          <li><a href="https://zdywrnm.github.io/dykj-web/about.html" data-site-path="about.html">关于我们</a></li>
+          <li><a href="https://zdywrnm.github.io/dykj-web/business.html" data-site-path="business.html">主营业务</a></li>
+          <li><a href="https://zdywrnm.github.io/dykj-web/brands.html" data-site-path="brands.html">产品与品牌</a></li>
+          <li><a href="https://zdywrnm.github.io/dykj-web/cases.html" data-site-path="cases.html">客户与案例</a></li>
+          <li><a href="https://zdywrnm.github.io/dykj-web/contact.html" data-site-path="contact.html">联系我们</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2>主营业务</h2>
+        <ul>
+          <li><a href="https://zdywrnm.github.io/dykj-web/business.html#integration" data-site-path="business.html#integration">真空系统集成</a></li>
+          <li><a href="https://zdywrnm.github.io/dykj-web/business.html#uhp" data-site-path="business.html#uhp">超高纯气路解决方案</a></li>
+          <li><a href="https://zdywrnm.github.io/dykj-web/business.html#emc" data-site-path="business.html#emc">合同能源管理</a></li>
+          <li><a href="https://zdywrnm.github.io/dykj-web/business.html#chamber" data-site-path="business.html#chamber">腔体加工与非标定制</a></li>
+          <li><a href="https://zdywrnm.github.io/dykj-web/business.html#service" data-site-path="business.html#service">维修与技术服务</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2>联系方式</h2>
+        <ul class="footer-contact">
+          <li><span data-config="phone">133-8113-6863</span></li>
+          <li><span data-config="email">19313965@qq.com</span></li>
+          <li><span data-config="address">北京市海淀区成府路45号中关村智造大街D座3层305</span></li>
+          <li><span data-config="worktime">周一至周五 9:00 – 18:00</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <span>© <span id="year">2026</span> 北京鼎熠科技有限公司 版权所有</span>
+      <span data-config="icp"></span>
+    </div>
+  </footer>
+
+  <script id="siteRuntimeLoader" data-site-scripts="js/site-config.js?v=20260714 js/main.js?v=20260714">
+    (function (window, document) {
+      "use strict";
+      var loader = document.currentScript;
+      var siteUrl = window.__DINGYI_SITE_URL__;
+      var paths = (loader.getAttribute("data-site-scripts") || "").split(/\s+/).filter(Boolean);
+
+      document.querySelectorAll("a[data-site-path]").forEach(function (link) {
+        link.href = siteUrl(link.getAttribute("data-site-path"));
+      });
+
+      function loadNext(index) {
+        if (index >= paths.length) return;
+        var script = document.createElement("script");
+        script.src = siteUrl(paths[index]);
+        script.onload = script.onerror = function () { loadNext(index + 1); };
+        document.body.appendChild(script);
+      }
+
+      loadNext(0);
+    }(window, document));
+  </script>
 </body>
 </html>

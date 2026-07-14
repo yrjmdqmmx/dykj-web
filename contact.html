@@ -11,10 +11,12 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="alternate icon" href="favicon.ico" sizes="32x32">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <link rel="stylesheet" href="css/style.css?v=20260708">
+  <link rel="stylesheet" href="css/style.css?v=20260714">
   <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
+
+  <a class="skip-link" href="#main-content">跳至主要内容</a>
 
   <header class="site-header" id="siteHeader">
     <div class="container header-inner">
@@ -30,15 +32,15 @@
         <a href="business.html">主营业务</a>
         <a href="brands.html">产品与品牌</a>
         <a href="cases.html">客户与案例</a>
-        <a href="contact.html" class="nav-cta active">联系我们</a>
+        <a href="contact.html" class="nav-cta active" aria-current="page">联系我们</a>
       </nav>
-      <button class="nav-toggle" id="navToggle" aria-label="打开菜单" aria-expanded="false" aria-controls="mainNav">
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="mainNav">
         <span></span><span></span><span></span>
       </button>
     </div>
   </header>
 
-  <main>
+  <main id="main-content" tabindex="-1">
 
   <!-- ======================= 页头 ======================= -->
   <section class="page-hero">
@@ -145,6 +147,10 @@
           <div class="map-card-body">
             <strong>中关村智造大街 D 座</strong>
             <p data-config="address">北京市海淀区成府路45号中关村智造大街D座3层305</p>
+            <div class="map-card-actions" aria-label="地图导航">
+              <a class="link-more" href="https://uri.amap.com/marker?position=116.335266,39.994199&amp;name=%E4%B8%AD%E5%85%B3%E6%9D%91%E6%99%BA%E9%80%A0%E5%A4%A7%E8%A1%97D%E5%BA%A7&amp;src=dingyivac.com&amp;coordinate=gaode&amp;callnative=1" target="_blank" rel="noopener noreferrer">高德地图导航</a>
+              <a class="link-more" href="https://api.map.baidu.com/geocoder?address=%E5%8C%97%E4%BA%AC%E5%B8%82%E6%B5%B7%E6%B7%80%E5%8C%BA%E6%88%90%E5%BA%9C%E8%B7%AF45%E5%8F%B7%E4%B8%AD%E5%85%B3%E6%9D%91%E6%99%BA%E9%80%A0%E5%A4%A7%E8%A1%97D%E5%BA%A73%E5%B1%82305&amp;output=html&amp;src=webapp.dingyivac" target="_blank" rel="noopener noreferrer">百度地图导航</a>
+            </div>
           </div>
         </div>
         <div class="card" style="margin-top:22px; padding:26px 28px;">
@@ -217,10 +223,10 @@
     </div>
   </footer>
 
-  <button class="backtop" id="backtop" aria-label="回到顶部">↑</button>
+  <button class="backtop" id="backtop" type="button" aria-label="回到顶部">↑</button>
 
-  <script src="js/site-config.js?v=20260708"></script>
-  <script src="js/main.js?v=20260708"></script>
-  <script src="js/map.js?v=20260708"></script>
+  <script src="js/site-config.js?v=20260714"></script>
+  <script src="js/main.js?v=20260714"></script>
+  <script src="js/map.js?v=20260714"></script>
 </body>
 </html>

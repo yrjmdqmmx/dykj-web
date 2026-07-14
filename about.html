@@ -11,10 +11,12 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="alternate icon" href="favicon.ico" sizes="32x32">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <link rel="stylesheet" href="css/style.css?v=20260708">
+  <link rel="stylesheet" href="css/style.css?v=20260714">
   <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
+
+  <a class="skip-link" href="#main-content">跳至主要内容</a>
 
   <header class="site-header" id="siteHeader">
     <div class="container header-inner">
@@ -26,19 +28,19 @@
       </a>
       <nav class="main-nav" id="mainNav" aria-label="主导航">
         <a href="index.html">首页</a>
-        <a href="about.html" class="active">关于我们</a>
+        <a href="about.html" class="active" aria-current="page">关于我们</a>
         <a href="business.html">主营业务</a>
         <a href="brands.html">产品与品牌</a>
         <a href="cases.html">客户与案例</a>
         <a href="contact.html" class="nav-cta">联系我们</a>
       </nav>
-      <button class="nav-toggle" id="navToggle" aria-label="打开菜单" aria-expanded="false" aria-controls="mainNav">
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="mainNav">
         <span></span><span></span><span></span>
       </button>
     </div>
   </header>
 
-  <main>
+  <main id="main-content" tabindex="-1">
 
   <!-- ======================= 页头 ======================= -->
   <section class="page-hero">
@@ -233,9 +235,9 @@
     </div>
   </footer>
 
-  <button class="backtop" id="backtop" aria-label="回到顶部">↑</button>
+  <button class="backtop" id="backtop" type="button" aria-label="回到顶部">↑</button>
 
-  <script src="js/site-config.js?v=20260708"></script>
-  <script src="js/main.js?v=20260708"></script>
+  <script src="js/site-config.js?v=20260714"></script>
+  <script src="js/main.js?v=20260714"></script>
 </body>
 </html>

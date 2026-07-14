@@ -21,25 +21,59 @@
   /* ---------- 移动端菜单 ---------- */
   var navToggle = doc.getElementById("navToggle");
   if (navToggle && header) {
+    var menuLinks = doc.querySelectorAll(".main-nav a");
+    var mobileMenuQuery = window.matchMedia && window.matchMedia("(max-width: 900px)");
+
+    function closeMenu(returnFocus) {
+      header.classList.remove("nav-open");
+      navToggle.setAttribute("aria-expanded", "false");
+      navToggle.setAttribute("aria-label", "打开菜单");
+      if (returnFocus) navToggle.focus();
+    }
+
     navToggle.addEventListener("click", function () {
       var open = header.classList.toggle("nav-open");
       navToggle.setAttribute("aria-expanded", open ? "true" : "false");
       navToggle.setAttribute("aria-label", open ? "关闭菜单" : "打开菜单");
+      // Toggle 在 DOM 中位于导航之后；打开时主动进入首个链接，
+      // 否则键盘用户下一次 Tab 会直接越过整组菜单。
+      if (open && menuLinks.length) {
+        window.requestAnimationFrame(function () {
+          if (header.classList.contains("nav-open")) menuLinks[0].focus();
+        });
+      }
     });
     // 点击菜单项后收起
-    doc.querySelectorAll(".main-nav a").forEach(function (a) {
+    menuLinks.forEach(function (a) {
       a.addEventListener("click", function () {
-        header.classList.remove("nav-open");
-        navToggle.setAttribute("aria-expanded", "false");
+        closeMenu(false);
       });
     });
+    doc.addEventListener("keydown", function (ev) {
+      if (ev.key === "Escape" && header.classList.contains("nav-open")) {
+        closeMenu(true);
+      }
+    });
+    function onMenuBreakpoint(event) {
+      if (!event.matches) closeMenu(false);
+    }
+    if (mobileMenuQuery) {
+      if (typeof mobileMenuQuery.addEventListener === "function") {
+        mobileMenuQuery.addEventListener("change", onMenuBreakpoint);
+      } else if (typeof mobileMenuQuery.addListener === "function") {
+        mobileMenuQuery.addListener(onMenuBreakpoint);
+      }
+    }
   }
 
   /* ---------- 当前页导航高亮 ---------- */
   var path = location.pathname.split("/").pop() || "index.html";
   doc.querySelectorAll(".main-nav a").forEach(function (a) {
     var href = a.getAttribute("href") || "";
-    if (href.split("#")[0] === path) a.classList.add("active");
+    var current = href.split("#")[0] === path;
+    a.classList.toggle("active", current);
+    if (current) a.setAttribute("aria-current", "page");
+    else a.removeAttribute("aria-current");
   });
 
   /* ---------- 滚动渐入 ---------- */
@@ -78,15 +112,13 @@
     var cio = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) {
+          e.target.firstChild.nodeValue = "0";
           animateCount(e.target);
           cio.unobserve(e.target);
         }
       });
     }, { threshold: 0.4 });
-    countEls.forEach(function (el) {
-      el.firstChild.nodeValue = "0";
-      cio.observe(el);
-    });
+    countEls.forEach(function (el) { cio.observe(el); });
   }
 
   /* ---------- Logo 走马灯：复制一份轨道实现无缝循环 ----------

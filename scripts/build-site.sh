@@ -38,6 +38,11 @@ for directory in css js assets; do
   cp -R "$REPO_ROOT/$directory" "$OUTPUT_DIR/$directory"
 done
 
+# Legacy pump walkthrough assets remain in source history for reference but are
+# no longer part of the public site after the v2 company scrollytelling launch.
+rm -rf "$OUTPUT_DIR/assets/pump-seq"
+rm -f "$OUTPUT_DIR/js/pump-scrolly.js"
+
 shopt -s nullglob
 html_files=("$REPO_ROOT"/*.html)
 [ "${#html_files[@]}" -gt 0 ] || fail "no root HTML files found"

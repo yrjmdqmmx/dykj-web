@@ -3,22 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>北京鼎熠科技有限公司 - 真空设备与真空领域全方位整合服务供应商</title>
-  <meta name="description" content="北京鼎熠科技有限公司专业从事真空设备经营与真空领域全方位整合服务，提供氦液化真空系统集成、超高纯气路解决方案、合同能源管理、真空腔体加工、非标定制及真空维修服务。">
-  <meta name="keywords" content="北京鼎熠科技,真空设备,真空系统集成,超高纯气路,合同能源管理,真空腔体加工,真空泵维修,低温泵">
+  <title>北京鼎熠科技有限公司 - 真空领域全方位整合服务供应商</title>
+  <meta name="description" content="北京鼎熠科技有限公司提供真空系统集成、超高纯气路、真空腔体与非标加工、真空设备维修保养等全方位整合服务。">
+  <meta name="keywords" content="北京鼎熠科技,真空设备,真空系统集成,超高纯气路,真空腔体加工,真空泵维修,低温泵">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="北京鼎熠科技有限公司 - 真空领域全方位整合服务商">
-  <meta property="og:description" content="真空系统集成 · 超高纯气路 · 合同能源管理 · 非标定制加工 · 专业真空维修服务">
-  <!-- 上线后请补充绝对地址：<meta property="og:image" content="https://您的域名/assets/img/hero-helium.jpg"> -->
+  <meta property="og:title" content="北京鼎熠科技有限公司 - 真空领域全方位整合服务供应商">
+  <meta property="og:description" content="系统集成 · 精密工程 · 运维能力 · 可靠交付">
+  <!-- 备案和正式域名启用后再补充 canonical 与绝对 OG 地址。 -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="alternate icon" href="favicon.ico" sizes="32x32">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <link rel="stylesheet" href="css/style.css?v=20260708">
+  <link rel="stylesheet" href="css/style.css?v=20260714">
+  <link rel="stylesheet" href="css/home.css?v=20260714">
   <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
-<body>
+<body class="home-page">
+  <a class="skip-link" href="#main-content">跳至主要内容</a>
 
-  <!-- ======================= 顶部导航 ======================= -->
   <header class="site-header" id="siteHeader">
     <div class="container header-inner">
       <a class="logo" href="index.html" aria-label="北京鼎熠科技 首页">
@@ -28,295 +29,207 @@
         </span>
       </a>
       <nav class="main-nav" id="mainNav" aria-label="主导航">
-        <a href="index.html" class="active">首页</a>
+        <a href="index.html" class="active" aria-current="page">首页</a>
         <a href="about.html">关于我们</a>
         <a href="business.html">主营业务</a>
         <a href="brands.html">产品与品牌</a>
         <a href="cases.html">客户与案例</a>
         <a href="contact.html" class="nav-cta">联系我们</a>
       </nav>
-      <button class="nav-toggle" id="navToggle" aria-label="打开菜单" aria-expanded="false" aria-controls="mainNav">
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="mainNav">
         <span></span><span></span><span></span>
       </button>
     </div>
   </header>
 
-  <main>
-
-  <!-- ======================= Hero ======================= -->
-  <section class="hero">
-    <div class="container hero-inner">
-      <p class="hero-eyebrow">DINGYI TECHNOLOGY · 北京鼎熠科技</p>
-      <h1>真空领域<em>全方位整合服务</em>供应商</h1>
-      <p class="hero-sub">专业从事真空设备经营，为半导体、微电子与科研领域客户提供从产品设计、生产加工、装配调试到后期维修保养的整体解决方案。</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="business.html">探索主营业务</a>
-        <a class="btn btn-ghost" href="contact.html">联系我们</a>
+  <main id="main-content" tabindex="-1">
+    <section class="company-scrolly" id="companyScrolly" data-manifest="assets/scrolly/v2/manifest.json" aria-labelledby="companyScrollyTitle">
+      <div class="company-stage" aria-hidden="true">
+        <picture class="company-poster">
+          <source media="(max-width: 767px)" srcset="assets/scrolly/v2/poster-mobile.webp">
+          <img src="assets/scrolly/v2/poster-desktop.webp"
+               srcset="assets/scrolly/v2/poster-mobile.webp 720w, assets/scrolly/v2/poster-desktop.webp 1920w"
+               sizes="(max-width: 767px) 720px, 1920px"
+               alt="" width="1920" height="1080" loading="eager" fetchpriority="high">
+        </picture>
+        <canvas class="company-canvas" aria-hidden="true" hidden></canvas>
+        <div class="company-vignette"></div>
+        <ol class="company-progress" aria-hidden="true">
+          <li class="is-active" data-progress-act="1"><span>01</span>完整系统启动</li>
+          <li data-progress-act="2"><span>02</span>系统集成</li>
+          <li data-progress-act="3"><span>03</span>精密工程</li>
+          <li data-progress-act="4"><span>04</span>运维能力</li>
+          <li data-progress-act="5"><span>05</span>可靠交付</li>
+        </ol>
+        <p class="company-scroll-hint">向下滚动 · 查看系统能力</p>
       </div>
 
-      <div class="hero-stats">
-        <div class="stat">
-          <span class="stat-num"><span data-count="10">10</span><small>年+</small></span>
-          <span class="stat-label">真空维修技术沉淀</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num"><span data-count="9">9</span><small>家</small></span>
-          <span class="stat-label">国际知名经营品牌</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num"><span data-count="27">27</span><small>家+</small></span>
-          <span class="stat-label">央企 · 高校 · 院所客户</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">全国<small>覆盖</small></span>
-          <span class="stat-label">省会直辖市销售服务网络</span>
-        </div>
-      </div>
-    </div>
-  </section>
+      <div class="company-steps">
+        <article class="company-act company-act-hero" data-act="1" id="act-startup">
+          <div class="container company-act-inner">
+            <div class="company-copy">
+              <p class="act-number">01 / 05 · DINGYI TECHNOLOGY</p>
+              <h1 id="companyScrollyTitle">真空领域<br><span>全方位整合服务</span></h1>
+              <p class="company-lead">从产品设计、生产加工与装配调试，到后期维修保养，为半导体、微电子与科研领域提供完整解决方案。</p>
+              <div class="company-actions">
+                <a class="btn btn-primary" href="business.html">探索主营业务</a>
+                <a class="btn btn-ghost" href="contact.html">沟通项目需求</a>
+              </div>
+            </div>
+          </div>
+        </article>
 
-  <!-- ======================= 低温泵 3D 拆解（滚动驱动，JS 升级；默认静态版式即兜底） ======================= -->
-  <section class="pump-scrolly" id="pumpScrolly"
-           data-frames="80" data-src="assets/pump-seq/" data-v="20260708b">
-    <div class="pump-static">
+        <article class="company-act" data-act="2" id="act-integration">
+          <div class="container company-act-inner">
+            <div class="company-copy">
+              <p class="act-number">02 / 05 · SYSTEM INTEGRATION</p>
+              <h2>系统集成</h2>
+              <p>围绕真空与超高纯气体输送系统，完成方案规划、设备选型、管路集成、安装施工、测试与调试。</p>
+              <a class="act-link" href="business.html#integration">查看系统集成能力</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="company-act" data-act="3" id="act-precision">
+          <div class="container company-act-inner">
+            <div class="company-copy">
+              <p class="act-number">03 / 05 · PRECISION ENGINEERING</p>
+              <h2>精密工程</h2>
+              <p>面向实际工况开展真空腔体、法兰、波纹管、馈通与非标设备的设计和精密加工，让系统结构可制造、可装配、可验证。</p>
+              <a class="act-link" href="business.html#chamber">了解非标定制</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="company-act" data-act="4" id="act-service">
+          <div class="container company-act-inner">
+            <div class="company-copy">
+              <p class="act-number">04 / 05 · LIFECYCLE SERVICE</p>
+              <h2>运维能力</h2>
+              <p>以检漏、测试、校准、保养与维修覆盖设备全生命周期，并支持大型设备上门现场服务，缩短停机与恢复周期。</p>
+              <a class="act-link" href="business.html#service">查看维修服务</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="company-act" data-act="5" id="act-delivery">
+          <div class="container company-act-inner">
+            <div class="company-copy">
+              <p class="act-number">05 / 05 · RELIABLE DELIVERY</p>
+              <h2>可靠交付</h2>
+              <p>从方案、制造、装配到调试和服务形成闭环，让每一项交付都能回到真实工况、质量节点与持续支持。</p>
+              <a class="act-link" href="cases.html">查看客户与案例</a>
+              <p class="engineering-note">结构与动画为工程示意，不对应具体品牌或型号。</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="home-capabilities section" aria-labelledby="capabilitiesTitle">
       <div class="container">
-        <div class="sec-head reveal">
-          <p class="eyebrow">Vacuum Pump</p>
-          <h2>解构一台真空泵</h2>
-          <p class="sec-sub">从整机到零件——一台真空泵机组的精密装配，也是我们维修保养工作的日常</p>
+        <div class="home-section-head reveal">
+          <p>CORE CAPABILITIES</p>
+          <h2 id="capabilitiesTitle">从系统到现场，能力贯穿项目全周期</h2>
+          <a class="link-more" href="business.html">查看全部主营业务</a>
         </div>
-        <div class="pump-static-grid">
-          <img class="reveal" src="assets/pump-seq/pump-exploded.webp?v=20260708b"
-               alt="真空泵机组结构拆解示意：进排气法兰、泵头壳体、系杆螺栓、驱动电机、接线盒与底座"
-               loading="lazy" width="1440" height="1080">
-          <ul class="pump-parts reveal" data-delay="1">
-            <li><strong>进气 / 排气法兰</strong>顶部双法兰接口，与工艺管路对接</li>
-            <li><strong>泵头总成</strong>蜗壳与端盖组成的承压壳体，气体在此完成吸入与排出</li>
-            <li><strong>系杆与紧固件</strong>贯穿泵头的系杆螺栓，维修拆装的第一步</li>
-            <li><strong>驱动电机</strong>与泵头直联，散热筋壳体，顶置接线盒</li>
-            <li><strong>公共底座</strong>电机与泵头共用的刚性支承，保证轴系对中</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="pump-stage" aria-hidden="true">
-      <canvas class="pump-canvas"></canvas>
-      <div class="pump-caption" data-start="0" data-end="0.26">
-        <p class="pump-k">01 · Assembly</p>
-        <h3>一台真空泵机组</h3>
-        <p>电机直联泵头、共用底座的一体化机组。滚动页面，看它如何被拆解成一个个零件——这也是我们维修工程师每天的工作。</p>
-      </div>
-      <div class="pump-caption" data-start="0.26" data-end="0.55">
-        <p class="pump-k">02 · Interfaces</p>
-        <h3>顶部接口</h3>
-        <p>进排气法兰与接线盒集中于机组顶部：气路对接工艺管路，电路进接线盒——安装与检修在同一侧即可完成。</p>
-      </div>
-      <div class="pump-caption" data-start="0.55" data-end="0.84">
-        <p class="pump-k">03 · Pump Head</p>
-        <h3>泵头拆解</h3>
-        <p>端盖与系杆螺栓依次分离，露出承压的泵头壳体——气体的吸入、压缩与排出都在这套壳体内完成，也是检修的核心部位。</p>
-      </div>
-      <div class="pump-caption" data-start="0.84" data-end="1">
-        <p class="pump-k">04 · Drive &amp; Base</p>
-        <h3>驱动与底座</h3>
-        <p>散热筋壳体的驱动电机与刚性公共底座：精准对中、稳固支承，是真空泵长期稳定运行的基础。</p>
-      </div>
-      <div class="pump-hint">滚动查看拆解</div>
-    </div>
-  </section>
-
-  <!-- ======================= 公司简介 ======================= -->
-  <section class="section">
-    <div class="container intro-grid">
-      <div class="intro-text reveal">
-        <div class="sec-head" style="margin-bottom:28px;">
-          <p class="eyebrow">About Dingyi</p>
-          <h2>专注真空 · 整合服务</h2>
-        </div>
-        <p>北京鼎熠科技有限公司是一家专业从事<strong>真空设备经营</strong>和提供<strong>真空领域全方位整合服务</strong>的供应商，拥有一批多年从事真空行业研发、生产、销售及服务的专业型高科技人才队伍。</p>
-        <p>公司坐拥稳定、庞大的销售网络，覆盖全国各大省会直辖市，以完整的产品种类、核心的专业经验和娴熟的维修能力，实现客户从产品设计、生产加工、装配调试到后期维修保养的整体解决方案。</p>
-        <p>公司已成功为半导体、微电子领域客户提供<strong>超高纯气体输送系统</strong>的规划、设计、施工及测试等全面解决方案，以及压缩气体动力系统的<strong>合同能源管理服务</strong>，取得客户的高度认可与好评。</p>
-        <a class="link-more" href="about.html" style="margin-top:8px;">了解更多关于我们</a>
-      </div>
-      <div class="intro-media reveal" data-delay="1">
-        <img class="im-main" src="assets/img/biz-cryopump-workshop.jpg" alt="低温泵产品生产加工车间" loading="lazy">
-        <img class="im-float" src="assets/img/custom-chamber-glow.jpg" alt="定制真空腔体设备" loading="lazy">
-        <div class="intro-badge">
-          <strong>10 年+</strong>
-          <span>真空行业深耕</span>
+        <div class="capability-grid">
+          <a class="capability-item reveal" href="business.html#integration">
+            <span class="capability-index">01</span>
+            <h3>系统集成</h3>
+            <p>真空系统与超高纯气路的规划、集成、施工、测试和调试。</p>
+            <span class="capability-meta">方案 · 装配 · 调试</span>
+          </a>
+          <a class="capability-item reveal" data-delay="1" href="business.html#chamber">
+            <span class="capability-index">02</span>
+            <h3>精密制造</h3>
+            <p>真空腔体、法兰、波纹管、馈通及非标产品设计与加工。</p>
+            <span class="capability-meta">设计 · 加工 · 验证</span>
+          </a>
+          <a class="capability-item reveal" data-delay="2" href="business.html#service">
+            <span class="capability-index">03</span>
+            <h3>运维服务</h3>
+            <p>维修、保养、检漏、测试与校准，支持大型设备现场服务。</p>
+            <span class="capability-meta">检漏 · 维修 · 保养</span>
+          </a>
+          <a class="capability-item reveal" data-delay="3" href="cases.html">
+            <span class="capability-index">04</span>
+            <h3>项目交付</h3>
+            <p>围绕真实工况组织资源与技术节点，形成可持续支持的交付闭环。</p>
+            <span class="capability-meta">工况 · 质量 · 支持</span>
+          </a>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ======================= 主营业务 ======================= -->
-  <section class="section tint">
-    <div class="container">
-      <div class="sec-head center reveal">
-        <p class="eyebrow">Our Business</p>
-        <h2>主营业务</h2>
-        <p class="sec-sub">从真空系统集成到维修保养，覆盖真空应用全生命周期的一体化服务能力</p>
+    <section class="home-brands section" aria-labelledby="brandsTitle">
+      <div class="container home-section-head reveal">
+        <p>PRODUCTS &amp; BRANDS</p>
+        <h2 id="brandsTitle">可靠产品与备件，服务完整方案</h2>
+        <a class="link-more" href="brands.html">查看品牌与产品线</a>
       </div>
-
-      <div class="biz-grid">
-        <a class="card reveal" href="business.html#integration">
-          <div class="card-media"><img src="assets/img/hero-helium.jpg" alt="氦液化真空系统集成现场" loading="lazy"></div>
-          <div class="card-body">
-            <h3>真空系统集成</h3>
-            <p>氦液化等大型真空系统的规划、集成、装配与调试，服务重大科研装置。</p>
-            <span class="link-more">了解详情</span>
-          </div>
-        </a>
-        <a class="card reveal" data-delay="1" href="business.html#uhp">
-          <div class="card-media"><img src="assets/img/biz-uhp-panels.jpg" alt="超高纯气体输送系统管路" loading="lazy"></div>
-          <div class="card-body">
-            <h3>超高纯气路解决方案</h3>
-            <p>高纯气体输送系统的规划设计、现场安装施工、测试认证与调试启动。</p>
-            <span class="link-more">了解详情</span>
-          </div>
-        </a>
-        <a class="card reveal" data-delay="2" href="business.html#emc">
-          <div class="card-media"><img src="assets/img/biz-energy.jpg" alt="合同能源管理项目现场" loading="lazy"></div>
-          <div class="card-body">
-            <h3>合同能源管理</h3>
-            <p>压缩气体动力系统的合同能源管理服务，助力客户降本增效。</p>
-            <span class="link-more">了解详情</span>
-          </div>
-        </a>
-        <a class="card reveal" href="business.html#chamber">
-          <div class="card-media"><img src="assets/img/custom-chamber-3.jpg" alt="定制真空腔体" loading="lazy"></div>
-          <div class="card-body">
-            <h3>真空腔体加工与非标定制</h3>
-            <p>真空腔体、法兰、波纹管、馈通等非标产品的设计与精密加工。</p>
-            <span class="link-more">了解详情</span>
-          </div>
-        </a>
-        <a class="card reveal" data-delay="1" href="business.html#pump">
-          <div class="card-media"><img src="assets/img/biz-explosionproof-install.jpg" alt="真空泵防爆产品安装现场" loading="lazy"></div>
-          <div class="card-body">
-            <h3>低温泵与防爆真空产品</h3>
-            <p>低温泵产品生产加工，真空泵防爆产品与移动式防爆机组。</p>
-            <span class="link-more">了解详情</span>
-          </div>
-        </a>
-        <a class="card reveal" data-delay="2" href="business.html#service">
-          <div class="card-media"><img src="assets/img/biz-service-workshop.jpg" alt="真空产品维修车间" loading="lazy"></div>
-          <div class="card-body">
-            <h3>维修与技术服务</h3>
-            <p>真空维修、保养、检漏、测试、校准，支持大型设备上门现场服务。</p>
-            <span class="link-more">了解详情</span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ======================= 经营品牌 ======================= -->
-  <section class="section">
-    <div class="container">
-      <div class="sec-head center reveal">
-        <p class="eyebrow">Brands</p>
-        <h2>经营品牌</h2>
-        <p class="sec-sub">经营国际知名真空与气路品牌，为客户甄选可靠的产品与备件</p>
-      </div>
-    </div>
-    <div class="marquee reveal" role="group" aria-label="经营品牌">
-      <div class="marquee-track">
-        <div class="logo-card"><img src="assets/img/brand-sumitomo.jpg" alt="SUMITOMO 住友重机械"></div>
-        <div class="logo-card"><img src="assets/img/brand-pfeiffer.jpg" alt="Pfeiffer Vacuum 普发真空"></div>
-        <div class="logo-card"><img src="assets/img/brand-anest-iwata.jpg" alt="ANEST IWATA 阿耐思特岩田"></div>
-        <div class="logo-card"><img src="assets/img/brand-inficon.png" alt="INFICON 英福康"></div>
-        <div class="logo-card"><img src="assets/img/brand-ulvac.jpg" alt="ULVAC 爱发科"></div>
-        <div class="logo-card"><img src="assets/img/brand-edwards.png" alt="EDWARDS 爱德华"></div>
-        <div class="logo-card"><img src="assets/img/brand-agilent.jpg" alt="Agilent Technologies 安捷伦"></div>
-        <div class="logo-card"><img src="assets/img/brand-vat.jpg" alt="VAT 真空阀门"></div>
-        <div class="logo-card"><img src="assets/img/brand-swagelok.png" alt="Swagelok 世伟洛克"></div>
-      </div>
-    </div>
-    <div class="container" style="text-align:center; margin-top:36px;">
-      <a class="btn btn-outline" href="brands.html">查看品牌与产品线</a>
-    </div>
-  </section>
-
-  <!-- ======================= 客户群体 ======================= -->
-  <section class="section dark">
-    <div class="container">
-      <div class="sec-head center reveal">
-        <p class="eyebrow">Our Clients</p>
-        <h2>客户群体</h2>
-        <p class="sec-sub">服务大型国企、著名高校与科研院所，深度参与前沿科研与工业项目</p>
-      </div>
-      <div class="client-cats">
-        <a class="client-cat reveal" href="cases.html#soe">
-          <span class="cat-num">4<small>家</small></span>
-          <h3>大型国企</h3>
-          <p>中国航天科技、中国航天科工、中国航空工业、中国核工业等央企集团。</p>
-        </a>
-        <a class="client-cat reveal" data-delay="1" href="cases.html#uni">
-          <span class="cat-num">15<small>所</small></span>
-          <h3>著名高校</h3>
-          <p>清华大学、北京大学、浙江大学、哈尔滨工业大学等知名学府。</p>
-        </a>
-        <a class="client-cat reveal" data-delay="2" href="cases.html#inst">
-          <span class="cat-num">8<small>家</small></span>
-          <h3>科研院所</h3>
-          <p>中科院物理所、化学所、半导体所、理化所、大连化物所等研究机构。</p>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ======================= 成功案例精选 ======================= -->
-  <section class="section tint">
-    <div class="container">
-      <div class="sec-head center reveal">
-        <p class="eyebrow">Success Cases</p>
-        <h2>成功案例</h2>
-        <p class="sec-sub">从量子科研装置到加速器工程，交付值得信赖的真空与气路系统</p>
-      </div>
-      <div class="case-grid">
-        <div class="card case-item reveal">
-          <div class="card-media"><img src="assets/img/case-arpes.jpg" alt="ARPES/MBE 真空系统" loading="lazy"></div>
-          <div class="card-body">
-            <span class="case-tag">高校案例</span>
-            <h3>北京大学 量子 ARPES/MBE 真空系统及高纯氦气气路系统</h3>
-          </div>
-        </div>
-        <div class="card case-item reveal" data-delay="1">
-          <div class="card-media"><img src="assets/img/case-system.jpg" alt="加速器设备现场" loading="lazy"></div>
-          <div class="card-body">
-            <span class="case-tag">科研院所案例</span>
-            <h3>中科院高能物理所 质子加速器</h3>
-          </div>
-        </div>
-        <div class="card case-item reveal" data-delay="2">
-          <div class="card-media"><img src="assets/img/case-degas.jpg" alt="高温加热除气台" loading="lazy"></div>
-          <div class="card-body">
-            <span class="case-tag">科研院所案例</span>
-            <h3>中科院半导体所 高温加热除气台</h3>
-          </div>
+      <div class="marquee reveal" role="group" aria-label="经营品牌">
+        <div class="marquee-track">
+          <div class="logo-card"><img src="assets/img/brand-sumitomo.jpg" alt="SUMITOMO 住友重机械"></div>
+          <div class="logo-card"><img src="assets/img/brand-pfeiffer.jpg" alt="Pfeiffer Vacuum 普发真空"></div>
+          <div class="logo-card"><img src="assets/img/brand-anest-iwata.jpg" alt="ANEST IWATA 阿耐思特岩田"></div>
+          <div class="logo-card"><img src="assets/img/brand-inficon.png" alt="INFICON 英福康"></div>
+          <div class="logo-card"><img src="assets/img/brand-ulvac.jpg" alt="ULVAC 爱发科"></div>
+          <div class="logo-card"><img src="assets/img/brand-edwards.png" alt="EDWARDS 爱德华"></div>
+          <div class="logo-card"><img src="assets/img/brand-agilent.jpg" alt="Agilent Technologies 安捷伦"></div>
+          <div class="logo-card"><img src="assets/img/brand-vat.jpg" alt="VAT 真空阀门"></div>
+          <div class="logo-card"><img src="assets/img/brand-swagelok.png" alt="Swagelok 世伟洛克"></div>
         </div>
       </div>
-      <div style="text-align:center; margin-top:44px;" class="reveal">
-        <a class="btn btn-outline" href="cases.html">查看全部客户与案例</a>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ======================= CTA ======================= -->
-  <section class="section" style="padding-top:0;">
-    <div class="container">
-      <div class="cta-band reveal">
-        <div>
-          <h2>诚挚期待与您的合作</h2>
-          <p>诚为本，和则兴；技至精，业竞成。欢迎垂询真空系统与气路解决方案。</p>
+    <section class="home-proof section" aria-labelledby="proofTitle">
+      <div class="container">
+        <div class="proof-metrics reveal" aria-label="服务能力数据">
+          <div><strong><span data-count="10">10</span><small>年+</small></strong><span>真空维修技术沉淀</span></div>
+          <div><strong><span data-count="9">9</span><small>家</small></strong><span>国际知名经营品牌</span></div>
+          <div><strong><span data-count="27">27</span><small>家+</small></strong><span>央企、高校与院所客户</span></div>
+          <div><strong>全国<small>覆盖</small></strong><span>省会直辖市销售服务网络</span></div>
         </div>
-        <a class="btn btn-primary" style="background:#fff; color:var(--teal-800); box-shadow:none;" href="contact.html">立即咨询</a>
-      </div>
-    </div>
-  </section>
 
-  <!-- ======================= 页脚 ======================= -->
+        <div class="home-section-head reveal">
+          <p>PROJECT DELIVERY</p>
+          <h2 id="proofTitle">项目现场，是能力最终落地的地方</h2>
+          <a class="link-more" href="cases.html">查看全部客户与案例</a>
+        </div>
+
+        <div class="home-case-grid">
+          <a class="home-case reveal" href="cases.html#success">
+            <div class="home-case-media"><img src="assets/img/case-arpes.jpg" alt="北京大学 ARPES/MBE 真空系统" loading="lazy"></div>
+            <span>01 · 高校案例</span>
+            <h3>北京大学量子 ARPES/MBE 真空系统及高纯氦气气路系统</h3>
+          </a>
+          <a class="home-case reveal" data-delay="1" href="cases.html#success">
+            <div class="home-case-media"><img src="assets/img/case-system.jpg" alt="中科院高能物理所质子加速器设备现场" loading="lazy"></div>
+            <span>02 · 科研院所案例</span>
+            <h3>中科院高能物理所质子加速器</h3>
+          </a>
+          <a class="home-case reveal" data-delay="2" href="cases.html#success">
+            <div class="home-case-media"><img src="assets/img/case-degas.jpg" alt="中科院半导体所高温加热除气台" loading="lazy"></div>
+            <span>03 · 科研院所案例</span>
+            <h3>中科院半导体所高温加热除气台</h3>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-contact section">
+      <div class="container">
+        <div class="home-contact-panel reveal">
+          <div>
+            <p>START A PROJECT</p>
+            <h2>告诉我们您的工况与需求</h2>
+            <span>从方案咨询、产品选型到维修服务，我们将围绕实际项目给出响应。</span>
+          </div>
+          <a class="btn btn-primary" href="contact.html">获取整体解决方案</a>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -353,22 +266,10 @@
       <div class="footer-col">
         <h2>联系方式</h2>
         <ul class="footer-contact">
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <span data-config="phone">133-8113-6863</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            <span data-config="email">19313965@qq.com</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span data-config="address">北京市海淀区成府路45号中关村智造大街D座3层305</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <span data-config="worktime">周一至周五 9:00 – 18:00</span>
-          </li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span data-config="phone">133-8113-6863</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg><span data-config="email">19313965@qq.com</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span data-config="address">北京市海淀区成府路45号中关村智造大街D座3层305</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-config="worktime">周一至周五 9:00 – 18:00</span></li>
         </ul>
       </div>
     </div>
@@ -378,10 +279,10 @@
     </div>
   </footer>
 
-  <button class="backtop" id="backtop" aria-label="回到顶部">↑</button>
+  <button class="backtop" id="backtop" type="button" aria-label="回到顶部">↑</button>
 
-  <script src="js/site-config.js?v=20260708"></script>
-  <script src="js/main.js?v=20260708"></script>
-  <script src="js/pump-scrolly.js?v=20260708"></script>
+  <script src="js/site-config.js?v=20260714"></script>
+  <script src="js/main.js?v=20260714"></script>
+  <script src="js/company-scrolly.js?v=20260714"></script>
 </body>
 </html>

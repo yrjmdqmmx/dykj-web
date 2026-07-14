@@ -25,6 +25,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          lfs: true
       - name: Test deploy artifact
         run: bash tests/build-site.test.sh
       - name: Build deploy artifact

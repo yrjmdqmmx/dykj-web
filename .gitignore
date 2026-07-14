@@ -9,3 +9,4 @@ node_modules/
 _site/
 playwright-report/
 test-results/
+source/blender/render-cache/

@@ -25,8 +25,9 @@
 **Files:**
 - Create: `tests/cinematic-assets.test.sh`
 - Create: `source/blender/dingyi-vacuum-system.blend`
-- Create: `assets/cinematic/desktop/`
-- Create: `assets/cinematic/mobile/`
+- Create: `assets/scrolly/v2/desktop/`
+- Create: `assets/scrolly/v2/mobile/`
+- Create: `assets/scrolly/v2/manifest.json`
 
 - [ ] 先写失败测试，校验桌面 96 帧/1920×1080/≤8 MB、移动 40 帧/720×960/≤2 MB，并拒绝缺帧和错号。
 - [ ] 运行 `bash tests/cinematic-assets.test.sh`，确认因资产尚未生成而失败。
@@ -39,7 +40,7 @@
 **Files:**
 - Modify: `index.html`
 - Modify: `css/style.css`
-- Create: `js/cinematic-homepage.js`
+- Create: `js/company-scrolly.js`
 - Modify: `tests/build-site.test.sh`
 
 - [ ] 先扩展 artifact 测试，要求新脚本、桌面帧、移动帧和静态兜底图进入 `_site`，运行并确认失败。

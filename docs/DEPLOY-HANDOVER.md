@@ -7,15 +7,15 @@
 
 - **仓库**：`zdywrnm/dykj-web`，唯一分支 `claude/dingyi-tech-website-lkp7bu`（即默认分支），**推送该分支会自动触发 GitHub Pages 部署**（`.github/workflows/pages.yml`）
 - **线上地址**：<https://zdywrnm.github.io/dykj-web/>（GitHub Pages，作为临时/预览环境，迁移后可保留）
-- **技术形态**：纯静态 HTML/CSS/JS，零构建零依赖，全站相对路径（根目录或子路径部署均可），直接把仓库文件放到 Web 根目录即可运行
-- **页面**：index / about / business / brands / cases / contact + 自包含 404
+- **技术形态**：生产站点为纯静态 HTML/CSS/JS、零运行时依赖；发布前由 `scripts/build-site.sh` 过滤源码与测试，Playwright 仅作为开发质量门禁
+- **页面**：index / about / business / brands / cases / contact + GitHub Pages/ECS 双部署路径自适应 404
 - **站点配置集中在 `js/site-config.js`**：电话 133-8113-6863、邮箱 19313965@qq.com、地址（海淀区成府路45号中关村智造大街D座3层305）、`formEmail`（留言表单收件）、`icp`（备案号，当前为空字符串）
 - **在线留言**：前端 fetch POST 到 `https://formsubmit.co/ajax/<formEmail>`，失败自动回退 mailto。链路已用 Gmail 验证可用；当前 formEmail=19313965@qq.com，**QQ 邮箱尚未做 FormSubmit 激活**（首次收到提交时会收到激活邮件，可能在垃圾箱，点击确认后生效）
-- **公司位置**：嵌入式高德实时地图已上线（`js/map.js`，渐进增强，Key/GCJ-02 坐标在 `site-config.js` 的 `map` 字段）；Key 为空或加载失败时自动回退 SVG 占位卡片（零地图请求）。原高德/百度检索导航链接已按用户要求移除（2026-07）。安全密钥走服务器 Nginx 代理（模板 `docs/nginx-amap-proxy.conf.example`）
+- **公司位置**：嵌入式高德实时地图已上线（`js/map.js`，渐进增强，Key/GCJ-02 坐标在 `site-config.js` 的 `map` 字段）；Key 为空、GitHub Pages 无同源代理或加载失败时自动回退 SVG 占位卡片（零地图请求），并始终保留高德/百度导航链接。ECS/正式域名通过同源 Nginx 代理保存安全密钥（模板 `docs/nginx-amap-proxy.conf.example`）
 
 ## 二、新阶段目标
 
-用户已购买 **域名**（具体域名请向用户确认）和 **阿里云 ECS**（`root@116.62.146.226`，SSH 免密已配置），计划：
+用户已购买域名 **dingyivac.com** 和 **阿里云 ECS**（`root@116.62.146.226`，SSH 免密已配置），计划：
 
 1. 将网站部署到该服务器（从而可做 ICP 备案）
 2. 域名解析 + HTTPS
@@ -54,7 +54,7 @@ EOF
 4. **ICP 备案**：在阿里云 ICP 代备案系统提交（需营业执照、法人/负责人身份证、真实性核验等）。**备案审核期间管局要求域名不可访问**——期间网站可先只用 IP 验证或保持 GitHub Pages 预览。备案通过后：
    - `js/site-config.js` 的 `icp` 填入真实备案号（页脚自动显示）
    - `sitemap.xml`、`robots.txt` 里的 `zdywrnm.github.io/dykj-web` 全局替换为正式域名
-   - `404.html`「返回首页」`href="/dykj-web/"` 改回 `href="/"`
+   - `404.html` 已按 `github.io` 与根域名自动选择站点根路径，无需手工改返回首页链接
    - 各页 `<head>` 可补 `og:image` 绝对地址（已留注释）
 
 ## 五、遗留小事项（非阻塞）
@@ -63,7 +63,7 @@ EOF
 |---|---|
 | QQ 邮箱 FormSubmit 激活 | 网站上提交一条留言 → 19313965@qq.com 收激活邮件（查垃圾箱）→ 点击确认；建议把 formsubmit.co 加入 QQ 邮箱白名单 |
 | 高德地图密钥激活 | lbs.amap.com 注册实名 → 应用管理创建应用 → 添加 Key（平台选「Web端(JS API)」）→ Key + 拾取器坐标填 `site-config.js` 的 `map` 配置；「安全密钥」只进服务器 Nginx（模板 `docs/nginx-amap-proxy.conf.example`），绝不提交进仓库。备案切正式域名后在高德控制台给 Key 绑域名白名单 |
-| 首页五幕真空系统动画 | 旧 `assets/pump-seq/` 会由 `assets/scrolly/v2/` 桌面/移动预渲染序列替代；统一 Blender 工程为仓库内 LFS 文件 `source/blender/dingyi-vacuum-system.blend`，可由同目录脚本复现。网页以 `manifest.json` 为唯一帧契约；降级链为无 JS / Reduced Motion / Save-Data / Canvas 不可用 / 首帧失败 → 静态关键画面和完整 HTML 五幕文案。内部结构均为工程示意，不对应具体品牌或型号。 |
+| 首页五幕真空系统动画 | `assets/scrolly/v2/` 桌面/移动预渲染序列与 `js/company-scrolly.js` 已上线；统一 Blender 工程为仓库内 LFS 文件 `source/blender/dingyi-vacuum-system.blend`，可由同目录脚本复现。网页以 `manifest.json` 为唯一帧契约；降级链为无 JS / Reduced Motion / Save-Data / Canvas 不可用 / 首帧失败 → 静态关键画面和完整 HTML 五幕文案。内部结构均为工程示意，不对应具体品牌或型号；旧泵序列仅保留历史源文件且不进入发布产物。 |
 | 两张央企 Logo 裁切 | `assets/img/client-avic.jpg` 与 `client-cnnc.jpg` 源素材（公司简介 PDF）右缘即被裁切，拿到官方完整 Logo 后替换 |
 | 公司官方 Logo | 页头/页脚现为纯文字标识（用户要求移除了自制图标）；favicon 仍是「鼎」字自制图标，拿到官方 Logo 后可整体替换 |
 | 英文版 | 未做，结构已预留，需要时可加 |

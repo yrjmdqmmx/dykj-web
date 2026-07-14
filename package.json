@@ -1,0 +1,15 @@
+{
+  "name": "dingyi-static-site-qa",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Browser quality gates for the framework-free Dingyi company website.",
+  "scripts": {
+    "test:browser": "npm run test:e2e",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:report": "playwright show-report output/playwright/report"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.1"
+  }
+}

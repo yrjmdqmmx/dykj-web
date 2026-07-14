@@ -13,6 +13,10 @@
   // 双重开关：key 或坐标未配置即整体禁用，页面保持现状
   if (!visual || !box || !cfg.amapKey || !Array.isArray(cfg.center)) return;
 
+  // GitHub Pages 不能提供同源 /_AMapService 安全代理。未显式配置
+  // securityJsCode 时不加载 SDK，保留地址与高德/百度导航链接作为完整兜底。
+  if (!cfg.securityJsCode && /(^|\.)github\.io$/i.test(location.hostname)) return;
+
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var started = false;
 

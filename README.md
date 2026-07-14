@@ -6,12 +6,12 @@
 
 | 页面 | 说明 |
 |---|---|
-| `index.html` | 首页：Hero、公司简介、主营业务、经营品牌、客户群体、成功案例 |
+| `index.html` | 首页：五幕电影级真空系统叙事、主营能力、经营品牌、客户与案例 |
 | `about.html` | 关于我们：公司简介、公司优势、发展理念、服务网络 |
 | `business.html` | 主营业务：真空系统集成 / 超高纯气路 / 合同能源管理 / 腔体加工 / 非标定制 / 低温泵与防爆产品 / 维修服务 |
 | `brands.html` | 产品与品牌：九大经营品牌与产品类别导览 |
 | `cases.html` | 客户与案例：国企 / 高校 / 科研院所客户与成功案例 |
-| `contact.html` | 联系我们：联系方式、在线留言、地图占位 |
+| `contact.html` | 联系我们：联系方式、在线留言、嵌入地图与导航链接 |
 | `404.html` | 404 页面 |
 
 ## 本地预览
@@ -39,23 +39,27 @@ python3 -m http.server 8000
 3. **域名相关**：
    - `sitemap.xml` 与 `robots.txt` 当前指向 GitHub Pages 临时地址，启用正式域名后请全局替换；
    - 各页 `<head>` 中可补充 `og:image` 绝对地址（已留注释）。
-4. **嵌入式地图**（已上线）：联系页内嵌高德实时地图（`js/map.js`，渐进增强），Key/坐标配置在 `js/site-config.js` 的 `map` 字段；安全密钥走服务器 Nginx 代理（模板见 `docs/nginx-amap-proxy.conf.example`，详见交接文档）。Key 为空或加载失败时自动回退 SVG 占位卡片（导航外链已按用户要求于 2026-07 移除）。
+4. **嵌入式地图**（已上线）：联系页内嵌高德实时地图（`js/map.js`，渐进增强），Key/坐标配置在 `js/site-config.js` 的 `map` 字段；安全密钥走服务器 Nginx 代理（模板见 `docs/nginx-amap-proxy.conf.example`，详见交接文档）。Key 为空、GitHub Pages 无同源代理或加载失败时自动回退 SVG 占位卡片，并始终保留高德/百度导航链接。
 5. **留言表单**：通过 FormSubmit 免费服务直发 `js/site-config.js` 中 `formEmail` 指定的邮箱（当前 19313965@qq.com），发送失败自动回退 mailto。链路已用 Gmail 验证可用；**QQ 邮箱首次收到提交时需点击 FormSubmit 激活确认邮件（注意查垃圾箱）**。
 6. **两张客户 Logo 待换**：`assets/img/client-avic.jpg`（中国航空工业）与 `client-cnnc.jpg`（中国核工业）源素材右缘在公司简介 PDF 中即被裁切，建议上线前替换为官方完整 Logo。
-7. **404 首页链接**：`404.html` 中「返回首页」当前指向 GitHub Pages 子路径 `/dykj-web/`；迁移到正式域名根部署时请改回 `href="/"`。
+7. **404 双部署路径**：`404.html` 会按 `github.io` 与根域名自动选择 `/dykj-web/` 或 `/`，无需在正式域名切换时手工改链接。
 
 ## 目录说明
 
 ```
 css/style.css        全站样式（设计变量集中在 :root）
+css/home.css         首页五幕与电影工业视觉
 js/site-config.js    联系方式等站点配置（占位信息集中处）
 js/main.js           导航 / 滚动动画 / 数字滚动 / 走马灯 / 表单
+js/company-scrolly.js 首页桌面/移动预渲染序列运行时
 js/map.js            联系页嵌入式高德地图（渐进增强）
-js/pump-scrolly.js   首页低温泵拆解 scrollytelling（帧序列滚动擦除）
 assets/img/          图片素材（源自公司简介 PDF，语义化命名）
-assets/pump-seq/     旧首页低温泵序列（新五幕运行时接入前继续作为线上兜底）
+assets/scrolly/v2/   五幕桌面/移动 WebP 序列、海报与 manifest 契约
 source/blender/      五幕真空系统 .blend、可复现构建/预览脚本与质量关口静帧
+tests/e2e/           Playwright 浏览器质量门禁（不进入发布产物）
 assets/favicon.svg   站点图标
 ```
+
+旧 `js/pump-scrolly.js` 与 `assets/pump-seq/` 仅保留作历史源文件，`scripts/build-site.sh` 会明确排除，不会发布。
 
 Blender 工程及 HDR/EXR/TIFF 源素材由 Git LFS 管理；部署用 WebP 帧与质量关口预览仍使用普通 Git，便于静态托管与代码审查直接读取。场景内部结构为工程示意，不对应具体品牌或型号。

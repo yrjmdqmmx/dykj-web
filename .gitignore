@@ -5,6 +5,8 @@ __pycache__/
 Thumbs.db
 *.log
 node_modules/
+.cache/ms-playwright/
+ms-playwright/
 .gstack/
 _site/
 playwright-report/

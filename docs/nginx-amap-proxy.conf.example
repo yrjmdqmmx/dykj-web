@@ -48,4 +48,12 @@
         rewrite ^/_AMapService(/.*)$ $1 break;
         proxy_pass https://$amap_up;
         proxy_ssl_server_name on;
+        # /v3/log/init 等端点返回 JSONP。隐藏上游 application/json，
+        # 否则配合 nosniff 时浏览器会拒绝把回调响应作为脚本执行。
+        proxy_hide_header Content-Type;
+        add_header Content-Type application/javascript always;
+        # location 内一旦声明 add_header，server 级安全头不会自动继承，需显式保留。
+        add_header X-Content-Type-Options nosniff always;
+        add_header X-Frame-Options SAMEORIGIN always;
+        add_header Referrer-Policy strict-origin-when-cross-origin always;
     }

@@ -6,7 +6,7 @@
 
 | 页面 | 说明 |
 |---|---|
-| `index.html` | 首页：五幕电影级真空系统叙事、主营能力、经营品牌、客户与案例 |
+| `index.html` | 首页：静态五幕真空能力叙事、主营能力、经营品牌、客户与案例 |
 | `about.html` | 关于我们：公司简介、公司优势、发展理念、服务网络 |
 | `business.html` | 主营业务：真空系统集成 / 超高纯气路 / 合同能源管理 / 腔体加工 / 非标定制 / 低温泵与防爆产品 / 维修服务 |
 | `brands.html` | 产品与品牌：九大经营品牌与产品类别导览 |
@@ -48,18 +48,18 @@ python3 -m http.server 8000
 
 ```
 css/style.css        全站样式（设计变量集中在 :root）
-css/home.css         首页五幕与电影工业视觉
+css/home.css         首页静态五幕与黑钢渐变视觉
 js/site-config.js    联系方式等站点配置（占位信息集中处）
 js/main.js           导航 / 滚动动画 / 数字滚动 / 走马灯 / 表单
-js/company-scrolly.js 首页桌面/移动预渲染序列运行时
+js/company-scrolly.js 历史预渲染序列运行时（源码保留，不发布）
 js/map.js            联系页嵌入式高德地图（渐进增强）
 assets/img/          图片素材（源自公司简介 PDF，语义化命名）
-assets/scrolly/v2/   五幕桌面/移动 WebP 序列、海报与 manifest 契约
-source/blender/      五幕真空系统 .blend、可复现构建/预览脚本与质量关口静帧
+assets/scrolly/v2/   历史五幕 WebP 序列、海报与 manifest（源码保留，不发布）
+source/blender/      历史五幕真空系统 .blend、构建/预览脚本与质量关口静帧
 tests/e2e/           Playwright 浏览器质量门禁（不进入发布产物）
 assets/favicon.svg   站点图标
 ```
 
-旧 `js/pump-scrolly.js` 与 `assets/pump-seq/` 仅保留作历史源文件，`scripts/build-site.sh` 会明确排除，不会发布。
+`js/pump-scrolly.js`、`assets/pump-seq/`、`js/company-scrolly.js` 与 `assets/scrolly/v2/` 仅保留作历史源文件，`scripts/build-site.sh` 会明确排除，不会发布。首页五幕使用纯 CSS 石墨黑/钢灰渐变与普通文档流，不加载图片、Canvas、视频或视差运行时。
 
-Blender 工程及 HDR/EXR/TIFF 源素材由 Git LFS 管理；部署用 WebP 帧与质量关口预览仍使用普通 Git，便于静态托管与代码审查直接读取。场景内部结构为工程示意，不对应具体品牌或型号。
+Blender 工程及 HDR/EXR/TIFF 源素材由 Git LFS 管理；历史 WebP 帧与质量关口预览仍使用普通 Git，便于代码审查与追溯，但不进入发布产物。场景内部结构为工程示意，不对应具体品牌或型号。

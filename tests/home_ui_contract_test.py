@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Static contracts for the cinematic home page and shared site chrome.
+"""Static contracts for the home page and shared site chrome.
 
 This intentionally uses only the Python standard library so it can run in CI
 before the later browser-test toolchain is installed.
@@ -142,13 +142,13 @@ def shared_runtime_references(page: DocumentParser) -> list[str]:
     return references
 
 
-class CinematicHomeContractTest(unittest.TestCase):
+class StaticHomeContractTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.page = parse_page("index.html")
         cls.source = (ROOT / "index.html").read_text(encoding="utf-8")
 
-    def test_home_loads_dedicated_stylesheet_and_runtime(self) -> None:
+    def test_home_loads_dedicated_stylesheet_without_scrolly_runtime(self) -> None:
         stylesheet_paths = {
             path_without_query(link.attrs.get("href"))
             for link in self.page.find("link", rel="stylesheet")
@@ -159,7 +159,8 @@ class CinematicHomeContractTest(unittest.TestCase):
         }
 
         self.assertIn("css/home.css", stylesheet_paths)
-        self.assertIn("js/company-scrolly.js", script_paths)
+        self.assertNotIn("js/company-scrolly.js", script_paths)
+        self.assertNotIn("data-manifest", self.source)
 
     def test_home_no_longer_loads_the_legacy_pump_experience(self) -> None:
         asset_references = [
@@ -177,31 +178,16 @@ class CinematicHomeContractTest(unittest.TestCase):
         self.assertNotIn("pump-scrolly", self.source)
         self.assertNotIn("assets/pump-seq/", self.source)
 
-    def test_native_picture_contains_both_device_posters(self) -> None:
-        references = {
-            value.split()[0]
+    def test_home_contains_no_dynamic_background_stage(self) -> None:
+        classes = {
+            class_name
             for element in self.page.elements
-            if element.tag in {"source", "img"}
-            for key in ("srcset", "src")
-            if (value := element.attrs.get(key))
+            for class_name in (element.attrs.get("class") or "").split()
         }
-
-        self.assertTrue(
-            any(ref.endswith("assets/scrolly/v2/poster-desktop.webp") for ref in references),
-            "desktop poster is missing from native picture markup",
-        )
-        self.assertTrue(
-            any(ref.endswith("assets/scrolly/v2/poster-mobile.webp") for ref in references),
-            "mobile poster is missing from native picture markup",
-        )
-        self.assertTrue(self.page.find("picture"), "home needs a native <picture> fallback")
-
-    def test_canvas_is_decorative_and_not_keyboard_focusable(self) -> None:
-        canvases = self.page.find("canvas")
-        self.assertEqual(1, len(canvases), "home should expose one decorative sequence canvas")
-        canvas = canvases[0]
-        self.assertEqual("true", canvas.attrs.get("aria-hidden"))
-        self.assertNotIn("tabindex", canvas.attrs)
+        self.assertNotIn("company-stage", classes)
+        self.assertFalse(self.page.find("picture"))
+        self.assertFalse(self.page.find("canvas"))
+        self.assertNotIn("assets/scrolly/v2/", self.source)
 
     def test_five_semantic_acts_remain_available_as_html(self) -> None:
         acts = [
@@ -209,7 +195,7 @@ class CinematicHomeContractTest(unittest.TestCase):
             for element in self.page.elements
             if element.tag == "article" and "data-act" in element.attrs
         ]
-        self.assertEqual(5, len(acts), "the cinematic narrative must contain five HTML acts")
+        self.assertEqual(5, len(acts), "the static narrative must contain five HTML acts")
         self.assertEqual(
             {"1", "2", "3", "4", "5"},
             {act.attrs.get("data-act") for act in acts},
@@ -220,28 +206,36 @@ class CinematicHomeContractTest(unittest.TestCase):
 
     def test_engineering_disclaimer_is_visible_html_copy(self) -> None:
         visible_copy = " ".join(self.page.text_parts)
-        self.assertIn("结构与动画为工程示意", visible_copy)
+        self.assertIn("结构为工程示意", visible_copy)
+        self.assertNotIn("结构与动画为工程示意", visible_copy)
 
-    def test_five_copy_tracks_match_the_500svh_scrollable_distance(self) -> None:
+    def test_five_acts_use_static_gradients_and_normal_document_flow(self) -> None:
         css = (ROOT / "css/home.css").read_text(encoding="utf-8")
         scrolly = css_declarations(css, ".company-scrolly")
         steps = css_declarations(css, ".company-steps")
         act = css_declarations(css, ".company-act")
 
-        self.assertEqual("500svh", scrolly.get("height"))
-        self.assertNotIn("min-height", scrolly)
-        self.assertEqual("420svh", steps.get("height"))
-        self.assertEqual("repeat(5, 80svh)", steps.get("grid-template-rows"))
-        self.assertEqual("100svh", act.get("min-height"))
+        background = scrolly.get("background", "")
+        self.assertIn("radial-gradient", background)
+        self.assertIn("linear-gradient", background)
+        self.assertNotIn("url(", background)
+        self.assertEqual("auto", scrolly.get("height"))
+        self.assertEqual("relative", steps.get("position"))
+        self.assertEqual("auto", steps.get("height"))
+        self.assertNotEqual("absolute", act.get("position"))
 
-    def test_reduced_motion_restores_natural_copy_flow(self) -> None:
-        css = (ROOT / "css/home.css").read_text(encoding="utf-8")
-        reduced_start = css.index("@media (prefers-reduced-motion: reduce)")
-        reduced_steps = css_declarations(css, ".company-steps", reduced_start)
-        reduced_act = css_declarations(css, ".company-act", reduced_start)
-
-        self.assertEqual("auto", reduced_steps.get("height"))
-        self.assertEqual("0", reduced_act.get("min-height"))
+        obsolete_selectors = (
+            ".company-stage",
+            ".company-poster",
+            ".company-canvas",
+            ".company-vignette",
+            ".company-progress",
+            ".company-scroll-hint",
+            ".company-scrolly.canvas-ready",
+        )
+        for selector in obsolete_selectors:
+            with self.subTest(selector=selector):
+                self.assertNotIn(selector, css)
 
     def test_noninteractive_labels_use_the_warm_industrial_accent(self) -> None:
         css = (ROOT / "css/home.css").read_text(encoding="utf-8")

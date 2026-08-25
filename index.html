@@ -44,27 +44,7 @@
   </header>
 
   <main id="main-content" tabindex="-1">
-    <section class="company-scrolly" id="companyScrolly" data-manifest="assets/scrolly/v2/manifest.json" aria-labelledby="companyScrollyTitle">
-      <div class="company-stage" aria-hidden="true">
-        <picture class="company-poster">
-          <source media="(max-width: 767px)" srcset="assets/scrolly/v2/poster-mobile.webp">
-          <img src="assets/scrolly/v2/poster-desktop.webp"
-               srcset="assets/scrolly/v2/poster-mobile.webp 720w, assets/scrolly/v2/poster-desktop.webp 1920w"
-               sizes="(max-width: 767px) 720px, 1920px"
-               alt="" width="1920" height="1080" loading="eager" fetchpriority="high">
-        </picture>
-        <canvas class="company-canvas" aria-hidden="true" hidden></canvas>
-        <div class="company-vignette"></div>
-        <ol class="company-progress" aria-hidden="true">
-          <li class="is-active" data-progress-act="1"><span>01</span>完整系统启动</li>
-          <li data-progress-act="2"><span>02</span>系统集成</li>
-          <li data-progress-act="3"><span>03</span>精密工程</li>
-          <li data-progress-act="4"><span>04</span>运维能力</li>
-          <li data-progress-act="5"><span>05</span>可靠交付</li>
-        </ol>
-        <p class="company-scroll-hint">向下滚动 · 查看系统能力</p>
-      </div>
-
+    <section class="company-scrolly" id="companyScrolly" aria-labelledby="companyScrollyTitle">
       <div class="company-steps">
         <article class="company-act company-act-hero" data-act="1" id="act-startup">
           <div class="container company-act-inner">
@@ -120,7 +100,7 @@
               <h2>可靠交付</h2>
               <p>从方案、制造、装配到调试和服务形成闭环，让每一项交付都能回到真实工况、质量节点与持续支持。</p>
               <a class="act-link" href="cases.html">查看客户与案例</a>
-              <p class="engineering-note">结构与动画为工程示意，不对应具体品牌或型号。</p>
+              <p class="engineering-note">结构为工程示意，不对应具体品牌或型号。</p>
             </div>
           </div>
         </article>
@@ -284,6 +264,5 @@
 
   <script src="js/site-config.js?v=20260714"></script>
   <script src="js/main.js?v=20260714"></script>
-  <script src="js/company-scrolly.js?v=20260714"></script>
 </body>
 </html>

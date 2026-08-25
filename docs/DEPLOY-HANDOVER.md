@@ -60,7 +60,7 @@ EOF
 |---|---|
 | QQ 邮箱 FormSubmit 激活 | 网站上提交一条留言 → 19313965@qq.com 收激活邮件（查垃圾箱）→ 点击确认；建议把 formsubmit.co 加入 QQ 邮箱白名单 |
 | 高德地图密钥激活 | lbs.amap.com 注册实名 → 应用管理创建应用 → 添加 Key（平台选「Web端(JS API)」）→ Key + 拾取器坐标填 `site-config.js` 的 `map` 配置；「安全密钥」只进服务器 Nginx（模板 `docs/nginx-amap-proxy.conf.example`），绝不提交进仓库。正式域名切换时在高德控制台给 Key 绑域名白名单 |
-| 首页五幕真空系统动画 | `assets/scrolly/v2/` 桌面/移动预渲染序列与 `js/company-scrolly.js` 已上线；统一 Blender 工程为仓库内 LFS 文件 `source/blender/dingyi-vacuum-system.blend`，可由同目录脚本复现。网页以 `manifest.json` 为唯一帧契约；降级链为无 JS / Reduced Motion / Save-Data / Canvas 不可用 / 首帧失败 → 静态关键画面和完整 HTML 五幕文案。内部结构均为工程示意，不对应具体品牌或型号；旧泵序列仅保留历史源文件且不进入发布产物。 |
+| 首页静态五幕 | 首页以纯 CSS 石墨黑/钢灰渐变和普通文档流展示完整 HTML 五幕文案，无图片、Canvas、视频、视差或滚动运行时；无 JS / Reduced Motion / Save-Data 下保持同样可读。`source/blender/`、`assets/scrolly/v2/` 与 `js/company-scrolly.js` 仅作为历史源文件保留，构建脚本明确排除、不进入发布产物。内部结构均为工程示意，不对应具体品牌或型号。 |
 | 两张央企 Logo 裁切 | `assets/img/client-avic.jpg` 与 `client-cnnc.jpg` 源素材（公司简介 PDF）右缘即被裁切，拿到官方完整 Logo 后替换 |
 | 公司官方 Logo | 页头/页脚现为纯文字标识（用户要求移除了自制图标）；favicon 仍是「鼎」字自制图标，拿到官方 Logo 后可整体替换 |
 | 英文版 | 未做，结构已预留，需要时可加 |

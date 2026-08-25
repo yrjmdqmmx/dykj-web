@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build-output contract for the cinematic UI package."""
+"""Build-output contract for the static home UI package."""
 
 from __future__ import annotations
 
@@ -14,16 +14,7 @@ OUTPUT = ROOT / "_site"
 
 REQUIRED = (
     "css/home.css",
-    "js/company-scrolly.js",
-    "assets/scrolly/v2/manifest.json",
-    "assets/scrolly/v2/poster-desktop.webp",
-    "assets/scrolly/v2/poster-mobile.webp",
-    "assets/scrolly/v2/desktop/frame-0001.webp",
-    "assets/scrolly/v2/desktop/frame-0048.webp",
-    "assets/scrolly/v2/desktop/frame-0096.webp",
-    "assets/scrolly/v2/mobile/frame-0001.webp",
-    "assets/scrolly/v2/mobile/frame-0020.webp",
-    "assets/scrolly/v2/mobile/frame-0040.webp",
+    "index.html",
 )
 
 EXCLUDED = (
@@ -35,6 +26,8 @@ EXCLUDED = (
     "node_modules",
     "assets/pump-seq",
     "js/pump-scrolly.js",
+    "assets/scrolly/v2",
+    "js/company-scrolly.js",
 )
 
 
@@ -54,7 +47,7 @@ class BuildUiContractTest(unittest.TestCase):
     def tearDownClass(cls) -> None:
         shutil.rmtree(OUTPUT, ignore_errors=True)
 
-    def test_build_contains_home_runtime_and_cinematic_assets(self) -> None:
+    def test_build_contains_static_home_assets(self) -> None:
         missing = [relative for relative in REQUIRED if not (OUTPUT / relative).is_file()]
         self.assertEqual([], missing, f"missing deployable UI artifacts: {missing}")
 

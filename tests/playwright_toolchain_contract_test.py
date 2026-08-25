@@ -54,11 +54,7 @@ class PlaywrightToolchainContractTest(unittest.TestCase):
                 self.assertIn("npm ci", workflow)
                 self.assertIn("npx playwright install --with-deps chromium", workflow)
                 self.assertIn("npm run test:browser", workflow)
-                self.assertLess(
-                    workflow.index("actions/setup-node@v4"),
-                    workflow.index("node tests/company_scrolly_runtime_test.js"),
-                    "the pinned Node runtime must be active before Node contract tests",
-                )
+                self.assertNotIn("node tests/company_scrolly_runtime_test.js", workflow)
 
 
 if __name__ == "__main__":

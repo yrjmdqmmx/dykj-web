@@ -34,10 +34,9 @@ jobs:
           cache: npm
       - name: Test deploy artifact
         run: bash tests/build-site.test.sh
-      - name: Test cinematic UI contracts
+      - name: Test static UI contracts
         run: |
           python3 -m unittest -v tests/home_ui_contract_test.py tests/build_ui_contract_test.py tests/map_contract_test.py tests/playwright_toolchain_contract_test.py tests/domain_cutover_contract_test.py
-          node tests/company_scrolly_runtime_test.js
           node tests/main_menu_runtime_test.js
           node tests/map_runtime_test.js
       - name: Install browser QA dependencies

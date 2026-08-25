@@ -178,60 +178,75 @@ class StaticHomeContractTest(unittest.TestCase):
         self.assertNotIn("pump-scrolly", self.source)
         self.assertNotIn("assets/pump-seq/", self.source)
 
-    def test_home_contains_no_dynamic_background_stage(self) -> None:
+    def test_home_contains_one_static_corporate_hero_with_real_image(self) -> None:
         classes = {
             class_name
             for element in self.page.elements
             for class_name in (element.attrs.get("class") or "").split()
         }
-        self.assertNotIn("company-stage", classes)
+        heroes = [
+            element
+            for element in self.page.elements
+            if "corporate-hero" in (element.attrs.get("class") or "").split()
+        ]
+        hero_images = self.page.find(
+            "img",
+            src="assets/img/hero-helium.jpg",
+        )
+
+        self.assertEqual(1, len(heroes))
+        self.assertEqual(1, len(hero_images))
+        self.assertEqual("真空系统与高纯氦气管路设备", hero_images[0].attrs.get("alt"))
+        self.assertIn("真空领域全方位整合服务", "".join(self.page.text_parts))
+        self.assertIn(
+            '<h1 id="corporateHeroTitle">真空领域<span>全方位整合服务</span></h1>',
+            self.source,
+        )
+        self.assertIn("corporate-actions", classes)
         self.assertFalse(self.page.find("picture"))
         self.assertFalse(self.page.find("canvas"))
         self.assertNotIn("assets/scrolly/v2/", self.source)
 
-    def test_five_semantic_acts_remain_available_as_html(self) -> None:
-        acts = [
-            element
+    def test_home_removes_the_five_act_scrolly_structure(self) -> None:
+        classes = {
+            class_name
             for element in self.page.elements
-            if element.tag == "article" and "data-act" in element.attrs
-        ]
-        self.assertEqual(5, len(acts), "the static narrative must contain five HTML acts")
-        self.assertEqual(
-            {"1", "2", "3", "4", "5"},
-            {act.attrs.get("data-act") for act in acts},
-        )
-        for act in acts:
-            self.assertNotEqual("true", act.attrs.get("aria-hidden"))
-            self.assertNotIn("hidden", act.attrs)
+            for class_name in (element.attrs.get("class") or "").split()
+        }
+        obsolete_classes = {
+            "company-scrolly",
+            "company-steps",
+            "company-act",
+            "company-copy",
+        }
+        self.assertTrue(obsolete_classes.isdisjoint(classes))
+        self.assertNotIn("data-act", self.source)
+        self.assertNotIn("结构为工程示意", self.source)
 
-    def test_engineering_disclaimer_is_visible_html_copy(self) -> None:
-        visible_copy = " ".join(self.page.text_parts)
-        self.assertIn("结构为工程示意", visible_copy)
-        self.assertNotIn("结构与动画为工程示意", visible_copy)
-
-    def test_five_acts_use_static_gradients_and_normal_document_flow(self) -> None:
+    def test_corporate_hero_uses_compact_two_column_desktop_and_mobile_stack(self) -> None:
         css = (ROOT / "css/home.css").read_text(encoding="utf-8")
-        scrolly = css_declarations(css, ".company-scrolly")
-        steps = css_declarations(css, ".company-steps")
-        act = css_declarations(css, ".company-act")
+        hero = css_declarations(css, ".corporate-hero")
+        inner = css_declarations(css, ".corporate-hero-inner")
+        media = css_declarations(css, ".corporate-hero-media")
 
-        background = scrolly.get("background", "")
-        self.assertIn("radial-gradient", background)
-        self.assertIn("linear-gradient", background)
-        self.assertNotIn("url(", background)
-        self.assertEqual("auto", scrolly.get("height"))
-        self.assertEqual("relative", steps.get("position"))
-        self.assertEqual("auto", steps.get("height"))
-        self.assertNotEqual("absolute", act.get("position"))
+        self.assertEqual("620px", hero.get("min-height"))
+        self.assertIn("linear-gradient", hero.get("background", ""))
+        self.assertEqual("grid", inner.get("display"))
+        self.assertIn("minmax", inner.get("grid-template-columns", ""))
+        self.assertEqual("hidden", media.get("overflow"))
+        self.assertRegex(
+            css,
+            r"@media\s*\(max-width:\s*767px\)[\s\S]*?\.corporate-hero-inner\s*\{[\s\S]*?grid-template-columns:\s*1fr",
+        )
 
         obsolete_selectors = (
-            ".company-stage",
-            ".company-poster",
-            ".company-canvas",
-            ".company-vignette",
-            ".company-progress",
-            ".company-scroll-hint",
-            ".company-scrolly.canvas-ready",
+            ".company-scrolly",
+            ".company-steps",
+            ".company-act",
+            ".company-copy",
+            ".act-number",
+            ".act-link",
+            ".engineering-note",
         )
         for selector in obsolete_selectors:
             with self.subTest(selector=selector):
@@ -240,7 +255,7 @@ class StaticHomeContractTest(unittest.TestCase):
     def test_noninteractive_labels_use_the_warm_industrial_accent(self) -> None:
         css = (ROOT / "css/home.css").read_text(encoding="utf-8")
         label_selectors = (
-            ".act-number",
+            ".corporate-kicker",
             ".home-section-head > p",
             ".capability-index",
             ".proof-metrics strong small",

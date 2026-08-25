@@ -6,7 +6,7 @@
 
 | 页面 | 说明 |
 |---|---|
-| `index.html` | 首页：静态五幕真空能力叙事、主营能力、经营品牌、客户与案例 |
+| `index.html` | 首页：普通企业 Hero、主营能力、经营品牌、客户与案例 |
 | `about.html` | 关于我们：公司简介、公司优势、发展理念、服务网络 |
 | `business.html` | 主营业务：真空系统集成 / 超高纯气路 / 合同能源管理 / 腔体加工 / 非标定制 / 低温泵与防爆产品 / 维修服务 |
 | `brands.html` | 产品与品牌：九大经营品牌与产品类别导览 |
@@ -48,7 +48,7 @@ python3 -m http.server 8000
 
 ```
 css/style.css        全站样式（设计变量集中在 :root）
-css/home.css         首页静态五幕与黑钢渐变视觉
+css/home.css         首页企业 Hero 与黑钢工业视觉
 js/site-config.js    联系方式等站点配置（占位信息集中处）
 js/main.js           导航 / 滚动动画 / 数字滚动 / 走马灯 / 表单
 js/company-scrolly.js 历史预渲染序列运行时（源码保留，不发布）
@@ -57,9 +57,11 @@ assets/img/          图片素材（源自公司简介 PDF，语义化命名）
 assets/scrolly/v2/   历史五幕 WebP 序列、海报与 manifest（源码保留，不发布）
 source/blender/      历史五幕真空系统 .blend、构建/预览脚本与质量关口静帧
 tests/e2e/           Playwright 浏览器质量门禁（不进入发布产物）
-assets/favicon.svg   站点图标
+assets/favicon.svg   历史站点图标源文件（保留、不发布）
 ```
 
-`js/pump-scrolly.js`、`assets/pump-seq/`、`js/company-scrolly.js` 与 `assets/scrolly/v2/` 仅保留作历史源文件，`scripts/build-site.sh` 会明确排除，不会发布。首页五幕使用纯 CSS 石墨黑/钢灰渐变与普通文档流，不加载图片、Canvas、视频或视差运行时。
+`js/pump-scrolly.js`、`assets/pump-seq/`、`js/company-scrolly.js` 与 `assets/scrolly/v2/` 仅保留作历史源文件，`scripts/build-site.sh` 会明确排除，不会发布。首页使用约 620px 的左右分栏企业 Hero，右侧直接加载真实业务照片 `assets/img/hero-helium.jpg`，移动端自然堆叠；不加载 Canvas、视频、帧序列或滚动叙事运行时。
+
+七个页面均显式声明空 favicon，浏览器标签页不显示自制“鼎”字图标。`favicon.ico`、`assets/favicon.svg` 与 `assets/apple-touch-icon.png` 只作为历史源码保留，构建时全部排除。
 
 Blender 工程及 HDR/EXR/TIFF 源素材由 Git LFS 管理；历史 WebP 帧与质量关口预览仍使用普通 Git，便于代码审查与追溯，但不进入发布产物。场景内部结构为工程示意，不对应具体品牌或型号。

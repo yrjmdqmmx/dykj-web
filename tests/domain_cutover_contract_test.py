@@ -63,6 +63,21 @@ def parse_html(filename: str) -> HtmlContractParser:
 
 
 class DomainCutoverContractTest(unittest.TestCase):
+    def test_all_seven_pages_declare_one_empty_favicon(self) -> None:
+        for filename in ALL_PAGES:
+            page = parse_html(filename)
+            icon_links = [
+                attributes
+                for tag, attributes in page.elements
+                if tag == "link"
+                and "icon" in (attributes.get("rel") or "").split()
+            ]
+            with self.subTest(page=filename):
+                self.assertEqual(1, len(icon_links))
+                self.assertEqual("icon", icon_links[0].get("rel"))
+                self.assertEqual("data:,", icon_links[0].get("href"))
+                self.assertFalse(page.find("link", rel="apple-touch-icon"))
+
     def test_site_config_contains_the_approved_icp_number(self) -> None:
         source = (ROOT / "js/site-config.js").read_text(encoding="utf-8")
         match = re.search(r"\bicp\s*:\s*([\"'])(.*?)\1", source)

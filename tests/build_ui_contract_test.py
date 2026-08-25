@@ -15,6 +15,7 @@ OUTPUT = ROOT / "_site"
 REQUIRED = (
     "css/home.css",
     "index.html",
+    "assets/img/hero-helium.jpg",
 )
 
 EXCLUDED = (
@@ -28,6 +29,9 @@ EXCLUDED = (
     "js/pump-scrolly.js",
     "assets/scrolly/v2",
     "js/company-scrolly.js",
+    "favicon.ico",
+    "assets/favicon.svg",
+    "assets/apple-touch-icon.png",
 )
 
 

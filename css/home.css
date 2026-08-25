@@ -1,5 +1,5 @@
 /* ==========================================================================
-   首页 · 五幕电影滚动与工业视觉层
+   首页 · 普通企业官网与工业视觉层
    全站变量和通用组件仍由 style.css 管理。
    ========================================================================== */
 
@@ -16,130 +16,102 @@
   bottom: 112px;
 }
 
-/* ---------- 静态五幕开场 ---------- */
+/* ---------- 企业 Hero ---------- */
 
-.company-scrolly {
-  --company-copy: min(520px, 35vw);
-  position: relative;
-  height: auto;
+.corporate-hero {
+  min-height: 620px;
   overflow: hidden;
   color: #f4f6f5;
   background:
-    radial-gradient(circle at 82% 12%, rgba(89, 103, 108, .28), transparent 34%),
-    radial-gradient(circle at 18% 62%, rgba(49, 62, 66, .24), transparent 38%),
-    linear-gradient(145deg, #030506 0%, #11171a 48%, #070a0c 100%);
+    linear-gradient(110deg, #030506 0%, #0b1012 58%, #11191c 100%);
 }
 
-.company-steps {
-  position: relative;
-  z-index: 1;
-  height: auto;
-  display: block;
-}
-
-.company-act {
-  position: relative;
-  min-height: clamp(560px, 78svh, 820px);
-  display: flex;
+.corporate-hero-inner {
+  min-height: 620px;
+  display: grid;
+  grid-template-columns: minmax(0, .92fr) minmax(460px, 1.08fr);
   align-items: center;
-  border-top: 1px solid rgba(226, 232, 232, .13);
+  gap: clamp(34px, 5vw, 78px);
+  padding-top: var(--header-h);
+  padding-bottom: 36px;
 }
 
-.company-act:first-child {
-  min-height: clamp(680px, 92svh, 960px);
-  border-top: 0;
+.corporate-hero-copy {
+  position: relative;
+  z-index: 2;
+  padding: 56px 0 48px;
 }
 
-.company-act:nth-child(odd) {
-  background: linear-gradient(110deg, rgba(3, 5, 6, .72), rgba(36, 45, 48, .18) 64%, transparent);
-}
-
-.company-act:nth-child(even) {
-  background: linear-gradient(250deg, rgba(22, 29, 32, .32), rgba(3, 5, 6, .62) 72%);
-}
-
-.company-copy {
-  width: var(--company-copy);
-  padding: 104px 0;
-}
-
-.act-number {
-  margin-bottom: 22px;
+.corporate-kicker {
+  margin-bottom: 20px;
   color: var(--copper);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: .18em;
+  letter-spacing: .2em;
 }
 
-.company-copy h1 {
+.corporate-hero h1 {
   max-width: 9em;
   color: #f6f7f6;
-  font-size: clamp(44px, 4.2vw, 66px);
+  font-size: clamp(44px, 4.4vw, 66px);
   font-weight: 650;
-  line-height: 1.12;
+  line-height: 1.13;
   letter-spacing: -.025em;
   text-wrap: balance;
 }
 
-.company-copy h1 span {
-  color: #cbd2d2;
+.corporate-hero h1 span {
+  display: block;
 }
 
-.company-copy h2 {
-  color: #f6f7f6;
-  font-size: clamp(36px, 4vw, 58px);
-  font-weight: 650;
-  letter-spacing: -.02em;
-}
-
-.company-lead,
-.company-copy > p:not(.act-number):not(.engineering-note) {
-  max-width: 520px;
+.corporate-lead {
+  max-width: 560px;
   margin-top: 24px;
-  color: rgba(238, 241, 241, .75);
-  font-size: clamp(16px, 1.35vw, 18px);
+  color: rgba(238, 241, 241, .74);
+  font-size: clamp(16px, 1.3vw, 18px);
   line-height: 1.85;
 }
 
-.company-actions {
+.corporate-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 34px;
+  margin-top: 32px;
 }
 
-.act-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 30px;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 650;
-  letter-spacing: .06em;
-}
-
-.act-link::after {
-  content: "→";
-  color: var(--teal-400);
-  transition: transform .2s ease;
-}
-
-.act-link:hover {
-  color: var(--teal-400);
-}
-
-.act-link:hover::after {
-  transform: translateX(4px);
-}
-
-.engineering-note {
-  margin-top: 34px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(238, 241, 241, .18);
+.corporate-strengths {
+  margin-top: 36px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(238, 241, 241, .16);
   color: rgba(238, 241, 241, .5);
   font-size: 12px;
-  line-height: 1.65;
+  letter-spacing: .12em;
+}
+
+.corporate-hero-media {
+  position: relative;
+  min-height: 420px;
+  overflow: hidden;
+  background: #111719;
+  box-shadow: 0 28px 60px rgba(0, 0, 0, .28);
+}
+
+.corporate-hero-media::before {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(7, 11, 13, .78) 0%, transparent 24%, transparent 82%, rgba(7, 11, 13, .24) 100%);
+}
+
+.corporate-hero-media img {
+  width: 100%;
+  height: 420px;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(.75) contrast(1.04);
 }
 
 /* ---------- 首页后续内容 ---------- */
@@ -392,7 +364,7 @@
 /* ---------- 响应式与静态降级 ---------- */
 
 @media (max-width: 1000px) {
-  .company-scrolly { --company-copy: min(500px, 48vw); }
+  .corporate-hero-inner { grid-template-columns: minmax(0, .9fr) minmax(380px, 1.1fr); }
   .capability-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .capability-item:nth-child(2) { border-right: 0; }
   .capability-item:nth-child(-n + 2) { border-bottom: 1px solid rgba(226, 232, 232, .16); }
@@ -402,66 +374,66 @@
 }
 
 @media (max-width: 767px) {
-  .company-scrolly {
-    --company-copy: none;
-  }
-
-  .company-act,
-  .company-act:first-child {
+  .corporate-hero,
+  .corporate-hero-inner {
     min-height: 0;
-    padding: 72px 0;
-    align-items: center;
   }
 
-  .company-act:first-child {
-    padding-top: calc(var(--header-h) + 52px);
+  .corporate-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding-top: calc(var(--header-h) + 30px);
+    padding-bottom: 44px;
   }
 
-  .company-copy {
-    width: 100%;
-    max-width: none;
-    padding: 0;
+  .corporate-hero-copy {
+    padding: 28px 0 30px;
   }
 
-  .company-copy h1 {
+  .corporate-hero h1 {
     max-width: 8em;
     font-size: clamp(38px, 11vw, 54px);
   }
 
-  .company-copy h2 {
-    font-size: clamp(34px, 9vw, 46px);
-  }
-
-  .company-lead,
-  .company-copy > p:not(.act-number):not(.engineering-note) {
+  .corporate-lead {
     margin-top: 15px;
     font-size: 15px;
     line-height: 1.75;
   }
 
-  .act-number {
+  .corporate-kicker {
     margin-bottom: 12px;
     font-size: 10px;
   }
 
-  .company-actions {
+  .corporate-actions {
     gap: 9px;
     margin-top: 22px;
   }
 
-  .company-actions .btn {
+  .corporate-actions .btn {
     padding: 11px 18px;
     font-size: 13px;
   }
 
-  .act-link {
-    margin-top: 18px;
+  .corporate-strengths {
+    margin-top: 24px;
+    padding-top: 14px;
+    font-size: 10.5px;
   }
 
-  .engineering-note {
-    margin-top: 20px;
-    padding-top: 10px;
-    font-size: 10.5px;
+  .corporate-hero-media {
+    min-height: 0;
+  }
+
+  .corporate-hero-media::before {
+    background: linear-gradient(180deg, rgba(7, 11, 13, .42) 0%, transparent 32%, rgba(7, 11, 13, .2) 100%);
+  }
+
+  .corporate-hero-media img {
+    height: auto;
+    min-height: 190px;
+    aspect-ratio: 1440 / 552;
   }
 
   .home-page .section {

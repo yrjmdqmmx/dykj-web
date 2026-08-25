@@ -1,15 +1,13 @@
 const { test, expect } = require("@playwright/test");
 const { collectBrowserErrors } = require("./helpers");
 
-async function expectReadableStaticHome(page) {
-  const acts = page.locator(".company-act[data-act]");
-  await expect(acts).toHaveCount(5);
-  for (let index = 0; index < 5; index += 1) {
-    await expect(acts.nth(index)).toBeVisible();
-  }
-  await expect(acts.nth(0)).toContainText("真空领域");
-  await expect(acts.nth(4)).toContainText("可靠交付");
-  await expect(page.locator("#companyScrolly .company-stage, #companyScrolly picture, #companyScrolly canvas")).toHaveCount(0);
+async function expectReadableCorporateHome(page) {
+  const hero = page.locator(".corporate-hero");
+  await expect(hero).toHaveCount(1);
+  await expect(hero).toBeVisible();
+  await expect(hero.getByRole("heading", { level: 1 })).toContainText("真空领域全方位整合服务");
+  await expect(hero.locator("img[src='assets/img/hero-helium.jpg']")).toBeVisible();
+  await expect(page.locator(".company-scrolly, .company-act, picture, canvas")).toHaveCount(0);
   const layout = await page.evaluate(() => ({
     innerWidth: window.innerWidth,
     scrollWidth: document.documentElement.scrollWidth
@@ -19,7 +17,7 @@ async function expectReadableStaticHome(page) {
 
 test.describe("static homepage fallbacks", () => {
 
-  test("reduced motion avoids the manifest and presents a readable static flow", async ({ browser }, testInfo) => {
+  test("reduced motion keeps the corporate hero static and readable", async ({ browser }, testInfo) => {
     test.skip(testInfo.project.name !== "desktop-chromium", "one explicit reduced-motion context");
     const context = await browser.newContext({
       reducedMotion: "reduce",
@@ -29,17 +27,17 @@ test.describe("static homepage fallbacks", () => {
     const dynamicRequests = [];
     const browserErrors = collectBrowserErrors(page);
     page.on("request", (request) => {
-      if (request.url().includes("/assets/scrolly/v2/")) dynamicRequests.push(request.url());
+      if (request.url().includes("/assets/scrolly/") || request.url().includes("company-scrolly")) dynamicRequests.push(request.url());
     });
 
     await page.goto("http://127.0.0.1:4173/index.html");
-    await expectReadableStaticHome(page);
+    await expectReadableCorporateHome(page);
     expect(dynamicRequests).toEqual([]);
     expect(browserErrors).toEqual([]);
     await context.close();
   });
 
-  test("Save-Data avoids all sequence requests", async ({ page }, testInfo) => {
+  test("Save-Data keeps the corporate hero free of sequence requests", async ({ page }, testInfo) => {
     test.skip(testInfo.project.name !== "desktop-chromium", "one explicit Save-Data context");
     const dynamicRequests = [];
     const browserErrors = collectBrowserErrors(page);
@@ -50,11 +48,11 @@ test.describe("static homepage fallbacks", () => {
       });
     });
     page.on("request", (request) => {
-      if (request.url().includes("/assets/scrolly/v2/")) dynamicRequests.push(request.url());
+      if (request.url().includes("/assets/scrolly/") || request.url().includes("company-scrolly")) dynamicRequests.push(request.url());
     });
 
     await page.goto("/index.html");
-    await expectReadableStaticHome(page);
+    await expectReadableCorporateHome(page);
     expect(dynamicRequests).toEqual([]);
     expect(browserErrors).toEqual([]);
   });
@@ -68,12 +66,12 @@ test.describe("static homepage fallbacks", () => {
     const page = await context.newPage();
     const dynamicRequests = [];
     page.on("request", (request) => {
-      if (request.url().includes("/assets/scrolly/v2/")) dynamicRequests.push(request.url());
+      if (request.url().includes("/assets/scrolly/") || request.url().includes("company-scrolly")) dynamicRequests.push(request.url());
     });
 
     await page.goto("http://127.0.0.1:4173/index.html");
-    await expectReadableStaticHome(page);
-    await expect(page.locator(".company-actions a[href='business.html']")).toHaveAttribute("href", "business.html");
+    await expectReadableCorporateHome(page);
+    await expect(page.locator(".corporate-actions a[href='business.html']")).toHaveAttribute("href", "business.html");
     expect(dynamicRequests).toEqual([]);
     await context.close();
   });

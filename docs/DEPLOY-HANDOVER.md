@@ -7,7 +7,7 @@
 
 - **仓库**：`yrjmdqmmx/dykj-web`，唯一分支 `claude/dingyi-tech-website-lkp7bu`（即默认分支），**推送该分支会自动触发 GitHub Pages 部署**（`.github/workflows/pages.yml`）
 - **正式线上地址**：<https://dingyivac.com/>；<https://yrjmdqmmx.github.io/dykj-web/> 作为 GitHub Pages 预览环境保留
-- **技术形态**：生产站点为纯静态 HTML/CSS/JS、零运行时依赖；发布前由 `scripts/build-site.sh` 过滤源码与测试，Playwright 仅作为开发质量门禁
+- **技术形态**：生产站点为纯静态 HTML/CSS/JS、零运行时依赖；首页是普通企业 Hero，发布前由 `scripts/build-site.sh` 过滤源码与测试，Playwright 仅作为开发质量门禁
 - **页面**：index / about / business / brands / cases / contact + GitHub Pages/ECS 双部署路径自适应 404
 - **站点配置集中在 `js/site-config.js`**：电话 133-8113-6863、邮箱 19313965@qq.com、地址（海淀区成府路45号中关村智造大街D座3层305）、`formEmail`（留言表单收件）、`icp`（备案号 `京ICP备2026049830号-1`）
 - **正式域名已上线**：六个内容页的 canonical / `og:url`、`sitemap.xml`、`robots.txt` 及 404 无 JS 兜底指向 `https://dingyivac.com`；DNS、双域名证书、HTTP/www 规范跳转与未知 Host 拒绝均已配置，首发未启用 HSTS
@@ -60,9 +60,9 @@ EOF
 |---|---|
 | QQ 邮箱 FormSubmit 激活 | 网站上提交一条留言 → 19313965@qq.com 收激活邮件（查垃圾箱）→ 点击确认；建议把 formsubmit.co 加入 QQ 邮箱白名单 |
 | 高德地图密钥激活 | lbs.amap.com 注册实名 → 应用管理创建应用 → 添加 Key（平台选「Web端(JS API)」）→ Key + 拾取器坐标填 `site-config.js` 的 `map` 配置；「安全密钥」只进服务器 Nginx（模板 `docs/nginx-amap-proxy.conf.example`），绝不提交进仓库。正式域名切换时在高德控制台给 Key 绑域名白名单 |
-| 首页静态五幕 | 首页以纯 CSS 石墨黑/钢灰渐变和普通文档流展示完整 HTML 五幕文案，无图片、Canvas、视频、视差或滚动运行时；无 JS / Reduced Motion / Save-Data 下保持同样可读。`source/blender/`、`assets/scrolly/v2/` 与 `js/company-scrolly.js` 仅作为历史源文件保留，构建脚本明确排除、不进入发布产物。内部结构均为工程示意，不对应具体品牌或型号。 |
+| 首页普通企业 Hero | 首页为约 620px 的深色左右分栏 Hero，左侧是公司定位、简介与业务/联系入口，右侧使用真实业务照片 `assets/img/hero-helium.jpg`；移动端自然堆叠，无 Canvas、视频、帧序列、视差或滚动运行时。`source/blender/`、`assets/scrolly/v2/` 与 `js/company-scrolly.js` 仅作为历史源文件保留，构建脚本明确排除、不进入发布产物。 |
 | 两张央企 Logo 裁切 | `assets/img/client-avic.jpg` 与 `client-cnnc.jpg` 源素材（公司简介 PDF）右缘即被裁切，拿到官方完整 Logo 后替换 |
-| 公司官方 Logo | 页头/页脚现为纯文字标识（用户要求移除了自制图标）；favicon 仍是「鼎」字自制图标，拿到官方 Logo 后可整体替换 |
+| 公司官方 Logo | 页头/页脚现为纯文字标识；七页均声明空 favicon，浏览器标签页不再显示自制“鼎”字图标。`favicon.ico`、`assets/favicon.svg` 与 `assets/apple-touch-icon.png` 仅保留为历史源码，构建产物会排除。拿到官方 Logo 后可另行评估品牌替换。 |
 | 英文版 | 未做，结构已预留，需要时可加 |
 
 ## 六、工程约定（改代码前必读）

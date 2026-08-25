@@ -44,13 +44,15 @@ rm -rf "$OUTPUT_DIR/assets/pump-seq"
 rm -f "$OUTPUT_DIR/js/pump-scrolly.js"
 rm -rf "$OUTPUT_DIR/assets/scrolly/v2"
 rm -f "$OUTPUT_DIR/js/company-scrolly.js"
+rm -f "$OUTPUT_DIR/assets/favicon.svg"
+rm -f "$OUTPUT_DIR/assets/apple-touch-icon.png"
 
 shopt -s nullglob
 html_files=("$REPO_ROOT"/*.html)
 [ "${#html_files[@]}" -gt 0 ] || fail "no root HTML files found"
 cp "${html_files[@]}" "$OUTPUT_DIR/"
 
-for file in favicon.ico robots.txt sitemap.xml .nojekyll; do
+for file in robots.txt sitemap.xml .nojekyll; do
   if [ -e "$REPO_ROOT/$file" ]; then
     cp "$REPO_ROOT/$file" "$OUTPUT_DIR/$file"
   fi

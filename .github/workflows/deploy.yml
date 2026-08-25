@@ -68,9 +68,13 @@ jobs:
 
       - name: Verify deployment
         run: |
-          code=$(curl -s -o /dev/null -w '%{http_code}' "http://${{ secrets.SERVER_HOST }}/")
-          echo "homepage HTTP $code"
+          code=$(curl --fail --silent --show-error \
+            --resolve "dingyivac.com:443:${{ secrets.SERVER_HOST }}" \
+            -o /dev/null -w '%{http_code}' "https://dingyivac.com/")
+          echo "canonical homepage HTTPS $code"
           test "$code" = "200"
           # 线上首页应与本次提交逐字节一致
-          curl -s "http://${{ secrets.SERVER_HOST }}/index.html" | cmp - index.html
+          curl --fail --silent --show-error \
+            --resolve "dingyivac.com:443:${{ secrets.SERVER_HOST }}" \
+            "https://dingyivac.com/index.html" | cmp - _site/index.html
           echo "content verified"

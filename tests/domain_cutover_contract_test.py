@@ -158,6 +158,12 @@ class DomainCutoverContractTest(unittest.TestCase):
                 source = (ROOT / filename).read_text(encoding="utf-8")
                 self.assertNotIn(retired_owner, source)
 
+    def test_ecs_deploy_verifies_the_canonical_https_host(self) -> None:
+        workflow = (ROOT / ".github/workflows/deploy.yml").read_text(encoding="utf-8")
+        self.assertIn('https://dingyivac.com/index.html', workflow)
+        self.assertIn('--resolve "dingyivac.com:443:${{ secrets.SERVER_HOST }}"', workflow)
+        self.assertNotIn('http://${{ secrets.SERVER_HOST }}/index.html', workflow)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

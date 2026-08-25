@@ -35,9 +35,9 @@ python3 -m http.server 8000
 ## 上线与外部切换清单
 
 1. ~~替换联系方式~~（已完成）：联系方式维护于 `js/site-config.js`，如有变更改此一处即可全站生效。
-2. **备案与正式 URL（仓库已准备）**：`js/site-config.js` 及七页静态页脚使用备案号 `京ICP备2026049830号-1`；六个内容页的 canonical / `og:url`、`sitemap.xml` 与 `robots.txt` 均指向 `https://dingyivac.com`。
-3. **域名基础设施（需独立核验）**：
-   - 仓库配置完成不代表 DNS 已解析或 HTTPS 证书已签发；正式对外切换前仍需分别验证 DNS、证书、Nginx 与公网可达性；
+2. **备案与正式 URL（已上线）**：`js/site-config.js` 及七页静态页脚使用备案号 `京ICP备2026049830号-1`；六个内容页的 canonical / `og:url`、`sitemap.xml` 与 `robots.txt` 均指向 `https://dingyivac.com`。
+3. **域名基础设施（已上线）**：
+   - `dingyivac.com` A 记录和 `www` CNAME 已指向 `116.62.146.226`，Nginx 使用 Certbot 证书提供 HTTPS；HTTP 与 www 统一跳转到 `https://dingyivac.com`，未知 Host 拒绝访问，首发未启用 HSTS；
    - 各页 `<head>` 后续可补充 `og:image` 绝对地址（当前未配置）。
 4. **嵌入式地图**（已上线）：联系页内嵌高德实时地图（`js/map.js`，渐进增强），Key/坐标配置在 `js/site-config.js` 的 `map` 字段；安全密钥走服务器 Nginx 代理（模板见 `docs/nginx-amap-proxy.conf.example`，详见交接文档）。Key 为空、GitHub Pages 无同源代理或加载失败时自动回退 SVG 占位卡片，并始终保留高德/百度导航链接。
 5. **留言表单**：通过 FormSubmit 免费服务直发 `js/site-config.js` 中 `formEmail` 指定的邮箱（当前 19313965@qq.com），发送失败自动回退 mailto。链路已用 Gmail 验证可用；**QQ 邮箱首次收到提交时需点击 FormSubmit 激活确认邮件（注意查垃圾箱）**。

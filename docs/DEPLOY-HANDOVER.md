@@ -6,21 +6,21 @@
 ## 一、项目现状（截至交接时）
 
 - **仓库**：`yrjmdqmmx/dykj-web`，唯一分支 `claude/dingyi-tech-website-lkp7bu`（即默认分支），**推送该分支会自动触发 GitHub Pages 部署**（`.github/workflows/pages.yml`）
-- **线上地址**：<https://yrjmdqmmx.github.io/dykj-web/>（GitHub Pages，作为临时/预览环境，迁移后可保留）
+- **正式线上地址**：<https://dingyivac.com/>；<https://yrjmdqmmx.github.io/dykj-web/> 作为 GitHub Pages 预览环境保留
 - **技术形态**：生产站点为纯静态 HTML/CSS/JS、零运行时依赖；发布前由 `scripts/build-site.sh` 过滤源码与测试，Playwright 仅作为开发质量门禁
 - **页面**：index / about / business / brands / cases / contact + GitHub Pages/ECS 双部署路径自适应 404
 - **站点配置集中在 `js/site-config.js`**：电话 133-8113-6863、邮箱 19313965@qq.com、地址（海淀区成府路45号中关村智造大街D座3层305）、`formEmail`（留言表单收件）、`icp`（备案号 `京ICP备2026049830号-1`）
-- **正式 URL 仓库配置已完成**：六个内容页的 canonical / `og:url`、`sitemap.xml`、`robots.txt` 及 404 无 JS 兜底指向 `https://dingyivac.com`；这不代表 DNS 或 HTTPS 已完成
+- **正式域名已上线**：六个内容页的 canonical / `og:url`、`sitemap.xml`、`robots.txt` 及 404 无 JS 兜底指向 `https://dingyivac.com`；DNS、双域名证书、HTTP/www 规范跳转与未知 Host 拒绝均已配置，首发未启用 HSTS
 - **在线留言**：前端 fetch POST 到 `https://formsubmit.co/ajax/<formEmail>`，失败自动回退 mailto。链路已用 Gmail 验证可用；当前 formEmail=19313965@qq.com，**QQ 邮箱尚未做 FormSubmit 激活**（首次收到提交时会收到激活邮件，可能在垃圾箱，点击确认后生效）
 - **公司位置**：嵌入式高德实时地图已上线（`js/map.js`，渐进增强，Key/GCJ-02 坐标在 `site-config.js` 的 `map` 字段）；Key 为空、GitHub Pages 无同源代理或加载失败时自动回退 SVG 占位卡片（零地图请求），并始终保留高德/百度导航链接。ECS/正式域名通过同源 Nginx 代理保存安全密钥（模板 `docs/nginx-amap-proxy.conf.example`）
 
 ## 二、新阶段目标
 
-用户已购买域名 **dingyivac.com** 和 **阿里云 ECS**（`root@116.62.146.226`，SSH 免密已配置）。仓库侧正式域名与备案信息已准备，基础设施仍按以下环节独立核验：
+用户已购买域名 **dingyivac.com** 和 **阿里云 ECS**（`root@116.62.146.226`，SSH 免密已配置）。正式域名已于 2026-08-25 完成切换，后续维护按以下环节复核：
 
 1. 将最新构建产物部署到该服务器并核验内容
-2. 域名解析 + HTTPS
-3. 核验备案信息、DNS、HTTPS 与公网访问后正式上线
+2. 核验域名解析、HTTPS 与 Certbot 自动续期
+3. 核验备案信息、地图代理与公网访问
 
 **用户约定：所有服务器操作通过 `ssh root@116.62.146.226 "..."` 执行；动手前先做只读检查。**
 
@@ -51,8 +51,8 @@ EOF
 2. **自动部署**：GitHub Actions 加一个 deploy workflow，push 后 rsync 到服务器
    - 服务器建专用部署用户或用 root（用户自行权衡），私钥放 GitHub Secrets（`SSH_PRIVATE_KEY`、`SERVER_HOST`）
    - 注意：GitHub App 令牌可能无权修改 workflow 文件（本次建站时 pages.yml 是 git push 成功的，说明该仓库可以直接推 workflow）
-3. **HTTPS**：域名解析到 116.62.146.226 后，用阿里云免费 DV 证书（每年申领，控制台下发 pem/key）或 certbot（Let's Encrypt，需 80 端口可达）
-4. **备案与仓库切换状态**：备案号 `京ICP备2026049830号-1` 已写入 `js/site-config.js` 和七页静态页脚；canonical、`og:url`、sitemap、robots 与 404 无 JS 绝对兜底已切到 `https://dingyivac.com`。`404.html` 的 JavaScript 仍按 `github.io` 与根域名自动选择 `/dykj-web/` 或 `/`，所以 GitHub Pages 预览路径继续保留。仓库状态不等于 DNS/HTTPS 完成，正式上线前仍须现场核验解析、证书与公网响应。各页 `<head>` 后续仍可补 `og:image` 绝对地址（当前未配置）。
+3. **HTTPS**：当前使用 Certbot webroot 为 `dingyivac.com` 与 `www.dingyivac.com` 签发同一证书，80 端口保留 `/.well-known/acme-challenge/`；续期 deploy hook 会先 `nginx -t` 再 reload
+4. **备案与仓库切换状态**：备案号 `京ICP备2026049830号-1` 已写入 `js/site-config.js` 和七页静态页脚；canonical、`og:url`、sitemap、robots 与 404 无 JS 绝对兜底已切到 `https://dingyivac.com`。`404.html` 的 JavaScript 仍按 `github.io` 与根域名自动选择 `/dykj-web/` 或 `/`，所以 GitHub Pages 预览路径继续保留。各页 `<head>` 后续仍可补 `og:image` 绝对地址（当前未配置）。
 
 ## 五、遗留小事项（非阻塞）
 

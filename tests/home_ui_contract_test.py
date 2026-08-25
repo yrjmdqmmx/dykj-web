@@ -271,6 +271,28 @@ class StaticHomeContractTest(unittest.TestCase):
                 )
 
 
+class ContactPageContractTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.page = parse_page("contact.html")
+        cls.source = (ROOT / "contact.html").read_text(encoding="utf-8")
+
+    def test_contact_page_removes_duplicate_contact_card_section(self) -> None:
+        classes = {
+            class_name
+            for element in self.page.elements
+            for class_name in (element.attrs.get("class") or "").split()
+        }
+
+        self.assertNotIn("contact-grid", classes)
+        self.assertNotIn("contact-card", classes)
+        self.assertNotIn("Get in Touch", " ".join(self.page.text_parts))
+
+        self.assertEqual(1, len(self.page.find("form", id="contactForm")))
+        self.assertEqual(1, len(self.page.find("div", id="mapVisual")))
+        self.assertIn("footer-contact", classes)
+
+
 class SharedChromeContractTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:

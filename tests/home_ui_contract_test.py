@@ -276,6 +276,8 @@ class ContactPageContractTest(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.page = parse_page("contact.html")
         cls.source = (ROOT / "contact.html").read_text(encoding="utf-8")
+        cls.runtime = (ROOT / "js/main.js").read_text(encoding="utf-8")
+        cls.site_config = (ROOT / "js/site-config.js").read_text(encoding="utf-8")
 
     def test_contact_page_removes_duplicate_contact_card_section(self) -> None:
         classes = {
@@ -291,6 +293,48 @@ class ContactPageContractTest(unittest.TestCase):
         self.assertEqual(1, len(self.page.find("form", id="contactForm")))
         self.assertEqual(1, len(self.page.find("div", id="mapVisual")))
         self.assertIn("footer-contact", classes)
+
+    def test_formsubmit_waits_twenty_five_seconds_before_fallback(self) -> None:
+        self.assertRegex(
+            self.runtime,
+            r"var\s+formSubmitTimeoutMs\s*=\s*25000\s*;",
+        )
+        self.assertRegex(
+            self.runtime,
+            r"setTimeout\(function\s*\(\)\s*\{\s*ctrl\.abort\(\);\s*\},\s*formSubmitTimeoutMs\s*\)",
+        )
+
+    def test_public_and_form_recipient_email_use_the_new_163_mailbox(self) -> None:
+        self.assertRegex(
+            self.site_config,
+            r'(?m)^\s*email:\s*"zqairtop@163\.com",\s*$',
+        )
+        self.assertRegex(
+            self.site_config,
+            r'(?m)^\s*formEmail:\s*"zqairtop@163\.com",\s*$',
+        )
+
+        for filename in PAGE_FILES:
+            source = (ROOT / filename).read_text(encoding="utf-8")
+            with self.subTest(page=filename):
+                self.assertIn("zqairtop@163.com", source)
+                self.assertNotIn("19313965@qq.com", source)
+
+    def test_public_phone_and_mobile_use_the_new_number(self) -> None:
+        self.assertRegex(
+            self.site_config,
+            r'(?m)^\s*phone:\s*"18911796197",\s*$',
+        )
+        self.assertRegex(
+            self.site_config,
+            r'(?m)^\s*mobile:\s*"18911796197",\s*$',
+        )
+
+        for filename in PAGE_FILES:
+            source = (ROOT / filename).read_text(encoding="utf-8")
+            with self.subTest(page=filename):
+                self.assertIn("18911796197", source)
+                self.assertNotIn("133-8113-6863", source)
 
 
 class SharedChromeContractTest(unittest.TestCase):
@@ -444,7 +488,7 @@ class NotFoundPortabilityContractTest(unittest.TestCase):
         loaders = self.page.find("script", id="siteRuntimeLoader")
         self.assertEqual(1, len(loaders))
         self.assertEqual(
-            "js/site-config.js?v=20260714 js/main.js?v=20260714",
+                "js/site-config.js?v=20260825-contact1 js/main.js?v=20260825-contact1",
             loaders[0].attrs.get("data-site-scripts"),
         )
 

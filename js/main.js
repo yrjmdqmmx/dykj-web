@@ -194,6 +194,7 @@
      注意：FormSubmit 首次收到提交时会向收件邮箱发送激活确认邮件，点击确认后生效。 */
   var form = doc.getElementById("contactForm");
   var statusEl = doc.getElementById("formStatus");
+  var formSubmitTimeoutMs = 25000;
 
   function showStatus(type, msg) {
     if (!statusEl) return;
@@ -237,7 +238,7 @@
       if (statusEl) statusEl.hidden = true;
 
       var ctrl = ("AbortController" in window) ? new AbortController() : null;
-      var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 8000) : null;
+      var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, formSubmitTimeoutMs) : null;
 
       fetch("https://formsubmit.co/ajax/" + formTo, {
         method: "POST",

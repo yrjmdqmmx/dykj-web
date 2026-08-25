@@ -9,17 +9,17 @@ window.SITE_CONFIG = {
   companyEn: "Dingyi Technology Co., Ltd",
 
   /** 联系电话 */
-  phone: "133-8113-6863",
+  phone: "18911796197",
 
   /** 商务手机 */
-  mobile: "133-8113-6863",
+  mobile: "18911796197",
 
   /** 邮箱（网站对外展示的联系邮箱） */
-  email: "19313965@qq.com",
+  email: "zqairtop@163.com",
 
   /** 留言表单收件邮箱（更换收件邮箱后，新邮箱首次收到提交时
       会收到 FormSubmit 激活确认邮件，点击确认后正式生效） */
-  formEmail: "19313965@qq.com",
+  formEmail: "zqairtop@163.com",
 
   /** 公司地址 */
   address: "北京市海淀区成府路45号中关村智造大街D座3层305",

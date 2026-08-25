@@ -9,9 +9,9 @@
 - **正式线上地址**：<https://dingyivac.com/>；<https://yrjmdqmmx.github.io/dykj-web/> 作为 GitHub Pages 预览环境保留
 - **技术形态**：生产站点为纯静态 HTML/CSS/JS、零运行时依赖；首页是普通企业 Hero，发布前由 `scripts/build-site.sh` 过滤源码与测试，Playwright 仅作为开发质量门禁
 - **页面**：index / about / business / brands / cases / contact + GitHub Pages/ECS 双部署路径自适应 404
-- **站点配置集中在 `js/site-config.js`**：电话 133-8113-6863、邮箱 19313965@qq.com、地址（海淀区成府路45号中关村智造大街D座3层305）、`formEmail`（留言表单收件）、`icp`（备案号 `京ICP备2026049830号-1`）
+- **站点配置集中在 `js/site-config.js`**：电话 18911796197、邮箱 zqairtop@163.com、地址（海淀区成府路45号中关村智造大街D座3层305）、`formEmail`（留言表单收件）、`icp`（备案号 `京ICP备2026049830号-1`）
 - **正式域名已上线**：六个内容页的 canonical / `og:url`、`sitemap.xml`、`robots.txt` 及 404 无 JS 兜底指向 `https://dingyivac.com`；DNS、双域名证书、HTTP/www 规范跳转与未知 Host 拒绝均已配置，首发未启用 HSTS
-- **在线留言**：前端 fetch POST 到 `https://formsubmit.co/ajax/<formEmail>`，失败自动回退 mailto。链路已用 Gmail 验证可用；当前 formEmail=19313965@qq.com，**QQ 邮箱尚未做 FormSubmit 激活**（首次收到提交时会收到激活邮件，可能在垃圾箱，点击确认后生效）
+- **在线留言**：前端 fetch POST 到 `https://formsubmit.co/ajax/<formEmail>`，失败自动回退 mailto。链路已用 Gmail 验证可用；当前 formEmail=zqairtop@163.com，**163 邮箱尚未做 FormSubmit 激活**（首次收到提交时会收到激活邮件，可能在垃圾箱，点击确认后生效）
 - **公司位置**：嵌入式高德实时地图已上线（`js/map.js`，渐进增强，Key/GCJ-02 坐标在 `site-config.js` 的 `map` 字段）；Key 为空、GitHub Pages 无同源代理或加载失败时自动回退 SVG 占位卡片（零地图请求），并始终保留高德/百度导航链接。ECS/正式域名通过同源 Nginx 代理保存安全密钥（模板 `docs/nginx-amap-proxy.conf.example`）
 
 ## 二、新阶段目标
@@ -58,7 +58,7 @@ EOF
 
 | 事项 | 说明 |
 |---|---|
-| QQ 邮箱 FormSubmit 激活 | 网站上提交一条留言 → 19313965@qq.com 收激活邮件（查垃圾箱）→ 点击确认；建议把 formsubmit.co 加入 QQ 邮箱白名单 |
+| 163 邮箱 FormSubmit 激活 | 网站上提交一条留言 → zqairtop@163.com 收激活邮件（查垃圾箱）→ 点击确认；建议把 formsubmit.co 加入 163 邮箱白名单 |
 | 高德地图密钥激活 | lbs.amap.com 注册实名 → 应用管理创建应用 → 添加 Key（平台选「Web端(JS API)」）→ Key + 拾取器坐标填 `site-config.js` 的 `map` 配置；「安全密钥」只进服务器 Nginx（模板 `docs/nginx-amap-proxy.conf.example`），绝不提交进仓库。正式域名切换时在高德控制台给 Key 绑域名白名单 |
 | 首页普通企业 Hero | 首页为约 620px 的深色左右分栏 Hero，左侧是公司定位、简介与业务/联系入口，右侧使用真实业务照片 `assets/img/hero-helium.jpg`；移动端自然堆叠，无 Canvas、视频、帧序列、视差或滚动运行时。`source/blender/`、`assets/scrolly/v2/` 与 `js/company-scrolly.js` 仅作为历史源文件保留，构建脚本明确排除、不进入发布产物。 |
 | 两张央企 Logo 裁切 | `assets/img/client-avic.jpg` 与 `client-cnnc.jpg` 源素材（公司简介 PDF）右缘即被裁切，拿到官方完整 Logo 后替换 |

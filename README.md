@@ -40,7 +40,7 @@ python3 -m http.server 8000
    - `dingyivac.com` A 记录和 `www` CNAME 已指向 `116.62.146.226`，Nginx 使用 Certbot 证书提供 HTTPS；HTTP 与 www 统一跳转到 `https://dingyivac.com`，未知 Host 拒绝访问，首发未启用 HSTS；
    - 各页 `<head>` 后续可补充 `og:image` 绝对地址（当前未配置）。
 4. **嵌入式地图**（已上线）：联系页内嵌高德实时地图（`js/map.js`，渐进增强），Key/坐标配置在 `js/site-config.js` 的 `map` 字段；安全密钥走服务器 Nginx 代理（模板见 `docs/nginx-amap-proxy.conf.example`，详见交接文档）。Key 为空、GitHub Pages 无同源代理或加载失败时自动回退 SVG 占位卡片，并始终保留高德/百度导航链接。
-5. **留言表单**：通过 FormSubmit 免费服务直发 `js/site-config.js` 中 `formEmail` 指定的邮箱（当前 19313965@qq.com），发送失败自动回退 mailto。链路已用 Gmail 验证可用；**QQ 邮箱首次收到提交时需点击 FormSubmit 激活确认邮件（注意查垃圾箱）**。
+5. **留言表单**：通过 FormSubmit 免费服务直发 `js/site-config.js` 中 `formEmail` 指定的邮箱（当前 zqairtop@163.com），发送失败自动回退 mailto。链路已用 Gmail 验证可用；**163 邮箱首次收到提交时需点击 FormSubmit 激活确认邮件（注意查垃圾箱）**。
 6. **两张客户 Logo 待换**：`assets/img/client-avic.jpg`（中国航空工业）与 `client-cnnc.jpg`（中国核工业）源素材右缘在公司简介 PDF 中即被裁切，建议上线前替换为官方完整 Logo。
 7. **404 双部署路径**：`404.html` 会按 `github.io` 与根域名自动选择 `/dykj-web/` 或 `/`，无需在正式域名切换时手工改链接。
 

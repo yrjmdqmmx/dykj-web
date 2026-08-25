@@ -141,6 +141,23 @@ class DomainCutoverContractTest(unittest.TestCase):
         self.assertNotIn("`icp`（备案号，当前为空字符串）", handover)
         self.assertNotIn("`icp` 填入真实备案号", handover)
 
+    def test_github_pages_preview_uses_the_current_repository_owner(self) -> None:
+        current_preview = "https://yrjmdqmmx.github.io/dykj-web/"
+        retired_owner = "zdywrnm"
+        checked_files = (
+            "README.md",
+            "docs/DEPLOY-HANDOVER.md",
+            "tests/home_ui_contract_test.py",
+            "tests/map_runtime_test.js",
+            "tests/e2e/navigation-map.spec.js",
+        )
+
+        self.assertIn(current_preview, (ROOT / "README.md").read_text(encoding="utf-8"))
+        for filename in checked_files:
+            with self.subTest(file=filename):
+                source = (ROOT / filename).read_text(encoding="utf-8")
+                self.assertNotIn(retired_owner, source)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

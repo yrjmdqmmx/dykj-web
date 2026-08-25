@@ -5,8 +5,8 @@
 
 ## 一、项目现状（截至交接时）
 
-- **仓库**：`zdywrnm/dykj-web`，唯一分支 `claude/dingyi-tech-website-lkp7bu`（即默认分支），**推送该分支会自动触发 GitHub Pages 部署**（`.github/workflows/pages.yml`）
-- **线上地址**：<https://zdywrnm.github.io/dykj-web/>（GitHub Pages，作为临时/预览环境，迁移后可保留）
+- **仓库**：`yrjmdqmmx/dykj-web`，唯一分支 `claude/dingyi-tech-website-lkp7bu`（即默认分支），**推送该分支会自动触发 GitHub Pages 部署**（`.github/workflows/pages.yml`）
+- **线上地址**：<https://yrjmdqmmx.github.io/dykj-web/>（GitHub Pages，作为临时/预览环境，迁移后可保留）
 - **技术形态**：生产站点为纯静态 HTML/CSS/JS、零运行时依赖；发布前由 `scripts/build-site.sh` 过滤源码与测试，Playwright 仅作为开发质量门禁
 - **页面**：index / about / business / brands / cases / contact + GitHub Pages/ECS 双部署路径自适应 404
 - **站点配置集中在 `js/site-config.js`**：电话 133-8113-6863、邮箱 19313965@qq.com、地址（海淀区成府路45号中关村智造大街D座3层305）、`formEmail`（留言表单收件）、`icp`（备案号 `京ICP备2026049830号-1`）

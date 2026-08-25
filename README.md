@@ -29,7 +29,7 @@ python3 -m http.server 8000
 部署前运行 `scripts/build-site.sh _site`，只上传生成的 `_site/`；源码、文档、测试和构建脚本不会进入线上站点。
 
 **当前已配置 GitHub Pages 自动部署**：推送到 `claude/dingyi-tech-website-lkp7bu` 分支即触发
-`.github/workflows/pages.yml` 工作流，发布到 <https://zdywrnm.github.io/dykj-web/>
+`.github/workflows/pages.yml` 工作流，发布到 <https://yrjmdqmmx.github.io/dykj-web/>
 （要求仓库 Settings → Pages → Source 为 "GitHub Actions"）。
 
 ## 上线与外部切换清单

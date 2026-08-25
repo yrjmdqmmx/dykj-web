@@ -370,7 +370,7 @@ class NotFoundPortabilityContractTest(unittest.TestCase):
             if element.attrs.get("data-site-path") is not None
         ]
         deployment_roots = (
-            "https://zdywrnm.github.io/dykj-web/",
+            "https://yrjmdqmmx.github.io/dykj-web/",
             "https://dingyivac.com/",
         )
 

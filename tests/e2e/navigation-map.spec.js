@@ -44,7 +44,7 @@ async function mockAmapSuccess(page) {
 }
 
 async function routeGitHubProjectSite(page) {
-  await page.route("https://zdywrnm.github.io/**", (route) => {
+  await page.route("https://yrjmdqmmx.github.io/**", (route) => {
     const url = new URL(route.request().url());
     let relativePath = decodeURIComponent(url.pathname).replace(/^\/dykj-web\/?/, "");
     const candidate = resolve(siteRoot, relativePath || "index.html");
@@ -128,13 +128,13 @@ test.describe("navigation and deployment paths", () => {
     await expect.poll(() => page.evaluate(() => window.SITE_CONFIG?.company)).toBe("北京鼎熠科技有限公司");
 
     await routeGitHubProjectSite(page);
-    response = await page.goto("https://zdywrnm.github.io/dykj-web/nested/missing/page");
+    response = await page.goto("https://yrjmdqmmx.github.io/dykj-web/nested/missing/page");
     expect(response.status()).toBe(404);
     await expect.poll(() => page.locator("#siteStyles").evaluate((element) => element.href)).toMatch(
-      /zdywrnm\.github\.io\/dykj-web\/css\/style\.css/
+      /yrjmdqmmx\.github\.io\/dykj-web\/css\/style\.css/
     );
     await expect.poll(() => page.locator(".main-nav a").first().evaluate((element) => element.href)).toBe(
-      "https://zdywrnm.github.io/dykj-web/index.html"
+      "https://yrjmdqmmx.github.io/dykj-web/index.html"
     );
     await expect.poll(() => page.evaluate(() => window.SITE_CONFIG?.company)).toBe("北京鼎熠科技有限公司");
   });

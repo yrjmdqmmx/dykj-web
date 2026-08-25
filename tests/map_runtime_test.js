@@ -56,7 +56,7 @@ function runMapRuntime(hostname, securityJsCode = "") {
 }
 
 function testGithubPagesWithoutSecurityCodeKeepsStaticFallback() {
-  const runtime = runMapRuntime("zdywrnm.github.io");
+  const runtime = runMapRuntime("yrjmdqmmx.github.io");
 
   assert.equal(runtime.appendedScripts.length, 0);
   assert.equal(runtime.window._AMapSecurityConfig, undefined);

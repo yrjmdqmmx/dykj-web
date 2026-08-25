@@ -344,6 +344,7 @@ class NotFoundPortabilityContractTest(unittest.TestCase):
             for element in self.page.find("a")
             if (href := element.attrs.get("href"))
             and not href.startswith(("#", "mailto:", "tel:"))
+            and element.attrs.get("data-site-path") is not None
         ]
         self.assertGreater(len(internal_links), 10, "expected the complete shared 404 chrome")
 
@@ -352,10 +353,10 @@ class NotFoundPortabilityContractTest(unittest.TestCase):
             fallback = urlsplit(href)
             with self.subTest(href=href):
                 self.assertEqual("https", fallback.scheme)
-                self.assertEqual("zdywrnm.github.io", fallback.netloc)
+                self.assertEqual("dingyivac.com", fallback.netloc)
                 self.assertTrue(
-                    fallback.path.startswith("/dykj-web/"),
-                    f"no-JS fallback must stay inside the published project: {href}",
+                    fallback.path.startswith("/"),
+                    f"no-JS fallback must stay inside the production site: {href}",
                 )
                 self.assertIsNotNone(
                     link.attrs.get("data-site-path"),
@@ -405,7 +406,7 @@ class NotFoundPortabilityContractTest(unittest.TestCase):
         self.assertEqual(1, len(styles))
         self.assertEqual("css/style.css?v=20260714", styles[0].attrs.get("data-site-path"))
         self.assertEqual(
-            "https://zdywrnm.github.io/dykj-web/css/style.css?v=20260714",
+            "https://dingyivac.com/css/style.css?v=20260714",
             styles[0].attrs.get("href"),
         )
 
@@ -424,7 +425,7 @@ class NotFoundPortabilityContractTest(unittest.TestCase):
         self.assertEqual(1, len(return_links))
         self.assertEqual("", return_links[0].attrs.get("data-site-path"))
         self.assertEqual(
-            "https://zdywrnm.github.io/dykj-web/",
+            "https://dingyivac.com/",
             return_links[0].attrs.get("href"),
         )
 

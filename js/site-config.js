@@ -45,6 +45,6 @@ window.SITE_CONFIG = {
     securityJsCode: ""
   },
 
-  /** ICP 备案号（GitHub Pages 境外托管无需备案；正式域名备案完成后填入，如 "京ICP备XXXXXXXX号"） */
-  icp: ""
+  /** ICP 备案号（正式域名页脚展示；GitHub Pages 预览也保持同一站点信息） */
+  icp: "京ICP备2026049830号-1"
 };

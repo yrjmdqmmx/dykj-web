@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 当前为 GitHub Pages 临时地址；启用正式域名后请全局替换 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://zdywrnm.github.io/dykj-web/</loc><priority>1.0</priority></url>
-  <url><loc>https://zdywrnm.github.io/dykj-web/about.html</loc><priority>0.8</priority></url>
-  <url><loc>https://zdywrnm.github.io/dykj-web/business.html</loc><priority>0.9</priority></url>
-  <url><loc>https://zdywrnm.github.io/dykj-web/brands.html</loc><priority>0.8</priority></url>
-  <url><loc>https://zdywrnm.github.io/dykj-web/cases.html</loc><priority>0.8</priority></url>
-  <url><loc>https://zdywrnm.github.io/dykj-web/contact.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dingyivac.com/</loc><priority>1.0</priority></url>
+  <url><loc>https://dingyivac.com/about.html</loc><priority>0.8</priority></url>
+  <url><loc>https://dingyivac.com/business.html</loc><priority>0.9</priority></url>
+  <url><loc>https://dingyivac.com/brands.html</loc><priority>0.8</priority></url>
+  <url><loc>https://dingyivac.com/cases.html</loc><priority>0.8</priority></url>
+  <url><loc>https://dingyivac.com/contact.html</loc><priority>0.7</priority></url>
 </urlset>

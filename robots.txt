@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# 启用正式域名后请替换为正式域名地址
-Sitemap: https://zdywrnm.github.io/dykj-web/sitemap.xml
+Sitemap: https://dingyivac.com/sitemap.xml

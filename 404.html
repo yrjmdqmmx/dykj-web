@@ -19,12 +19,18 @@
       };
     }(window));
   </script>
-  <!-- 绝对地址是无 JS 兜底；下方同步引导会在正常浏览器中改成本次部署根路径。 -->
-  <link id="siteStyles" rel="stylesheet" href="https://zdywrnm.github.io/dykj-web/css/style.css?v=20260714" data-site-path="css/style.css?v=20260714">
+  <!-- 绝对地址仅供无 JS 使用；正常浏览器直接按本次部署根路径创建样式链接。 -->
+  <noscript><link id="siteStyles" rel="stylesheet" href="https://dingyivac.com/css/style.css?v=20260714" data-site-path="css/style.css?v=20260714"></noscript>
   <script>
-    document.getElementById("siteStyles").href = window.__DINGYI_SITE_URL__(
-      document.getElementById("siteStyles").getAttribute("data-site-path")
-    );
+    (function (document, siteUrl) {
+      "use strict";
+      var siteStyles = document.createElement("link");
+      siteStyles.id = "siteStyles";
+      siteStyles.rel = "stylesheet";
+      siteStyles.setAttribute("data-site-path", "css/style.css?v=20260714");
+      siteStyles.href = siteUrl(siteStyles.getAttribute("data-site-path"));
+      document.head.appendChild(siteStyles);
+    }(document, window.__DINGYI_SITE_URL__));
   </script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -56,19 +62,19 @@
 
   <header class="site-header" id="siteHeader">
     <div class="container header-inner">
-      <a class="logo" href="https://zdywrnm.github.io/dykj-web/index.html" data-site-path="index.html" aria-label="北京鼎熠科技 首页">
+      <a class="logo" href="https://dingyivac.com/index.html" data-site-path="index.html" aria-label="北京鼎熠科技 首页">
         <span class="logo-text">
           <strong>北京鼎熠科技</strong>
           <small>DINGYI TECHNOLOGY</small>
         </span>
       </a>
       <nav class="main-nav" id="mainNav" aria-label="主导航">
-        <a href="https://zdywrnm.github.io/dykj-web/index.html" data-site-path="index.html">首页</a>
-        <a href="https://zdywrnm.github.io/dykj-web/about.html" data-site-path="about.html">关于我们</a>
-        <a href="https://zdywrnm.github.io/dykj-web/business.html" data-site-path="business.html">主营业务</a>
-        <a href="https://zdywrnm.github.io/dykj-web/brands.html" data-site-path="brands.html">产品与品牌</a>
-        <a href="https://zdywrnm.github.io/dykj-web/cases.html" data-site-path="cases.html">客户与案例</a>
-        <a href="https://zdywrnm.github.io/dykj-web/contact.html" data-site-path="contact.html" class="nav-cta">联系我们</a>
+        <a href="https://dingyivac.com/index.html" data-site-path="index.html">首页</a>
+        <a href="https://dingyivac.com/about.html" data-site-path="about.html">关于我们</a>
+        <a href="https://dingyivac.com/business.html" data-site-path="business.html">主营业务</a>
+        <a href="https://dingyivac.com/brands.html" data-site-path="brands.html">产品与品牌</a>
+        <a href="https://dingyivac.com/cases.html" data-site-path="cases.html">客户与案例</a>
+        <a href="https://dingyivac.com/contact.html" data-site-path="contact.html" class="nav-cta">联系我们</a>
       </nav>
       <button class="nav-toggle" id="navToggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="mainNav">
         <span></span><span></span><span></span>
@@ -80,14 +86,14 @@
     <div>
       <h1>404</h1>
       <p>抱歉，您访问的页面不存在或已被移动。<br>真空里什么都没有 —— 这个页面也是。</p>
-      <a class="btn" href="https://zdywrnm.github.io/dykj-web/" data-site-path="">返回首页</a>
+      <a class="btn" href="https://dingyivac.com/" data-site-path="">返回首页</a>
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-grid">
       <div class="footer-brand">
-        <a class="logo" href="https://zdywrnm.github.io/dykj-web/index.html" data-site-path="index.html" aria-label="北京鼎熠科技 首页">
+        <a class="logo" href="https://dingyivac.com/index.html" data-site-path="index.html" aria-label="北京鼎熠科技 首页">
           <span class="logo-text"><strong>北京鼎熠科技</strong><small>DINGYI TECHNOLOGY</small></span>
         </a>
         <p>专业从事真空设备经营和真空领域全方位整合服务，实现客户从产品设计、生产加工、装配调试到维修保养的整体解决方案。</p>
@@ -95,21 +101,21 @@
       <div class="footer-col">
         <h2>快速导航</h2>
         <ul>
-          <li><a href="https://zdywrnm.github.io/dykj-web/about.html" data-site-path="about.html">关于我们</a></li>
-          <li><a href="https://zdywrnm.github.io/dykj-web/business.html" data-site-path="business.html">主营业务</a></li>
-          <li><a href="https://zdywrnm.github.io/dykj-web/brands.html" data-site-path="brands.html">产品与品牌</a></li>
-          <li><a href="https://zdywrnm.github.io/dykj-web/cases.html" data-site-path="cases.html">客户与案例</a></li>
-          <li><a href="https://zdywrnm.github.io/dykj-web/contact.html" data-site-path="contact.html">联系我们</a></li>
+          <li><a href="https://dingyivac.com/about.html" data-site-path="about.html">关于我们</a></li>
+          <li><a href="https://dingyivac.com/business.html" data-site-path="business.html">主营业务</a></li>
+          <li><a href="https://dingyivac.com/brands.html" data-site-path="brands.html">产品与品牌</a></li>
+          <li><a href="https://dingyivac.com/cases.html" data-site-path="cases.html">客户与案例</a></li>
+          <li><a href="https://dingyivac.com/contact.html" data-site-path="contact.html">联系我们</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h2>主营业务</h2>
         <ul>
-          <li><a href="https://zdywrnm.github.io/dykj-web/business.html#integration" data-site-path="business.html#integration">真空系统集成</a></li>
-          <li><a href="https://zdywrnm.github.io/dykj-web/business.html#uhp" data-site-path="business.html#uhp">超高纯气路解决方案</a></li>
-          <li><a href="https://zdywrnm.github.io/dykj-web/business.html#emc" data-site-path="business.html#emc">合同能源管理</a></li>
-          <li><a href="https://zdywrnm.github.io/dykj-web/business.html#chamber" data-site-path="business.html#chamber">腔体加工与非标定制</a></li>
-          <li><a href="https://zdywrnm.github.io/dykj-web/business.html#service" data-site-path="business.html#service">维修与技术服务</a></li>
+          <li><a href="https://dingyivac.com/business.html#integration" data-site-path="business.html#integration">真空系统集成</a></li>
+          <li><a href="https://dingyivac.com/business.html#uhp" data-site-path="business.html#uhp">超高纯气路解决方案</a></li>
+          <li><a href="https://dingyivac.com/business.html#emc" data-site-path="business.html#emc">合同能源管理</a></li>
+          <li><a href="https://dingyivac.com/business.html#chamber" data-site-path="business.html#chamber">腔体加工与非标定制</a></li>
+          <li><a href="https://dingyivac.com/business.html#service" data-site-path="business.html#service">维修与技术服务</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -124,7 +130,7 @@
     </div>
     <div class="footer-bottom container">
       <span>© <span id="year">2026</span> 北京鼎熠科技有限公司 版权所有</span>
-      <span data-config="icp"></span>
+      <a data-config="icp" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备2026049830号-1</a>
     </div>
   </footer>
 

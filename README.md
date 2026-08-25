@@ -32,13 +32,13 @@ python3 -m http.server 8000
 `.github/workflows/pages.yml` 工作流，发布到 <https://zdywrnm.github.io/dykj-web/>
 （要求仓库 Settings → Pages → Source 为 "GitHub Actions"）。
 
-## ⚠️ 上线前待办清单
+## 上线与外部切换清单
 
 1. ~~替换联系方式~~（已完成）：联系方式维护于 `js/site-config.js`，如有变更改此一处即可全站生效。
-2. **备案号**：`js/site-config.js` 中的 `icp` 字段替换为真实备案号（工信部要求境内主机部署需 ICP 备案）。
-3. **域名相关**：
-   - `sitemap.xml` 与 `robots.txt` 当前指向 GitHub Pages 临时地址，启用正式域名后请全局替换；
-   - 各页 `<head>` 中可补充 `og:image` 绝对地址（已留注释）。
+2. **备案与正式 URL（仓库已准备）**：`js/site-config.js` 及七页静态页脚使用备案号 `京ICP备2026049830号-1`；六个内容页的 canonical / `og:url`、`sitemap.xml` 与 `robots.txt` 均指向 `https://dingyivac.com`。
+3. **域名基础设施（需独立核验）**：
+   - 仓库配置完成不代表 DNS 已解析或 HTTPS 证书已签发；正式对外切换前仍需分别验证 DNS、证书、Nginx 与公网可达性；
+   - 各页 `<head>` 后续可补充 `og:image` 绝对地址（当前未配置）。
 4. **嵌入式地图**（已上线）：联系页内嵌高德实时地图（`js/map.js`，渐进增强），Key/坐标配置在 `js/site-config.js` 的 `map` 字段；安全密钥走服务器 Nginx 代理（模板见 `docs/nginx-amap-proxy.conf.example`，详见交接文档）。Key 为空、GitHub Pages 无同源代理或加载失败时自动回退 SVG 占位卡片，并始终保留高德/百度导航链接。
 5. **留言表单**：通过 FormSubmit 免费服务直发 `js/site-config.js` 中 `formEmail` 指定的邮箱（当前 19313965@qq.com），发送失败自动回退 mailto。链路已用 Gmail 验证可用；**QQ 邮箱首次收到提交时需点击 FormSubmit 激活确认邮件（注意查垃圾箱）**。
 6. **两张客户 Logo 待换**：`assets/img/client-avic.jpg`（中国航空工业）与 `client-cnnc.jpg`（中国核工业）源素材右缘在公司简介 PDF 中即被裁切，建议上线前替换为官方完整 Logo。

@@ -139,7 +139,7 @@ class DomainCutoverContractTest(unittest.TestCase):
         styles = page.find("link", rel="stylesheet")
         self.assertEqual(1, len(styles))
         self.assertTrue((styles[0].get("href") or "").startswith(PRODUCTION_ORIGIN))
-        self.assertEqual("css/style.css?v=20260714", styles[0].get("data-site-path"))
+        self.assertEqual("css/style.css?v=20260906-industrial1", styles[0].get("data-site-path"))
         self.assertIn('var projectRoot = "/dykj-web/"', source)
         self.assertIn("github\\.io", source)
         self.assertIn("window.__DINGYI_SITE_ROOT__", source)

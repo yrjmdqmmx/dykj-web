@@ -1,513 +1,238 @@
-/* ==========================================================================
-   首页 · 普通企业官网与工业视觉层
-   全站变量和通用组件仍由 style.css 管理。
-   ========================================================================== */
+/* 鼎熠官网首页：精密工业视觉。真实照片、静态内容与原生交互。 */
 
-.home-page {
-  color: #eef1f1;
-  background: #080b0d;
-}
+.home-page { color: var(--text-dark); background: var(--surface-950); }
 
-.home-page .site-header:not(.scrolled):not(.nav-open) {
-  background: linear-gradient(180deg, rgba(4, 7, 8, .78), transparent);
-}
-
-.home-page .backtop {
-  bottom: 112px;
-}
-
-/* ---------- 企业 Hero ---------- */
-
+/* 首屏：工程网格、冷银排版、设备照片 */
 .corporate-hero {
+  position: relative;
   min-height: 620px;
   overflow: hidden;
-  color: #f4f6f5;
-  background:
-    linear-gradient(110deg, #030506 0%, #0b1012 58%, #11191c 100%);
+  color: var(--text-dark);
+  background: linear-gradient(115deg, #070c12 0%, #090f17 65%, #0c1420 100%);
 }
-
-.corporate-hero-inner {
-  min-height: 620px;
-  display: grid;
-  grid-template-columns: minmax(0, .92fr) minmax(460px, 1.08fr);
-  align-items: center;
-  gap: clamp(34px, 5vw, 78px);
-  padding-top: var(--header-h);
-  padding-bottom: 36px;
-}
-
-.corporate-hero-copy {
-  position: relative;
-  z-index: 2;
-  padding: 56px 0 48px;
-}
-
-.corporate-kicker {
-  margin-bottom: 20px;
-  color: var(--copper);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .2em;
-}
-
-.corporate-hero h1 {
-  max-width: 9em;
-  color: #f6f7f6;
-  font-size: clamp(44px, 4.4vw, 66px);
-  font-weight: 650;
-  line-height: 1.13;
-  letter-spacing: -.025em;
-  text-wrap: balance;
-}
-
-.corporate-hero h1 span {
-  display: block;
-}
-
-.corporate-lead {
-  max-width: 560px;
-  margin-top: 24px;
-  color: rgba(238, 241, 241, .74);
-  font-size: clamp(16px, 1.3vw, 18px);
-  line-height: 1.85;
-}
-
-.corporate-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 32px;
-}
-
-.corporate-strengths {
-  margin-top: 36px;
-  padding-top: 18px;
-  border-top: 1px solid rgba(238, 241, 241, .16);
-  color: rgba(238, 241, 241, .5);
-  font-size: 12px;
-  letter-spacing: .12em;
-}
-
-.corporate-hero-media {
-  position: relative;
-  min-height: 420px;
-  overflow: hidden;
-  background: #111719;
-  box-shadow: 0 28px 60px rgba(0, 0, 0, .28);
-}
-
-.corporate-hero-media::before {
-  position: absolute;
-  z-index: 1;
-  inset: 0;
-  content: "";
+.corporate-hero::before {
+  content: ""; position: absolute; inset: var(--header-h) 0 0;
+  background-image: radial-gradient(rgba(107, 155, 223, .16) .7px, transparent .7px);
+  background-size: 13px 13px;
+  mask-image: linear-gradient(90deg, #000, transparent 65%);
   pointer-events: none;
-  background: linear-gradient(90deg, rgba(7, 11, 13, .78) 0%, transparent 24%, transparent 82%, rgba(7, 11, 13, .24) 100%);
 }
-
-.corporate-hero-media img {
-  width: 100%;
-  height: 420px;
-  display: block;
-  object-fit: cover;
-  object-position: center;
-  filter: saturate(.75) contrast(1.04);
+.corporate-hero::after {
+  content: ""; position: absolute; top: 112px; bottom: 44px; left: 25px; width: 6px;
+  background: repeating-linear-gradient(to bottom, #52677f 0 1px, transparent 1px 9px);
+  opacity: .45; pointer-events: none;
 }
-
-/* ---------- 首页后续内容 ---------- */
-
-.home-page .section {
-  position: relative;
-  padding: 112px 0;
-}
-
-.home-section-head {
+.corporate-hero-inner {
+  position: relative; z-index: 1;
+  min-height: 620px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: end;
-  gap: 18px 40px;
-  margin-bottom: 52px;
+  grid-template-columns: minmax(0, .87fr) minmax(0, 1.13fr);
+  align-items: center;
+  gap: clamp(32px, 4vw, 60px);
+  padding-top: calc(var(--header-h) + 38px);
+  padding-bottom: 46px;
 }
+.corporate-hero-copy { min-width: 0; padding: 12px 0; }
+.corporate-kicker {
+  margin-bottom: 26px;
+  color: var(--accent-soft);
+  font-family: var(--font-tech);
+  font-size: 11px; font-weight: 500; letter-spacing: .14em;
+}
+.corporate-hero h1 {
+  color: #f3f6fa;
+  font-size: clamp(40px, 4.7vw, 68px);
+  font-weight: 650; line-height: 1.2; letter-spacing: -.035em;
+}
+.corporate-hero h1 span { display: block; color: #bac6d6; }
+.corporate-lead {
+  max-width: 510px; margin-top: 24px;
+  color: #acb7c5; font-size: 16px; line-height: 1.95;
+}
+.corporate-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 30px; }
+.corporate-actions .btn { min-height: 52px; padding-inline: 26px; }
+.corporate-actions .btn svg { margin-left: 9px; width: 21px; height: 21px; }
+.corporate-strengths {
+  margin-top: 32px; padding-top: 18px;
+  border-top: 1px solid var(--line-dark);
+  color: #9daabd; font-size: 11px; letter-spacing: .13em;
+}
+.corporate-hero-media { position: relative; min-width: 0; overflow: hidden; }
+.corporate-photo-frame { position: relative; padding: 10px; border: 1px solid var(--line-dark); }
+.corporate-photo-frame::after {
+  content: ""; position: absolute; inset: -1px; pointer-events: none;
+  background:
+    linear-gradient(#abc2dd, #abc2dd) top left / 18px 1px no-repeat,
+    linear-gradient(#abc2dd, #abc2dd) top left / 1px 18px no-repeat,
+    linear-gradient(#abc2dd, #abc2dd) top right / 18px 1px no-repeat,
+    linear-gradient(#abc2dd, #abc2dd) top right / 1px 18px no-repeat,
+    linear-gradient(#abc2dd, #abc2dd) bottom left / 18px 1px no-repeat,
+    linear-gradient(#abc2dd, #abc2dd) bottom left / 1px 18px no-repeat,
+    linear-gradient(#abc2dd, #abc2dd) bottom right / 18px 1px no-repeat,
+    linear-gradient(#abc2dd, #abc2dd) bottom right / 1px 18px no-repeat;
+}
+.corporate-hero-media img { width: 100%; height: auto; aspect-ratio: 1.52; object-fit: cover; object-position: 52% center; }
+.corporate-hero-media figcaption { padding: 9px 11px 0; color: #a6b2c2; font-size: 11px; letter-spacing: .08em; }
 
+/* 服务数据：首屏后的一条证据带 */
+.home-evidence { border-block: 1px solid var(--line-dark); background: var(--surface-900); }
+.proof-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding-block: 26px; }
+.proof-metrics > div {
+  display: grid; grid-template-columns: 42px minmax(0, 1fr); align-content: center;
+  column-gap: 20px; row-gap: 8px; padding: 0 28px;
+  border-right: 1px solid var(--line-dark);
+}
+.proof-metrics > div:first-child { padding-left: 0; }
+.proof-metrics > div:last-child { padding-right: 0; border-right: 0; }
+.metric-icon { grid-row: 1 / 3; align-self: center; width: 42px; height: 42px; color: var(--accent); }
+.proof-metrics strong { color: var(--accent); font-size: 46px; font-weight: 600; line-height: 1.15; letter-spacing: -.025em; }
+.proof-metrics strong small { margin-left: 7px; color: var(--text-muted); font-size: 14px; font-weight: 400; letter-spacing: 0; }
+.proof-metrics > div > span { grid-column: 2; color: #a8b4c4; font-size: 12px; line-height: 1.6; }
+.proof-metrics > div:last-child strong { font-size: 36px; line-height: 1.47; }
+
+/* 章节标题 */
+.home-page .section { position: relative; padding: 88px 0; }
+.home-section-head {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end;
+  gap: 12px 30px; margin-bottom: 38px;
+}
 .home-section-head > p {
   grid-column: 1 / -1;
-  color: var(--copper);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .22em;
+  color: var(--accent);
+  font-family: var(--font-tech); font-size: 11px; font-weight: 500; letter-spacing: .17em;
 }
+.home-section-head h2 { color: var(--text-dark); font-size: clamp(27px, 2.65vw, 38px); font-weight: 600; line-height: 1.4; letter-spacing: -.025em; }
+.home-section-head .link-more { align-self: center; color: var(--accent); font-size: 13px; white-space: nowrap; }
 
-.home-section-head h2 {
-  max-width: 760px;
-  color: #f0f2f1;
-  font-size: clamp(30px, 3.4vw, 48px);
-  font-weight: 620;
-  line-height: 1.24;
-  letter-spacing: -.015em;
-}
-
-.home-section-head .link-more {
-  align-self: center;
-  color: #d8dddd;
-}
-
-.home-capabilities {
-  background: #0a0e10;
-  border-top: 1px solid rgba(226, 232, 232, .1);
-}
-
-.capability-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  border-top: 1px solid rgba(226, 232, 232, .16);
-  border-bottom: 1px solid rgba(226, 232, 232, .16);
-}
-
+/* 工程能力：真实加工现场 + 连续编号的业务条目 */
+.home-capabilities { background: var(--surface-950); }
+.capability-layout { display: grid; grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr); gap: 56px; align-items: stretch; }
+.capability-visual { min-height: 0; overflow: hidden; background: var(--surface-800); }
+.capability-visual img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.capability-grid { display: grid; grid-template-columns: minmax(0, 1fr); border-top: 1px solid var(--line-dark); }
 .capability-item {
-  min-height: 330px;
-  padding: 32px 28px 30px;
-  color: #eef1f1;
-  border-right: 1px solid rgba(226, 232, 232, .16);
-  transition: background .24s ease, transform .24s ease;
+  position: relative; display: grid;
+  grid-template-columns: 76px minmax(0, 1fr) 30px; column-gap: 18px; row-gap: 6px;
+  align-content: center; padding: 26px 0;
+  border-bottom: 1px solid var(--line-dark);
+  color: var(--text-dark); transition: background .2s ease;
+}
+.capability-item:hover { color: #fff; background: #0e1723; }
+.capability-index { grid-column: 1; grid-row: 1 / 4; color: var(--accent); font-size: 44px; font-weight: 500; line-height: 1.3; font-variant-numeric: tabular-nums; }
+.capability-item h3 { grid-column: 2; color: var(--text-dark); font-size: 23px; font-weight: 600; }
+.capability-item p { grid-column: 2; color: #acb6c5; font-size: 13px; line-height: 1.8; }
+.capability-meta { grid-column: 2; color: var(--accent-soft); font-size: 11px; letter-spacing: .08em; }
+.capability-arrow { grid-column: 3; grid-row: 1 / 4; align-self: center; width: 27px; height: 27px; color: var(--accent); transition: transform .2s ease; }
+.capability-item:hover .capability-arrow { transform: translateX(4px); }
+
+/* 品牌：冷白色静态矩阵，保留原始标识 */
+.home-brands { background: #f1f4f8; border-block: 1px solid #d9e0e9; }
+.home-brands .home-section-head h2 { color: var(--ink); }
+.home-brands .home-section-head > p, .home-brands .home-section-head .link-more { color: var(--accent-strong); }
+.brand-matrix { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.brand-matrix .logo-card {
+  height: 108px; padding: 22px 32px; border: 0; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  border-radius: 0; background: #fff; box-shadow: none; transform: none;
+}
+.brand-matrix .logo-card img { max-width: 84%; max-height: 54px; width: auto; height: auto; object-fit: contain; }
+
+/* 项目现场：一个主项目，两个辅助项目 */
+.home-proof { color: var(--text-dark); background: var(--surface-950); }
+.home-case-grid { display: grid; grid-template-columns: minmax(0, 1.32fr) minmax(0, 1fr); gap: 28px; }
+.home-case { position: relative; display: block; padding-bottom: 22px; color: var(--text-dark); border-bottom: 1px solid var(--line-dark); }
+.home-case:first-child { grid-row: span 2; display: flex; flex-direction: column; }
+.home-case-media { position: relative; aspect-ratio: 2.05; margin-bottom: 16px; overflow: hidden; background: var(--surface-800); }
+.home-case:first-child .home-case-media { flex: 1; height: 0; min-height: 0; aspect-ratio: auto; }
+.home-case-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+.home-case:first-child .home-case-media img { object-position: center 48%; }
+.home-case:hover img { transform: scale(1.025); }
+.home-case > span { color: var(--accent-soft); font-size: 11px; letter-spacing: .04em; }
+.home-case h3 { max-width: calc(100% - 42px); margin-top: 10px; color: var(--text-dark); font-size: 17px; font-weight: 500; line-height: 1.7; }
+.case-arrow { position: absolute; right: 0; bottom: 27px; width: 25px; height: 25px; color: var(--accent); transition: transform .2s ease; }
+.home-case:hover .case-arrow { transform: translateX(4px); }
+
+@media (min-width: 768px) {
+  .home-case:first-child .home-case-media img { position: absolute; inset: 0; }
 }
 
-.capability-item:last-child {
-  border-right: 0;
-}
+/* 项目咨询 */
+.home-contact { border-block: 1px solid var(--line-dark); background-color: #09121e; background-image: radial-gradient(rgba(70, 136, 224, .28) .7px, transparent .7px); background-size: 16px 16px; }
+.home-contact-panel { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 46px; }
+.home-contact-panel p { margin-bottom: 15px; color: var(--accent); font-family: var(--font-tech); font-size: 11px; font-weight: 500; letter-spacing: .17em; }
+.home-contact-panel h2 { color: var(--text-dark); font-size: clamp(28px, 3vw, 42px); font-weight: 600; letter-spacing: -.025em; }
+.home-contact-panel span { display: block; margin-top: 16px; color: #adb8c8; font-size: 14px; line-height: 1.9; }
+.home-contact-panel .btn { min-height: 60px; padding-inline: 30px; }
+.home-contact-panel .btn svg { width: 22px; height: 22px; margin-left: 16px; }
 
-.capability-item:hover {
-  color: #fff;
-  background: #11181b;
-  transform: translateY(-4px);
-}
-
-.capability-index {
-  display: block;
-  margin-bottom: 70px;
-  color: var(--copper);
-  font-size: 12px;
-  font-variant-numeric: tabular-nums;
-}
-
-.capability-item h3 {
-  color: #f4f6f5;
-  font-size: 24px;
-  font-weight: 620;
-}
-
-.capability-item p {
-  margin-top: 14px;
-  color: rgba(226, 232, 232, .64);
-  font-size: 14px;
-  line-height: 1.75;
-}
-
-.capability-meta {
-  display: block;
-  margin-top: 28px;
-  color: rgba(226, 232, 232, .42);
-  font-size: 11px;
-  letter-spacing: .12em;
-}
-
-.home-brands {
-  overflow: hidden;
-  background: #0d1214;
-  border-top: 1px solid rgba(226, 232, 232, .08);
-}
-
-.home-brands .marquee {
-  padding: 2px 0;
-}
-
-.home-brands .logo-card {
-  height: 88px;
-  border: 0;
-  border-radius: 2px;
-  box-shadow: none;
-  filter: saturate(.72);
-}
-
-.home-proof {
-  color: #eff2f1;
-  background: #070a0b;
-  border-top: 1px solid rgba(226, 232, 232, .08);
-}
-
-.proof-metrics {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin-bottom: 112px;
-  border: 1px solid rgba(226, 232, 232, .16);
-}
-
-.proof-metrics > div {
-  display: flex;
-  min-height: 148px;
-  flex-direction: column;
-  justify-content: center;
-  gap: 10px;
-  padding: 28px;
-  border-right: 1px solid rgba(226, 232, 232, .16);
-}
-
-.proof-metrics > div:last-child {
-  border-right: 0;
-}
-
-.proof-metrics strong {
-  color: #f5f6f6;
-  font-size: clamp(30px, 3vw, 46px);
-  font-weight: 620;
-  line-height: 1;
-}
-
-.proof-metrics strong small {
-  margin-left: 4px;
-  color: var(--copper);
-  font-size: .38em;
-}
-
-.proof-metrics > div > span {
-  color: rgba(226, 232, 232, .52);
-  font-size: 12px;
-  letter-spacing: .06em;
-}
-
-.home-case-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-}
-
-.home-case {
-  display: block;
-  padding-bottom: 24px;
-  color: #eef1f1;
-  border-bottom: 1px solid rgba(226, 232, 232, .16);
-}
-
-.home-case:hover {
-  color: #fff;
-}
-
-.home-case-media {
-  aspect-ratio: 4 / 3;
-  margin-bottom: 22px;
-  overflow: hidden;
-  background: #121719;
-}
-
-.home-case-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: saturate(.7) contrast(1.04);
-  transition: transform .5s ease, filter .3s ease;
-}
-
-.home-case:hover img {
-  transform: scale(1.035);
-  filter: saturate(.95) contrast(1.04);
-}
-
-.home-case > span {
-  color: var(--copper);
-  font-size: 11px;
-  letter-spacing: .12em;
-}
-
-.home-case h3 {
-  margin-top: 11px;
-  color: #eef1f1;
-  font-size: 18px;
-  font-weight: 560;
-  line-height: 1.6;
-}
-
-.home-contact {
-  background: #0d1214;
-  border-top: 1px solid rgba(226, 232, 232, .08);
-}
-
-.home-contact-panel {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 40px;
-  padding: 52px 0;
-  border-top: 1px solid rgba(226, 232, 232, .18);
-  border-bottom: 1px solid rgba(226, 232, 232, .18);
-}
-
-.home-contact-panel p {
-  margin-bottom: 10px;
-  color: var(--copper);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .2em;
-}
-
-.home-contact-panel h2 {
-  color: #f4f6f5;
-  font-size: clamp(30px, 4vw, 48px);
-  font-weight: 620;
-  letter-spacing: -.015em;
-}
-
-.home-contact-panel span {
-  display: block;
-  margin-top: 12px;
-  color: rgba(226, 232, 232, .58);
-}
-
-/* ---------- 响应式与静态降级 ---------- */
-
-@media (max-width: 1000px) {
-  .corporate-hero-inner { grid-template-columns: minmax(0, .9fr) minmax(380px, 1.1fr); }
-  .capability-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .capability-item:nth-child(2) { border-right: 0; }
-  .capability-item:nth-child(-n + 2) { border-bottom: 1px solid rgba(226, 232, 232, .16); }
-  .proof-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .proof-metrics > div:nth-child(2) { border-right: 0; }
-  .proof-metrics > div:nth-child(-n + 2) { border-bottom: 1px solid rgba(226, 232, 232, .16); }
+@media (max-width: 1100px) {
+  .corporate-hero::after { display: none; }
+  .corporate-hero-inner { gap: 28px; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); }
+  .corporate-hero h1 { font-size: 43px; }
+  .corporate-kicker { font-size: 9px; letter-spacing: .1em; }
+  .proof-metrics > div { grid-template-columns: 32px minmax(0, 1fr); column-gap: 12px; padding-inline: 18px; }
+  .metric-icon { width: 32px; height: 32px; }
+  .proof-metrics strong { font-size: 38px; }
+  .proof-metrics > div:last-child strong { font-size: 28px; }
+  .proof-metrics strong small { font-size: 12px; margin-left: 4px; }
+  .proof-metrics > div > span { font-size: 11px; }
+  .capability-layout { gap: 32px; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); }
+  .capability-item { grid-template-columns: 54px minmax(0, 1fr) 24px; gap: 8px 12px; padding-block: 20px; }
+  .capability-index { font-size: 36px; }
+  .capability-item h3 { font-size: 21px; }
+  .home-section-head { grid-template-columns: 1fr; }
+  .home-section-head > p { grid-column: 1; }
+  .home-section-head .link-more { justify-self: start; }
 }
 
 @media (max-width: 767px) {
-  .corporate-hero,
-  .corporate-hero-inner {
-    min-height: 0;
-  }
+  .corporate-hero { min-height: 0; }
+  .corporate-hero-inner { min-height: 0; grid-template-columns: 1fr; gap: 28px; padding-top: calc(var(--header-h) + 32px); padding-bottom: 34px; }
+  .corporate-hero-copy { padding: 0; }
+  .corporate-kicker { font-size: 9px; margin-bottom: 20px; letter-spacing: .12em; }
+  .corporate-hero h1 { font-size: clamp(36px, 10.4vw, 54px); line-height: 1.24; }
+  .corporate-lead { margin-top: 20px; font-size: 14px; line-height: 1.85; }
+  .corporate-actions { gap: 12px; margin-top: 24px; }
+  .corporate-actions .btn { min-height: 48px; padding: 12px 19px; font-size: 13px; }
+  .corporate-strengths { margin-top: 24px; padding-top: 14px; font-size: 10px; }
+  .corporate-photo-frame { padding: 7px; }
+  .corporate-hero-media img { aspect-ratio: 1.85; }
+  .corporate-hero-media figcaption { padding: 8px 8px 0; font-size: 10px; }
+  .proof-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-block: 0; }
+  .proof-metrics > div { padding: 23px 16px; grid-template-columns: 30px minmax(0, 1fr); row-gap: 6px; column-gap: 10px; }
+  .proof-metrics > div:first-child { padding-left: 16px; }
+  .proof-metrics > div:last-child { padding-right: 16px; }
+  .proof-metrics > div:nth-child(2) { border-right: 0; }
+  .proof-metrics > div:nth-child(-n + 2) { border-bottom: 1px solid var(--line-dark); }
+  .proof-metrics strong { font-size: 36px; }
+  .proof-metrics > div:last-child strong { font-size: 26px; line-height: 1.6; }
+  .proof-metrics strong small { font-size: 11px; }
+  .proof-metrics > div > span { grid-column: 1 / -1; font-size: 10px; }
+  .metric-icon { grid-row: 1; width: 28px; height: 28px; }
+  .home-page .section { padding: 58px 0; }
+  .home-section-head { gap: 12px; margin-bottom: 30px; }
+  .home-section-head h2 { font-size: 28px; line-height: 1.5; }
+  .home-section-head > p { font-size: 10px; }
+  .home-section-head .link-more { font-size: 12px; }
+  .capability-layout { grid-template-columns: 1fr; gap: 26px; }
+  .capability-visual { aspect-ratio: 1.4; }
+  .capability-visual img { object-position: center 36%; }
+  .capability-item { grid-template-columns: 48px minmax(0, 1fr) 24px; padding-block: 23px; }
+  .capability-index { font-size: 33px; }
+  .capability-item p { font-size: 13px; }
+  .brand-matrix .logo-card { height: 82px; padding: 15px 12px; }
+  .brand-matrix .logo-card img { max-width: 94%; max-height: 39px; }
+  .home-case-grid { grid-template-columns: 1fr; gap: 30px; }
+  .home-case:first-child { grid-row: auto; display: block; }
+  .home-case:first-child .home-case-media { height: auto; aspect-ratio: 1.1; }
+  .home-case-media { aspect-ratio: 1.65; }
+  .home-case h3 { font-size: 16px; }
+  .home-contact-panel { grid-template-columns: 1fr; gap: 28px; }
+  .home-contact-panel h2 { font-size: 29px; }
+  .home-contact-panel span { font-size: 13px; }
+  .home-contact-panel .btn { justify-self: start; min-height: 52px; font-size: 14px; }
+}
 
-  .corporate-hero-inner {
-    grid-template-columns: 1fr;
-    gap: 4px;
-    padding-top: calc(var(--header-h) + 30px);
-    padding-bottom: 44px;
-  }
-
-  .corporate-hero-copy {
-    padding: 28px 0 30px;
-  }
-
-  .corporate-hero h1 {
-    max-width: 8em;
-    font-size: clamp(38px, 11vw, 54px);
-  }
-
-  .corporate-lead {
-    margin-top: 15px;
-    font-size: 15px;
-    line-height: 1.75;
-  }
-
-  .corporate-kicker {
-    margin-bottom: 12px;
-    font-size: 10px;
-  }
-
-  .corporate-actions {
-    gap: 9px;
-    margin-top: 22px;
-  }
-
-  .corporate-actions .btn {
-    padding: 11px 18px;
-    font-size: 13px;
-  }
-
-  .corporate-strengths {
-    margin-top: 24px;
-    padding-top: 14px;
-    font-size: 10.5px;
-  }
-
-  .corporate-hero-media {
-    min-height: 0;
-  }
-
-  .corporate-hero-media::before {
-    background: linear-gradient(180deg, rgba(7, 11, 13, .42) 0%, transparent 32%, rgba(7, 11, 13, .2) 100%);
-  }
-
-  .corporate-hero-media img {
-    height: auto;
-    min-height: 190px;
-    aspect-ratio: 1440 / 552;
-  }
-
-  .home-page .section {
-    padding: 76px 0;
-  }
-
-  .home-section-head {
-    grid-template-columns: 1fr;
-    margin-bottom: 36px;
-  }
-
-  .home-section-head > p {
-    grid-column: auto;
-  }
-
-  .home-section-head h2 {
-    font-size: 31px;
-  }
-
-  .home-section-head .link-more {
-    justify-self: start;
-  }
-
-  .capability-grid,
-  .proof-metrics,
-  .home-case-grid,
-  .home-contact-panel {
-    grid-template-columns: 1fr;
-  }
-
-  .capability-item {
-    min-height: 0;
-    padding: 26px 18px 30px;
-    border-right: 0;
-    border-bottom: 1px solid rgba(226, 232, 232, .16);
-  }
-
-  .capability-item:last-child {
-    border-bottom: 0;
-  }
-
-  .capability-index {
-    margin-bottom: 38px;
-  }
-
-  .proof-metrics {
-    margin-bottom: 76px;
-  }
-
-  .proof-metrics > div {
-    min-height: 120px;
-    border-right: 0;
-    border-bottom: 1px solid rgba(226, 232, 232, .16);
-  }
-
-  .proof-metrics > div:last-child {
-    border-bottom: 0;
-  }
-
-  .home-case-grid {
-    gap: 40px;
-  }
-
-  .home-contact-panel {
-    align-items: start;
-    padding: 42px 0;
-  }
-
-  .home-contact-panel .btn {
-    justify-self: start;
-  }
-
-  .home-page .backtop {
-    right: 18px;
-    bottom: 88px;
-  }
+@media (prefers-reduced-motion: reduce) {
+  .capability-arrow, .case-arrow, .home-case-media img { transition: none; }
+  .capability-item:hover .capability-arrow, .home-case:hover .case-arrow, .home-case:hover img { transform: none; }
 }

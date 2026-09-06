@@ -1,6 +1,8 @@
 const { defineConfig } = require("@playwright/test");
 
 const isCI = Boolean(process.env.CI);
+const qaPort = process.env.DINGYI_QA_PORT || "4173";
+const baseURL = `http://127.0.0.1:${qaPort}`;
 
 module.exports = defineConfig({
   testDir: "./tests/e2e",
@@ -16,7 +18,7 @@ module.exports = defineConfig({
     ["html", { outputFolder: "output/playwright/report", open: "never" }]
   ],
   use: {
-    baseURL: "http://127.0.0.1:4173",
+    baseURL,
     locale: "zh-CN",
     colorScheme: "dark",
     trace: "retain-on-failure",
@@ -35,7 +37,8 @@ module.exports = defineConfig({
   ],
   webServer: {
     command: "bash scripts/build-site.sh _site && node tests/e2e/server.mjs",
-    url: "http://127.0.0.1:4173/index.html",
+    url: `${baseURL}/index.html`,
+    env: { PORT: qaPort },
     reuseExistingServer: false,
     timeout: 120_000
   }

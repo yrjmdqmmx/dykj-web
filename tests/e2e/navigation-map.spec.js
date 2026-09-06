@@ -88,11 +88,12 @@ test.describe("navigation and deployment paths", () => {
     await expect(toggle).toBeFocused();
   });
 
-  test("all public pages have healthy internal links and no site console errors", async ({ page, request }, testInfo) => {
+  test("all public pages have healthy internal links and no site console errors", async ({ page, request, baseURL }, testInfo) => {
     test.skip(testInfo.project.name !== "desktop-chromium", "one crawl covers shared markup");
     await mockAmapSuccess(page);
     const browserErrors = collectBrowserErrors(page);
     const internalUrls = new Set();
+    const siteOrigin = new URL(baseURL).origin;
 
     for (const path of publicPages) {
       const response = await page.goto(path);
@@ -100,7 +101,7 @@ test.describe("navigation and deployment paths", () => {
       const urls = await page.locator("a[href]").evaluateAll((links) => links.map((link) => link.href));
       for (const href of urls) {
         const url = new URL(href);
-        if (url.origin === "http://127.0.0.1:4173") {
+        if (url.origin === siteOrigin) {
           url.hash = "";
           internalUrls.add(url.href);
         }
@@ -114,16 +115,17 @@ test.describe("navigation and deployment paths", () => {
     expect(browserErrors).toEqual([]);
   });
 
-  test("deep 404 assets and links resolve at both ECS root and GitHub project root", async ({ page }, testInfo) => {
+  test("deep 404 assets and links resolve at both ECS root and GitHub project root", async ({ page, baseURL }, testInfo) => {
     test.skip(testInfo.project.name !== "desktop-chromium", "one deployment-path contract");
 
     let response = await page.goto("/nested/missing/page");
     expect(response.status()).toBe(404);
-    await expect.poll(() => page.locator("#siteStyles").evaluate((element) => element.href)).toMatch(
-      /127\.0\.0\.1:4173\/css\/style\.css/
-    );
+    await expect.poll(() => page.locator("#siteStyles").evaluate((element) => {
+      const url = new URL(element.href);
+      return { origin: url.origin, pathname: url.pathname };
+    })).toEqual({ origin: new URL(baseURL).origin, pathname: "/css/style.css" });
     await expect.poll(() => page.locator(".main-nav a").first().evaluate((element) => element.href)).toBe(
-      "http://127.0.0.1:4173/index.html"
+      new URL("/index.html", baseURL).href
     );
     await expect.poll(() => page.evaluate(() => window.SITE_CONFIG?.company)).toBe("北京鼎熠科技有限公司");
 

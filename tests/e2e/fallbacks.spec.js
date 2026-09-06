@@ -17,9 +17,10 @@ async function expectReadableCorporateHome(page) {
 
 test.describe("static homepage fallbacks", () => {
 
-  test("reduced motion keeps the corporate hero static and readable", async ({ browser }, testInfo) => {
+  test("reduced motion keeps the corporate hero static and readable", async ({ browser, baseURL }, testInfo) => {
     test.skip(testInfo.project.name !== "desktop-chromium", "one explicit reduced-motion context");
     const context = await browser.newContext({
+      baseURL,
       reducedMotion: "reduce",
       viewport: { width: 1440, height: 900 }
     });
@@ -30,7 +31,7 @@ test.describe("static homepage fallbacks", () => {
       if (request.url().includes("/assets/scrolly/") || request.url().includes("company-scrolly")) dynamicRequests.push(request.url());
     });
 
-    await page.goto("http://127.0.0.1:4173/index.html");
+    await page.goto("/index.html");
     await expectReadableCorporateHome(page);
     expect(dynamicRequests).toEqual([]);
     expect(browserErrors).toEqual([]);
@@ -57,9 +58,10 @@ test.describe("static homepage fallbacks", () => {
     expect(browserErrors).toEqual([]);
   });
 
-  test("the no-JavaScript homepage retains the key visual text and navigation", async ({ browser }, testInfo) => {
+  test("the no-JavaScript homepage retains the key visual text and navigation", async ({ browser, baseURL }, testInfo) => {
     test.skip(testInfo.project.name !== "desktop-chromium", "one explicit no-JavaScript context");
     const context = await browser.newContext({
+      baseURL,
       javaScriptEnabled: false,
       viewport: { width: 390, height: 844 }
     });
@@ -69,7 +71,7 @@ test.describe("static homepage fallbacks", () => {
       if (request.url().includes("/assets/scrolly/") || request.url().includes("company-scrolly")) dynamicRequests.push(request.url());
     });
 
-    await page.goto("http://127.0.0.1:4173/index.html");
+    await page.goto("/index.html");
     await expectReadableCorporateHome(page);
     await expect(page.locator(".corporate-actions a[href='business.html']")).toHaveAttribute("href", "business.html");
     expect(dynamicRequests).toEqual([]);

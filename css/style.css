@@ -165,10 +165,20 @@ h1, h2, h3, h4 { font-weight: 650; line-height: 1.35; letter-spacing: -.015em; }
 }
 .header-inner { display: flex; align-items: center; justify-content: space-between; height: 100%; }
 
-.logo { display: flex; align-items: center; gap: 12px; }
-.logo-text { display: flex; flex-direction: column; line-height: 1.25; }
-.logo-text strong { font-size: 20px; font-weight: 650; letter-spacing: .06em; color: #fff; transition: color .25s ease; }
-.logo-text small { margin-top: 5px; font-family: var(--font-tech); font-size: 10px; letter-spacing: .18em; color: var(--text-muted); transition: color .25s ease; }
+.logo { display: inline-flex; align-items: center; }
+.brand-link { flex: none; gap: 12px; color: #fff; }
+.brand-link:hover { color: #fff; }
+.brand-name { font-size: 18px; font-weight: 600; line-height: 1.4; letter-spacing: .02em; white-space: nowrap; }
+.brand-mark { display: block; flex: none; width: 46px; padding: 4px; border-radius: 6px; background: #fff; }
+/* Use the original 1280px artwork unchanged. Crop only its display window:
+   symbol: x=232, y=76, width=768, height=960; full lockup: x=64, y=72, width=1136, height=1080. */
+.brand-mark-crop, .brand-full-crop { display: block; position: relative; overflow: hidden; }
+.brand-mark-crop { aspect-ratio: 768 / 960; }
+.brand-mark-crop img, .brand-full-crop img { position: absolute; max-width: none; height: auto; }
+.brand-mark-crop img { width: 166.666667%; left: -30.208333%; top: -7.916667%; }
+.brand-full-crop { width: 100%; aspect-ratio: 1136 / 1080; }
+.brand-full-crop img { width: 112.676056%; left: -5.633803%; top: -6.666667%; }
+img[data-site-image]:not([src]) { display: none; }
 
 .main-nav { display: flex; align-items: center; gap: 6px; }
 .main-nav a {
@@ -199,8 +209,6 @@ h1, h2, h3, h4 { font-weight: 650; line-height: 1.35; letter-spacing: -.015em; }
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
-.site-header.scrolled .logo-text strong, .site-header.nav-open .logo-text strong { color: #fff; }
-.site-header.scrolled .logo-text small, .site-header.nav-open .logo-text small { color: var(--text-muted); }
 .site-header.scrolled .main-nav a, .site-header.nav-open .main-nav a { color: rgba(255,255,255,.78); }
 .site-header.scrolled .main-nav a:hover, .site-header.scrolled .main-nav a.active,
 .site-header.nav-open .main-nav a:hover, .site-header.nav-open .main-nav a.active { color: #fff; }
@@ -610,8 +618,7 @@ h1, h2, h3, h4 { font-weight: 650; line-height: 1.35; letter-spacing: -.015em; }
   display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 48px;
   padding: 72px 0 52px;
 }
-.footer-brand .logo-text strong { color: #fff; }
-.footer-brand .logo-text small { color: var(--text-muted); }
+.footer-logo { display: block; width: 168px; padding: 12px 14px; background: #fff; border-radius: 10px; }
 .footer-brand p { margin-top: 22px; font-size: 13px; line-height: 1.95; color: var(--text-muted); }
 
 .footer-col { border-left: 1px solid var(--line-dark); padding-left: 26px; }
@@ -675,6 +682,15 @@ h1, h2, h3, h4 { font-weight: 650; line-height: 1.35; letter-spacing: -.015em; }
 
 /* ---------- 响应式 ---------- */
 
+@media (min-width: 901px) and (max-width: 1100px) {
+  .brand-link { gap: 10px; }
+  .brand-name { font-size: 17px; letter-spacing: 0; }
+  .main-nav { gap: 2px; }
+  .main-nav a { padding-inline: 10px; font-size: 14px; }
+  .main-nav a::after { left: 10px; right: 10px; }
+  .main-nav .nav-cta { margin-left: 6px; padding-inline: 14px; }
+}
+
 @media (max-width: 1080px) {
   .biz-grid, .case-grid, .brand-grid, .adv-grid, .pcat-grid { grid-template-columns: repeat(2, 1fr); }
   .logo-wall { grid-template-columns: repeat(4, 1fr); }
@@ -728,8 +744,9 @@ h1, h2, h3, h4 { font-weight: 650; line-height: 1.35; letter-spacing: -.015em; }
   .footer-grid { grid-template-columns: 1fr; gap: 34px; padding: 56px 0 40px; }
 
   .intro-media .im-float { border-width: 3px; }
-  .logo-text strong { font-size: 17px; }
-  .logo-text small { letter-spacing: .2em; }
+  .brand-link { gap: 10px; }
+  .brand-mark { width: 40px; }
+  .brand-name { font-size: 16px; letter-spacing: 0; }
   .page-hero { padding: calc(var(--header-h) + 52px) 0 52px; }
   .page-hero h1 { gap: 12px; }
   .page-hero h1 span { flex-basis: 100%; font-size: 10px; }

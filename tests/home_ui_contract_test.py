@@ -462,9 +462,9 @@ class NotFoundPortabilityContractTest(unittest.TestCase):
     def test_shared_assets_are_mount_aware_and_keep_no_js_fallback(self) -> None:
         styles = self.page.find("link", rel="stylesheet")
         self.assertEqual(1, len(styles))
-        self.assertEqual("css/style.css?v=20260906-industrial1", styles[0].attrs.get("data-site-path"))
+        self.assertEqual("css/style.css?v=20261031-logo1", styles[0].attrs.get("data-site-path"))
         self.assertEqual(
-            "https://dingyivac.com/css/style.css?v=20260906-industrial1",
+            "https://dingyivac.com/css/style.css?v=20261031-logo1",
             styles[0].attrs.get("href"),
         )
 

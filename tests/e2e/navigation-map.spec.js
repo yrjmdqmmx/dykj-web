@@ -18,6 +18,7 @@ const contentTypes = {
   ".css": "text/css; charset=utf-8",
   ".html": "text/html; charset=utf-8",
   ".js": "text/javascript; charset=utf-8",
+  ".jpg": "image/jpeg",
   ".png": "image/png",
   ".svg": "image/svg+xml",
   ".webp": "image/webp"
@@ -128,6 +129,9 @@ test.describe("navigation and deployment paths", () => {
       new URL("/index.html", baseURL).href
     );
     await expect.poll(() => page.evaluate(() => window.SITE_CONFIG?.company)).toBe("北京鼎熠科技有限公司");
+    await expect.poll(() => page.locator("img[data-site-image]").evaluateAll((images) =>
+      images.map((image) => ({ src: image.src, width: image.naturalWidth }))
+    )).toEqual(Array(2).fill({ src: new URL("/assets/brand/dingyi-logo.jpg", baseURL).href, width: 1280 }));
 
     await routeGitHubProjectSite(page);
     response = await page.goto("https://yrjmdqmmx.github.io/dykj-web/nested/missing/page");
@@ -139,6 +143,9 @@ test.describe("navigation and deployment paths", () => {
       "https://yrjmdqmmx.github.io/dykj-web/index.html"
     );
     await expect.poll(() => page.evaluate(() => window.SITE_CONFIG?.company)).toBe("北京鼎熠科技有限公司");
+    await expect.poll(() => page.locator("img[data-site-image]").evaluateAll((images) =>
+      images.map((image) => ({ src: image.src, width: image.naturalWidth }))
+    )).toEqual(Array(2).fill({ src: "https://yrjmdqmmx.github.io/dykj-web/assets/brand/dingyi-logo.jpg", width: 1280 }));
   });
 });
 

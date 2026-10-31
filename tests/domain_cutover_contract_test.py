@@ -63,7 +63,7 @@ def parse_html(filename: str) -> HtmlContractParser:
 
 
 class DomainCutoverContractTest(unittest.TestCase):
-    def test_all_seven_pages_declare_one_empty_favicon(self) -> None:
+    def test_all_seven_pages_declare_the_official_brand_favicon(self) -> None:
         for filename in ALL_PAGES:
             page = parse_html(filename)
             icon_links = [
@@ -75,7 +75,11 @@ class DomainCutoverContractTest(unittest.TestCase):
             with self.subTest(page=filename):
                 self.assertEqual(1, len(icon_links))
                 self.assertEqual("icon", icon_links[0].get("rel"))
-                self.assertEqual("data:,", icon_links[0].get("href"))
+                icon_path = "assets/brand/dingyi-favicon.ico?v=20261031"
+                expected_href = f"{PRODUCTION_ORIGIN}/{icon_path}" if filename == "404.html" else icon_path
+                self.assertEqual(expected_href, icon_links[0].get("href"))
+                self.assertEqual("image/x-icon", icon_links[0].get("type"))
+                self.assertEqual("16x16 32x32 48x48 64x64", icon_links[0].get("sizes"))
                 self.assertFalse(page.find("link", rel="apple-touch-icon"))
 
     def test_site_config_contains_the_approved_icp_number(self) -> None:

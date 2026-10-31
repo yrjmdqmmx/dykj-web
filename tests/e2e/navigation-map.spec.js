@@ -17,6 +17,7 @@ const publicPages = [
 const contentTypes = {
   ".css": "text/css; charset=utf-8",
   ".html": "text/html; charset=utf-8",
+  ".ico": "image/x-icon",
   ".js": "text/javascript; charset=utf-8",
   ".jpg": "image/jpeg",
   ".png": "image/png",
@@ -74,6 +75,19 @@ function statIsFile(path) {
   }
 }
 
+async function expectBrandFavicon(page, expectedUrl) {
+  await expect(page.locator('link[rel="icon"]')).toHaveCount(1);
+  const icon = await page.evaluate(async () => {
+    const image = new Image();
+    image.src = document.querySelector('link[rel="icon"]').href;
+    await image.decode();
+    return { url: image.src, width: image.naturalWidth, height: image.naturalHeight };
+  });
+  expect(icon.url).toBe(expectedUrl);
+  expect([16, 32, 48, 64]).toContain(icon.width);
+  expect(icon.height).toBe(icon.width);
+}
+
 test.describe("navigation and deployment paths", () => {
   test("mobile menu is keyboard reachable and Escape restores focus", async ({ page }, testInfo) => {
     test.skip(testInfo.project.name !== "mobile-chromium", "mobile navigation contract");
@@ -99,6 +113,7 @@ test.describe("navigation and deployment paths", () => {
     for (const path of publicPages) {
       const response = await page.goto(path);
       expect(response.status(), `${path} should load`).toBe(200);
+      await expectBrandFavicon(page, new URL("/assets/brand/dingyi-favicon.ico?v=20261031", baseURL).href);
       const urls = await page.locator("a[href]").evaluateAll((links) => links.map((link) => link.href));
       for (const href of urls) {
         const url = new URL(href);
@@ -132,6 +147,7 @@ test.describe("navigation and deployment paths", () => {
     await expect.poll(() => page.locator("img[data-site-image]").evaluateAll((images) =>
       images.map((image) => ({ src: image.src, width: image.naturalWidth }))
     )).toEqual(Array(2).fill({ src: new URL("/assets/brand/dingyi-logo.jpg", baseURL).href, width: 1280 }));
+    await expectBrandFavicon(page, new URL("/assets/brand/dingyi-favicon.ico?v=20261031", baseURL).href);
 
     await routeGitHubProjectSite(page);
     response = await page.goto("https://yrjmdqmmx.github.io/dykj-web/nested/missing/page");
@@ -146,6 +162,7 @@ test.describe("navigation and deployment paths", () => {
     await expect.poll(() => page.locator("img[data-site-image]").evaluateAll((images) =>
       images.map((image) => ({ src: image.src, width: image.naturalWidth }))
     )).toEqual(Array(2).fill({ src: "https://yrjmdqmmx.github.io/dykj-web/assets/brand/dingyi-logo.jpg", width: 1280 }));
+    await expectBrandFavicon(page, "https://yrjmdqmmx.github.io/dykj-web/assets/brand/dingyi-favicon.ico?v=20261031");
   });
 });
 

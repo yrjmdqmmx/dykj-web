@@ -16,6 +16,7 @@ REQUIRED = (
     "css/home.css",
     "index.html",
     "assets/img/hero-helium.jpg",
+    "assets/brand/dingyi-favicon.ico",
 )
 
 EXCLUDED = (

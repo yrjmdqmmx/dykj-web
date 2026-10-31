@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>页面未找到 - 北京鼎熠科技有限公司</title>
   <meta name="robots" content="noindex">
-  <link rel="icon" href="data:,">
   <script id="sitePathBootstrap">
     (function (window) {
       "use strict";
@@ -19,11 +18,19 @@
       };
     }(window));
   </script>
+  <noscript><link id="siteIcon" rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48 64x64" href="https://dingyivac.com/assets/brand/dingyi-favicon.ico?v=20261031"></noscript>
   <!-- 绝对地址仅供无 JS 使用；正常浏览器直接按本次部署根路径创建样式链接。 -->
   <noscript><link id="siteStyles" rel="stylesheet" href="https://dingyivac.com/css/style.css?v=20261031-logo2" data-site-path="css/style.css?v=20261031-logo2"></noscript>
   <script>
     (function (document, siteUrl) {
       "use strict";
+      var siteIcon = document.createElement("link");
+      siteIcon.id = "siteIcon";
+      siteIcon.rel = "icon";
+      siteIcon.type = "image/x-icon";
+      siteIcon.setAttribute("sizes", "16x16 32x32 48x48 64x64");
+      siteIcon.href = siteUrl("assets/brand/dingyi-favicon.ico?v=20261031");
+      document.head.appendChild(siteIcon);
       var siteStyles = document.createElement("link");
       siteStyles.id = "siteStyles";
       siteStyles.rel = "stylesheet";
